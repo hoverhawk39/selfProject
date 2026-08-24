@@ -1,89 +1,1241 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Welcome to Firebase Hosting</title>
+<html lang="zh-TW" class="scroll-smooth">
 
-    <!-- update the version number as needed -->
-    <script defer src="/__/firebase/12.18.0/firebase-app-compat.js"></script>
-    <!-- include only the Firebase features as you need -->
-    <script defer src="/__/firebase/12.18.0/firebase-auth-compat.js"></script>
-    <script defer src="/__/firebase/12.18.0/firebase-database-compat.js"></script>
-    <script defer src="/__/firebase/12.18.0/firebase-firestore-compat.js"></script>
-    <script defer src="/__/firebase/12.18.0/firebase-functions-compat.js"></script>
-    <script defer src="/__/firebase/12.18.0/firebase-messaging-compat.js"></script>
-    <script defer src="/__/firebase/12.18.0/firebase-storage-compat.js"></script>
-    <script defer src="/__/firebase/12.18.0/firebase-analytics-compat.js"></script>
-    <script defer src="/__/firebase/12.18.0/firebase-remote-config-compat.js"></script>
-    <script defer src="/__/firebase/12.18.0/firebase-performance-compat.js"></script>
-    <!-- 
-      initialize the SDK after all desired features are loaded, set useEmulator to false
-      to avoid connecting the SDK to running emulators.
-    -->
-    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
-
-    <style media="screen">
-      body { background: #ECEFF1; color: rgba(0,0,0,0.87); font-family: Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0; }
-      #message { background: white; max-width: 360px; margin: 100px auto 16px; padding: 32px 24px; border-radius: 3px; }
-      #message h2 { color: #ffa100; font-weight: bold; font-size: 16px; margin: 0 0 8px; }
-      #message h1 { font-size: 22px; font-weight: 300; color: rgba(0,0,0,0.6); margin: 0 0 16px;}
-      #message p { line-height: 140%; margin: 16px 0 24px; font-size: 14px; }
-      #message a { display: block; text-align: center; background: #039be5; text-transform: uppercase; text-decoration: none; color: white; padding: 16px; border-radius: 4px; }
-      #message, #message a { box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); }
-      #load { color: rgba(0,0,0,0.4); text-align: center; font-size: 13px; }
-      @media (max-width: 600px) {
-        body, #message { margin-top: 0; background: white; box-shadow: none; }
-        body { border-top: 16px solid #ffa100; }
-      }
-    </style>
-  </head>
-  <body>
-    <div id="message">
-      <h2>Welcome</h2>
-      <h1>Firebase Hosting Setup Complete</h1>
-      <p>You're seeing this because you've successfully setup Firebase Hosting. Now it's time to go build something extraordinary!</p>
-      <a target="_blank" href="https://firebase.google.com/docs/hosting/">Open Hosting Documentation</a>
-    </div>
-    <p id="load">Firebase SDK Loading&hellip;</p>
-
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SurveyPool 誠實許願池 | 擺脫廣告束縛，物盡其用</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Font Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
     <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        const loadEl = document.querySelector('#load');
-        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-        // // The Firebase SDK is initialized and available here!
-        //
-        // firebase.auth().onAuthStateChanged(user => { });
-        // firebase.database().ref('/path/to/ref').on('value', snapshot => { });
-        // firebase.firestore().doc('/foo/bar').get().then(() => { });
-        // firebase.functions().httpsCallable('yourFunction')().then(() => { });
-        // firebase.messaging().requestPermission().then(() => { });
-        // firebase.storage().ref('/path/to/ref').getDownloadURL().then(() => { });
-        // firebase.analytics(); // call to activate
-        // firebase.analytics().logEvent('tutorial_completed');
-        // firebase.performance(); // call to activate
-        //
-        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-
-        try {
-          let app = firebase.app();
-          let features = [
-            'auth', 
-            'database', 
-            'firestore',
-            'functions',
-            'messaging', 
-            'storage', 
-            'analytics', 
-            'remoteConfig',
-            'performance',
-          ].filter(feature => typeof app[feature] === 'function');
-          loadEl.textContent = `Firebase SDK loaded with ${features.join(', ')}`;
-        } catch (e) {
-          console.error(e);
-          loadEl.textContent = 'Error loading the Firebase SDK, check the console.';
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'Microsoft JhengHei', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            700: '#15803d',
+                            900: '#14532d',
+                        },
+                        coin: {
+                            500: '#f59e0b',
+                            600: '#d97706',
+                        }
+                    }
+                }
+            }
         }
-      });
     </script>
-  </body>
+    <style>
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(229, 231, 235, 0.8);
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 4px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+</head>
+
+<body
+    class="bg-slate-50 text-slate-800 font-sans antialiased selection:bg-brand-500 selection:text-white min-h-screen flex flex-col">
+
+    <!-- Navigation Header -->
+    <header
+        class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-200 transition-all duration-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="switchTab('hero')">
+                <div
+                    class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 to-emerald-400 flex items-center justify-center text-white font-black text-xl shadow-md shadow-brand-500/20">
+                    S
+                </div>
+                <div>
+                    <span
+                        class="text-xl font-extrabold bg-gradient-to-r from-brand-700 to-emerald-600 bg-clip-text text-transparent">SurveyPool</span>
+                    <span class="block text-[10px] font-medium tracking-wider text-slate-500 uppercase -mt-1">誠實許願 •
+                        如你所願</span>
+                </div>
+            </div>
+
+            <!-- Navigation Links -->
+            <nav class="hidden md:flex items-center space-x-1 lg:space-x-6 text-sm font-medium">
+                <button onclick="switchTab('hero')" id="nav-hero"
+                    class="nav-btn text-brand-600 font-semibold px-3 py-2 rounded-lg hover:bg-slate-100 transition">平台理念</button>
+                <button onclick="switchTab('pool')" id="nav-pool"
+                    class="nav-btn text-slate-600 hover:text-brand-600 px-3 py-2 rounded-lg hover:bg-slate-100 transition">許願池廣場</button>
+                <button onclick="switchTab('wish-form')" id="nav-wish-form"
+                    class="nav-btn text-slate-600 hover:text-brand-600 px-3 py-2 rounded-lg hover:bg-slate-100 transition">我要許願</button>
+                <button onclick="switchTab('merchant')" id="nav-merchant"
+                    class="nav-btn text-slate-600 hover:text-brand-600 px-3 py-2 rounded-lg hover:bg-slate-100 transition">商家接洽區</button>
+            </nav>
+
+            <!-- User Wallet & Profile Status -->
+            <div class="flex items-center space-x-3">
+                <div onclick="openWalletModal()"
+                    class="flex items-center space-x-2 bg-amber-50 hover:bg-amber-100 border border-amber-200 px-3 py-1.5 rounded-full cursor-pointer transition shadow-sm">
+                    <i class="fa-solid font-bold fa-coins text-coin-500"></i>
+                    <span class="text-xs font-semibold text-amber-900">SurveyCoin:</span>
+                    <span id="user-coin-balance" class="text-sm font-black text-amber-700">120</span>
+                    <span class="text-[10px] text-amber-600 font-bold">SC</span>
+                </div>
+
+                <!-- Google Auth UI Control -->
+                <div id="auth-container">
+                    <button id="google-login-btn" onclick="handleGoogleSignIn()"
+                        class="flex items-center space-x-2 bg-white hover:bg-slate-50 border border-slate-300 text-slate-700 text-xs font-semibold px-3 py-1.5 rounded-full shadow-sm transition">
+                        <i class="fa-brands fa-google text-red-500 text-sm"></i>
+                        <span>Google 登入</span>
+                    </button>
+                    <div id="user-profile-badge"
+                        class="hidden flex items-center space-x-2 bg-slate-100 px-2 py-1 rounded-full border border-slate-200">
+                        <img id="user-avatar" src="" alt="Avatar" class="w-6 h-6 rounded-full border border-brand-500">
+                        <span id="user-display-name"
+                            class="text-xs font-bold text-slate-800 max-w-[80px] truncate">使用者</span>
+                        <button onclick="handleSignOut()" class="text-slate-400 hover:text-red-500 text-xs px-1"
+                            title="登出">
+                            <i class="fa-solid fa-right-from-bracket"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <button onclick="toggleMobileMenu()" class="md:hidden text-slate-600 p-2 text-lg">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden border-t border-slate-200 bg-white px-4 py-3 space-y-2">
+            <button onclick="switchTab('hero')"
+                class="block w-full text-left px-3 py-2 text-slate-700 font-medium rounded-lg hover:bg-slate-100">平台理念</button>
+            <button onclick="switchTab('pool')"
+                class="block w-full text-left px-3 py-2 text-slate-700 font-medium rounded-lg hover:bg-slate-100">許願池廣場</button>
+            <button onclick="switchTab('wish-form')"
+                class="block w-full text-left px-3 py-2 text-slate-700 font-medium rounded-lg hover:bg-slate-100">我要許願</button>
+            <button onclick="switchTab('merchant')"
+                class="block w-full text-left px-3 py-2 text-slate-700 font-medium rounded-lg hover:bg-slate-100">商家接洽區</button>
+        </div>
+    </header>
+
+    <!-- Notification Toast System -->
+    <div id="toast-container" class="fixed top-20 right-5 z-50 flex flex-col space-y-2 pointer-events-none"></div>
+
+    <!-- Main Content Area Container -->
+    <main class="flex-grow">
+
+        <!-- ================= PAGE 1: HERO & PLATFORM WHY ================= -->
+        <section id="page-hero" class="tab-page py-12 lg:py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-16">
+
+            <!-- Hero Title Banner -->
+            <div class="text-center max-w-3xl mx-auto space-y-6">
+                <div
+                    class="inline-flex items-center space-x-2 px-3 py-1 bg-brand-50 border border-brand-200 rounded-full text-brand-700 text-xs font-semibold">
+                    <i class="fa-solid fa-leaf"></i>
+                    <span>翻轉傳統廣告機制 • 實現永續極簡生活</span>
+                </div>
+                <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight text-slate-900 leading-tight">
+                    誠實許願，如你所願<br>
+                    <span
+                        class="bg-gradient-to-r from-brand-600 via-emerald-500 to-teal-600 bg-clip-text text-transparent">誠實還能賺
+                        (省) 錢！</span>
+                </h1>
+                <p class="text-slate-600 text-base sm:text-lg leading-relaxed">
+                    擺脫廣告中介束縛，讓用戶自主決定公開喜好。讓商家直接找到對產品感興趣的你，將省下的廣告行銷費用，全數化為高額折扣與 <strong
+                        class="text-amber-600">SurveyCoin</strong> 回饋給你！
+                </p>
+                <div class="flex flex-wrap items-center justify-center gap-4 pt-2">
+                    <button onclick="switchTab('wish-form')"
+                        class="px-6 py-3 bg-brand-600 hover:bg-brand-700 text-white font-semibold rounded-xl shadow-lg shadow-brand-600/30 transition duration-200 flex items-center space-x-2">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                        <span>立即公開許願</span>
+                    </button>
+                    <button onclick="switchTab('pool')"
+                        class="px-6 py-3 bg-white border border-slate-300 hover:bg-slate-50 text-slate-700 font-semibold rounded-xl transition duration-200 flex items-center space-x-2">
+                        <i class="fa-solid fa-fire"></i>
+                        <span>探索大眾許願池</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Golden Circle (Why - How - What) Interactive Paradigm -->
+            <div class="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-8">
+                <div class="border-b border-slate-100 pb-4 text-center sm:text-left">
+                    <h2 class="text-2xl font-bold text-slate-900">黃金圈核心架構 (Golden Circle)</h2>
+                    <p class="text-slate-500 text-sm">從「為什麼」出發，重建買家與賣家的透明雙贏橋樑</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Why Card -->
+                    <div class="p-6 rounded-xl bg-red-50/50 border border-red-100 space-y-3">
+                        <div
+                            class="w-10 h-10 rounded-lg bg-red-100 text-red-600 flex items-center justify-center font-bold text-lg">
+                            WHY
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-800">痛點與目標</h3>
+                        <ul class="text-xs text-slate-600 space-y-2 list-disc list-inside">
+                            <li><strong>廣告霸權：</strong>Google/FB 利用用戶隱私作為主要廣告營收。</li>
+                            <li><strong>資源浪費：</strong>供需失衡導致過季商品被燒毀/棄置。</li>
+                            <li><strong>三贏目標：</strong>物盡其用、擺脫廣告束縛、保護永續環境。</li>
+                        </ul>
+                    </div>
+
+                    <!-- How Card -->
+                    <div class="p-6 rounded-xl bg-amber-50/50 border border-amber-100 space-y-3">
+                        <div
+                            class="w-10 h-10 rounded-lg bg-amber-100 text-amber-600 flex items-center justify-center font-bold text-lg">
+                            HOW
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-800">運作機制</h3>
+                        <ul class="text-xs text-slate-600 space-y-2 list-disc list-inside">
+                            <li><strong>自主隱私：</strong>用戶自願公開「想要/必要」購物需求。</li>
+                            <li><strong>去中間人：</strong>商家直接找對其產品感興趣的買家。</li>
+                            <li><strong>供需均等：</strong>商家事前精準掌握人數，避免無謂過度生產。</li>
+                        </ul>
+                    </div>
+
+                    <!-- What Card -->
+                    <div class="p-6 rounded-xl bg-emerald-50/50 border border-emerald-100 space-y-3">
+                        <div
+                            class="w-10 h-10 rounded-lg bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold text-lg">
+                            WHAT
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-800">SurveyPool & SC</h3>
+                        <ul class="text-xs text-slate-600 space-y-2 list-disc list-inside">
+                            <li><strong>SurveyPool：</strong>乘載大眾購物願望清單的媒合平台。</li>
+                            <li><strong>SurveyCoin：</strong>1 SC = NTD $1 現金折抵無上限虛擬幣。</li>
+                            <li><strong>雙重回饋：</strong>許願可得 SC + 願望實現再得 SC！</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Marketing Paradigm Shift Comparison Section -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Traditional Advertising Model -->
+                <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm relative overflow-hidden">
+                    <div
+                        class="absolute top-0 right-0 bg-red-500 text-white text-[10px] uppercase tracking-widest font-extrabold px-3 py-1 rounded-bl-lg">
+                        傳統現況</div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-rectangle-ad text-red-500"></i>
+                        當今數位廣告機制
+                    </h3>
+                    <div class="space-y-4 text-xs sm:text-sm text-slate-600">
+                        <div class="p-3 bg-slate-50 rounded-lg border border-slate-100 flex items-start gap-3">
+                            <i class="fa-solid fa-database text-slate-400 mt-1"></i>
+                            <div><strong>隱私被動被利用：</strong>巨頭掌握搜尋紀錄，廣告如影隨形推播。</div>
+                        </div>
+                        <div class="p-3 bg-slate-50 rounded-lg border border-slate-100 flex items-start gap-3">
+                            <i class="fa-solid fa-hand-holding-dollar text-slate-400 mt-1"></i>
+                            <div><strong>高昂中間開銷：</strong>廣告主支付鉅額廣告費給第三方媒介，成本反映在售價。</div>
+                        </div>
+                        <div class="p-3 bg-slate-50 rounded-lg border border-slate-100 flex items-start gap-3">
+                            <i class="fa-solid fa-box-open text-slate-400 mt-1"></i>
+                            <div><strong>供需嚴重失衡：</strong>不了解潛在顧客輪廓，盲目量產導致過季燒毀報銷。</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SurveyPool Direct Matching Model -->
+                <div
+                    class="bg-gradient-to-br from-brand-900 to-emerald-900 text-white p-6 sm:p-8 rounded-2xl shadow-xl relative overflow-hidden">
+                    <div
+                        class="absolute top-0 right-0 bg-brand-500 text-white text-[10px] uppercase tracking-widest font-extrabold px-3 py-1 rounded-bl-lg">
+                        SurveyPool 模式</div>
+                    <h3 class="text-xl font-bold mb-4 flex items-center gap-2 text-brand-100">
+                        <i class="fa-solid fa-arrows-split-up-and-left text-brand-400"></i>
+                        擺脫中間人 • 隱私即籌碼
+                    </h3>
+                    <div class="space-y-4 text-xs sm:text-sm text-brand-100/90">
+                        <div class="p-3 bg-white/10 rounded-lg border border-white/10 flex items-start gap-3">
+                            <i class="fa-solid fa-user-shield text-brand-400 mt-1"></i>
+                            <div><strong>隱私自主權：</strong>主動公開願望，將個人隱私作為與商家協商的有利籌碼。</div>
+                        </div>
+                        <div class="p-3 bg-white/10 rounded-lg border border-white/10 flex items-start gap-3">
+                            <i class="fa-solid fa-piggy-bank text-brand-400 mt-1"></i>
+                            <div><strong>行銷預算轉回饋：</strong>商家省下廣告投手代操費，直接給予買家高額折扣與 SC。</div>
+                        </div>
+                        <div class="p-3 bg-white/10 rounded-lg border border-white/10 flex items-start gap-3">
+                            <i class="fa-solid fa-earth-americas text-brand-400 mt-1"></i>
+                            <div><strong>SDG 永續環境：</strong>事前掌握需求量，杜絕無謂生產與浪費，踐行極簡生活。</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SDGs & Minimalist Lifestyle Section -->
+            <div class="bg-slate-900 text-slate-200 rounded-2xl p-6 sm:p-8 space-y-6">
+                <div
+                    class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-slate-800 pb-4">
+                    <div>
+                        <h3 class="text-xl font-bold text-white flex items-center gap-2">
+                            <i class="fa-solid fa-recycle text-emerald-400"></i>
+                            永續環境＋極簡生活 (Less is More)
+                        </h3>
+                        <p class="text-slate-400 text-xs mt-1">響應聯合國永續發展目標 SDG 12 (責任消費與生產) 與 SDG 13 (氣候行動)</p>
+                    </div>
+                    <div class="flex space-x-2">
+                        <span
+                            class="px-3 py-1 bg-amber-500/20 text-amber-300 border border-amber-500/30 rounded-full text-xs font-semibold">SDG
+                            12</span>
+                        <span
+                            class="px-3 py-1 bg-blue-500/20 text-blue-300 border border-blue-500/30 rounded-full text-xs font-semibold">SDG
+                            13</span>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs sm:text-sm">
+                    <div class="space-y-3">
+                        <h4 class="font-bold text-emerald-300 text-base">捫心自問：想要還是需要？</h4>
+                        <ul class="space-y-2 text-slate-300 list-disc list-inside">
+                            <li>生產一件牛仔褲需耗費 8000+ 公升水資源，若賣不出去...</li>
+                            <li>過季奢侈品與快時尚服飾庫存，最後許多都被直接燒毀或掩埋。</li>
+                            <li>物質生活帶來的快樂是短暫的，真的有必要每年換新手機嗎？</li>
+                        </ul>
+                    </div>
+                    <div class="space-y-3">
+                        <h4 class="font-bold text-emerald-300 text-base">極簡理念與平台願景</h4>
+                        <p class="text-slate-300 leading-relaxed">
+                            沒有需求的商品，理當不應該存在。SurveyPool 透過事先掌控買家人數，從源頭控管產量。少即是多，讓大眾成為解法的一部分！
+                        </p>
+                        <blockquote class="italic border-l-2 border-emerald-500 pl-3 text-slate-400 text-xs">
+                            "Insanity is doing the same thing over and over again and expecting different results. Be
+                            the change you want to see in the world."
+                        </blockquote>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- ================= PAGE 2: WISH POOL HUB ================= -->
+        <section id="page-pool" class="tab-page hidden py-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-8">
+
+            <!-- Page Header -->
+            <div
+                class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-slate-200 pb-6">
+                <div>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900">大眾許願池</h2>
+                    <p class="text-slate-500 text-sm mt-1">乘載眾人真實購買慾望，透明接洽進行中</p>
+                </div>
+                <button onclick="switchTab('wish-form')"
+                    class="px-4 py-2 bg-brand-600 hover:bg-brand-700 text-white rounded-xl text-sm font-semibold shadow-md flex items-center space-x-2">
+                    <i class="fa-solid fa-plus"></i>
+                    <span>發布新願望</span>
+                </button>
+            </div>
+
+            <!-- Filters & Keyword Search Bar -->
+            <div class="bg-white p-4 sm:p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <!-- Wish Type Tabs -->
+                    <div class="flex rounded-xl bg-slate-100 p-1 text-xs font-semibold">
+                        <button onclick="filterWishes('type', 'all')" id="filter-type-all"
+                            class="filter-type-btn flex-1 px-4 py-2 rounded-lg bg-white shadow-sm text-slate-800">全部類型</button>
+                        <button onclick="filterWishes('type', 'must')" id="filter-type-must"
+                            class="filter-type-btn flex-1 px-4 py-2 rounded-lg text-slate-600 hover:text-slate-900">必要
+                            (Must)</button>
+                        <button onclick="filterWishes('type', 'want')" id="filter-type-want"
+                            class="filter-type-btn flex-1 px-4 py-2 rounded-lg text-slate-600 hover:text-slate-900">想要
+                            (Want)</button>
+                    </div>
+
+                    <!-- Category Pills -->
+                    <div class="flex flex-wrap gap-2 text-xs">
+                        <button onclick="filterWishes('cat', 'all')"
+                            class="cat-pill active px-3 py-1.5 rounded-lg bg-brand-100 text-brand-800 font-medium">全部類別</button>
+                        <button onclick="filterWishes('cat', '吃')"
+                            class="cat-pill px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium">吃</button>
+                        <button onclick="filterWishes('cat', '穿')"
+                            class="cat-pill px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium">穿</button>
+                        <button onclick="filterWishes('cat', '用')"
+                            class="cat-pill px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium">用</button>
+                        <button onclick="filterWishes('cat', '玩樂')"
+                            class="cat-pill px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium">玩樂</button>
+                        <button onclick="filterWishes('cat', '其他')"
+                            class="cat-pill px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium">其他</button>
+                    </div>
+                </div>
+
+                <!-- Search Bar -->
+                <div class="relative">
+                    <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                    <input type="text" id="wish-search-input" onkeyup="searchWishes()"
+                        placeholder="搜尋願望標題、關鍵字（如 #牛肉麵 #室內設計 #極簡風）..."
+                        class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500">
+                </div>
+            </div>
+
+            <!-- Wishes Grid -->
+            <div id="wishes-grid-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
+                <!-- Wishes Cards dynamically generated by JavaScript -->
+            </div>
+
+        </section>
+
+        <!-- ================= PAGE 3: CREATE WISH FORM ================= -->
+        <section id="page-wish-form" class="tab-page hidden py-8 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto space-y-8">
+
+            <div class="border-b border-slate-200 pb-4">
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900">發表誠實願望</h2>
+                <p class="text-slate-500 text-sm mt-1">填寫得越詳細，越容易獲得商家接洽，並獲得更高 SurveyCoin 獎勵！</p>
+            </div>
+
+            <!-- Quota Tracker Card -->
+            <div
+                class="bg-gradient-to-r from-emerald-500 to-teal-600 text-white p-4 rounded-2xl shadow-sm flex flex-col sm:flex-row justify-between items-center gap-4">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center font-bold text-lg">
+                        <i class="fa-solid fa-calendar-check"></i>
+                    </div>
+                    <div>
+                        <div class="text-xs font-medium text-emerald-100">今日許願額度（匿名許願）</div>
+                        <div class="text-sm font-bold">每日限發：想要 x 3、必要 x 3 (共 6 個)</div>
+                    </div>
+                </div>
+                <div class="flex space-x-3 text-xs">
+                    <div class="bg-white/10 px-3 py-1.5 rounded-lg border border-white/20">
+                        必要餘額: <span id="quota-must-count" class="font-bold text-amber-300">3</span> / 3
+                    </div>
+                    <div class="bg-white/10 px-3 py-1.5 rounded-lg border border-white/20">
+                        想要餘額: <span id="quota-want-count" class="font-bold text-amber-300">3</span> / 3
+                    </div>
+                </div>
+            </div>
+
+            <!-- Penalty Alert Notice if any -->
+            <div id="penalty-banner"
+                class="hidden bg-red-50 border border-red-200 text-red-800 p-4 rounded-xl text-xs sm:text-sm flex items-center space-x-3">
+                <i class="fa-solid fa-triangle-exclamation text-red-500 text-lg"></i>
+                <div>
+                    <strong>許願功能暫時凍結中！</strong>
+                    因您有「必要」願望收到商家接洽後未於 7 天內回應，觸發懲罰機制（禁許願 3 天）。
+                </div>
+            </div>
+
+            <!-- Wish Form Card -->
+            <form id="new-wish-form" onsubmit="handleWishSubmit(event)"
+                class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm space-y-6">
+
+                <!-- Wish Type Selection -->
+                <div class="space-y-2">
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-700">
+                        1. 願望類型 <span class="text-red-500">*</span>
+                    </label>
+                    <div class="grid grid-cols-2 gap-4">
+                        <label
+                            class="wish-type-option cursor-pointer p-4 rounded-xl border-2 border-brand-500 bg-brand-50/50 flex flex-col space-y-1">
+                            <input type="radio" name="wishType" value="必要" checked onchange="updateWishTypeUI()"
+                                class="hidden">
+                            <span class="font-bold text-brand-900 text-sm flex items-center justify-between">
+                                必要 (Must)
+                                <i class="fa-solid fa-circle-check text-brand-600"></i>
+                            </span>
+                            <span class="text-[11px] text-slate-500 leading-tight">必定購買需求。許願成功且填寫詳細可得最高 SC 獎勵！（需遵守 7
+                                天回應條款）</span>
+                        </label>
+                        <label
+                            class="wish-type-option cursor-pointer p-4 rounded-xl border-2 border-slate-200 bg-slate-50 flex flex-col space-y-1">
+                            <input type="radio" name="wishType" value="想要" onchange="updateWishTypeUI()" class="hidden">
+                            <span class="font-bold text-slate-800 text-sm flex items-center justify-between">
+                                想要 (Want)
+                                <i class="fa-solid fa-heart text-slate-400"></i>
+                            </span>
+                            <span class="text-[11px] text-slate-500 leading-tight">潛在購物慾望。許願時不預發 SC，待願望實際媒合實現時可得 SC
+                                獎勵。</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Wish Title & Category -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="md:col-span-2 space-y-1">
+                        <label class="block text-xs font-bold text-slate-700">願望標題 / 描述 <span
+                                class="text-red-500">*</span></label>
+                        <input type="text" id="form-title" required placeholder="例如：下週要請客，邀新同事下班去吃牛肉麵"
+                            class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-brand-500 focus:outline-none">
+                    </div>
+                    <div class="space-y-1">
+                        <label class="block text-xs font-bold text-slate-700">性質類別 <span
+                                class="text-red-500">*</span></label>
+                        <select id="form-category" required
+                            class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-brand-500 focus:outline-none bg-white">
+                            <option value="吃">吃 (美食餐飲)</option>
+                            <option value="穿">穿 (服飾鞋包)</option>
+                            <option value="用">用 (居家用品)</option>
+                            <option value="玩樂">玩樂 (旅遊休閒)</option>
+                            <option value="其他">其他 (設計/服務等)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Detailed Content -->
+                <div class="space-y-1">
+                    <label class="block text-xs font-bold text-slate-700">詳細內文說明 <span
+                            class="text-red-500">*</span></label>
+                    <textarea id="form-description" required rows="3" oninput="calculateEstimatedSC()"
+                        placeholder="詳細說明規格、人數、偏好（字數越多可獲更高 SC 獎勵）..."
+                        class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-brand-500 focus:outline-none"></textarea>
+                </div>
+
+                <!-- Price Range & Deadline -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="space-y-1">
+                        <label class="block text-xs font-bold text-slate-700">最低預算 (NTD)</label>
+                        <input type="number" id="form-price-min" placeholder="1000"
+                            class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-brand-500 focus:outline-none">
+                    </div>
+                    <div class="space-y-1">
+                        <label class="block text-xs font-bold text-slate-700">最高預算 (NTD)</label>
+                        <input type="number" id="form-price-max" placeholder="5000"
+                            class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-brand-500 focus:outline-none">
+                    </div>
+                    <div class="space-y-1">
+                        <label class="block text-xs font-bold text-slate-700">最晚實現日期 (最晚期限) <span
+                                class="text-red-500">*</span></label>
+                        <input type="date" id="form-deadline" required
+                            class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-brand-500 focus:outline-none">
+                    </div>
+                </div>
+
+                <!-- Keywords & Notes -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="space-y-1">
+                        <label class="block text-xs font-bold text-slate-700">關鍵字標籤 (用空格或逗號隔開) <span
+                                class="text-red-500">*</span></label>
+                        <input type="text" id="form-tags" required placeholder="#牛肉麵 #包廂 #有機"
+                            class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-brand-500 focus:outline-none">
+                    </div>
+                    <div class="space-y-1">
+                        <label class="block text-xs font-bold text-slate-700">額外備註</label>
+                        <input type="text" id="form-notes" placeholder="例如：共計 10 人，希望有獨桌"
+                            class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-brand-500 focus:outline-none">
+                    </div>
+                </div>
+
+                <!-- Estimated Reward Box -->
+                <div class="bg-amber-50 border border-amber-200 p-4 rounded-xl flex items-center justify-between">
+                    <div class="flex items-center space-x-3">
+                        <i class="fa-solid fa-gift text-coin-500 text-xl"></i>
+                        <div>
+                            <div class="text-xs font-bold text-amber-900">預估可獲得 SurveyCoin (SC)</div>
+                            <div class="text-[11px] text-amber-700">詳盡填答欄位有助於獲取更高回饋（實現結帳時連同發放）</div>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <span id="estimated-sc-val" class="text-2xl font-black text-amber-600">+15</span>
+                        <span class="text-xs font-bold text-amber-800">SC</span>
+                    </div>
+                </div>
+
+                <!-- Form Submit Button -->
+                <div class="pt-2">
+                    <button type="submit" id="submit-wish-btn"
+                        class="w-full py-3.5 bg-brand-600 hover:bg-brand-700 text-white font-bold rounded-xl shadow-lg shadow-brand-600/30 transition text-sm">
+                        確認誠實發布願望
+                    </button>
+                    <p class="text-[11px] text-slate-400 text-center mt-2">註：願望發布後採匿名公開展示，不可修正或刪除，所有商家均可瀏覽接洽。</p>
+                </div>
+            </form>
+
+        </section>
+
+        <!-- ================= PAGE 4: MERCHANT PORTAL ================= -->
+        <section id="page-merchant" class="tab-page hidden py-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-8">
+
+            <div
+                class="bg-gradient-to-r from-slate-900 to-indigo-950 text-white p-6 sm:p-8 rounded-2xl shadow-xl flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+                <div class="space-y-2">
+                    <div
+                        class="inline-block px-3 py-1 bg-indigo-500/30 border border-indigo-400/30 text-indigo-200 text-xs rounded-full font-semibold">
+                        <i class="fa-solid fa-store"></i> 商家與廠商專用端
+                    </div>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold">主動尋找對你產品感興趣的顧客</h2>
+                    <p class="text-slate-300 text-xs sm:text-sm max-w-2xl">
+                        告別數位廣告代理費用與關鍵字競價！直接根據顧客填寫的關鍵字、預算區間與類別主動提案接洽，精準成交。
+                    </p>
+                </div>
+                <div class="bg-white/10 backdrop-blur p-4 rounded-xl border border-white/10 text-center min-w-[200px]">
+                    <div class="text-xs text-indigo-200">已省下廣告開銷</div>
+                    <div class="text-2xl font-black text-emerald-400">NT$ 128,500</div>
+                    <div class="text-[10px] text-slate-400 mt-0.5">直接轉化為顧客折扣與優惠</div>
+                </div>
+            </div>
+
+            <!-- Merchant Matching Simulator -->
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-6">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-4">
+                    <h3 class="text-lg font-bold text-slate-800">精準潛在買家配對庫</h3>
+                    <span
+                        class="text-xs bg-brand-100 text-brand-800 font-semibold px-2.5 py-1 rounded-full">智慧文字過濾中</span>
+                </div>
+
+                <div id="merchant-wishes-list" class="space-y-4">
+                    <!-- Dynamic Merchant Match Cards generated by JS -->
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- ================= WALLET MODAL ================= -->
+    <div id="wallet-modal"
+        class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-white w-full max-w-md rounded-2xl shadow-2xl border border-slate-100 overflow-hidden space-y-6">
+            <div class="bg-gradient-to-r from-amber-500 to-coin-600 p-6 text-white relative">
+                <button onclick="closeWalletModal()"
+                    class="absolute top-4 right-4 text-white/80 hover:text-white text-lg">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+                <div class="text-xs font-semibold text-amber-100 uppercase tracking-wider">SurveyCoin 錢包資產</div>
+                <div class="text-4xl font-black mt-2 flex items-baseline gap-2">
+                    <span id="modal-coin-balance">120</span>
+                    <span class="text-sm font-medium">SC</span>
+                </div>
+                <div class="text-xs text-amber-100 mt-1">1 SC 價值等同 NTD $1 (折抵金額無上限)</div>
+            </div>
+
+            <div class="px-6 space-y-4 text-xs text-slate-600">
+                <h4 class="font-bold text-slate-800 text-sm">SurveyCoin 獲得與使用規則</h4>
+                <ul class="space-y-2 list-disc list-inside">
+                    <li><strong>無期限限制：</strong>可持續累積，性質為平台專屬虛擬貨幣。</li>
+                    <li><strong>許願完畢獎勵：</strong>限「必要」願望，說明越詳細 SC 越多 (由平台吸收)。</li>
+                    <li><strong>實現願望獎勵：</strong>越早完成交易媒合 SC 越多 (由商家吸收)。</li>
+                    <li><strong>交易折抵：</strong>同意商家接洽方案結帳時，可直接 100% 現金折抵。</li>
+                </ul>
+
+                <div class="border-t border-slate-100 pt-3">
+                    <h5 class="font-bold text-slate-800 mb-2">近期 SC 獲得與使用紀錄</h5>
+                    <div class="space-y-2 max-h-40 overflow-y-auto custom-scrollbar" id="wallet-history-list">
+                        <div class="flex justify-between items-center p-2 bg-slate-50 rounded">
+                            <div>
+                                <div class="font-semibold text-slate-700">新屋裝潢許願獎勵</div>
+                                <div class="text-[10px] text-slate-400">2026-08-10</div>
+                            </div>
+                            <span class="font-bold text-emerald-600">+70 SC</span>
+                        </div>
+                        <div class="flex justify-between items-center p-2 bg-slate-50 rounded">
+                            <div>
+                                <div class="font-semibold text-slate-700">防風外套願望實現折抵</div>
+                                <div class="text-[10px] text-slate-400">2026-08-01</div>
+                            </div>
+                            <span class="font-bold text-red-500">-50 SC</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-4 bg-slate-50 border-t border-slate-100 text-center">
+                <button onclick="closeWalletModal()"
+                    class="w-full py-2 bg-slate-800 hover:bg-slate-900 text-white font-semibold rounded-xl text-xs">
+                    關閉錢包
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Global Footer -->
+    <footer class="bg-slate-900 text-slate-400 text-xs py-10 border-t border-slate-800 mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 text-center sm:text-left">
+            <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
+                <div>
+                    <div class="text-base font-bold text-white">SurveyPool 誠實許願池</div>
+                    <div class="text-slate-400 text-xs mt-0.5">Let the crowd become part of the solution.</div>
+                </div>
+                <div class="flex space-x-6 text-slate-400">
+                    <a href="#" onclick="switchTab('hero'); return false;" class="hover:text-white">黃金圈理念</a>
+                    <a href="#" onclick="switchTab('pool'); return false;" class="hover:text-white">許願池</a>
+                    <a href="#" onclick="switchTab('merchant'); return false;" class="hover:text-white">商家對接</a>
+                </div>
+            </div>
+            <div
+                class="border-t border-slate-800 pt-6 flex flex-col sm:flex-row justify-between items-center gap-2 text-slate-500">
+                <p>&copy; 2026 SurveyPool & SurveyCoin. All rights reserved.</p>
+                <p>誠實許願 • 如你所願 • 永續生活</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Firebase SDK v11 Initialization -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import {
+            getAuth,
+            GoogleAuthProvider,
+            signInWithPopup,
+            signOut,
+            onAuthStateChanged,
+            signInWithCustomToken,
+            signInAnonymously
+        } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import {
+            getFirestore,
+            doc,
+            getDoc,
+            setDoc,
+            collection,
+            onSnapshot
+        } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // Fallback Firebase Configuration for preview environment
+        const defaultConfig = {
+            apiKey: "AIzaSyAp8ATUsl0xYyteilzRjbNuugor0lgZ9yg",
+            authDomain: "surveypool-7b03f.firebaseapp.com",
+            projectId: "surveypool-7b03f",
+            storageBucket: "surveypool-7b03f.firebasestorage.app",
+            messagingSenderId: "81182450744",
+            appId: "1:81182450744:web:55fe0a4985ad310e1ef2cd"
+        };
+
+        const firebaseConfig = typeof __firebase_config !== 'undefined'
+            ? JSON.parse(__firebase_config)
+            : defaultConfig;
+
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'surveypool-app';
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+        const googleProvider = new GoogleAuthProvider();
+
+        // Global Firebase Auth Handlers
+        window.handleGoogleSignIn = async function () {
+            try {
+                const result = await signInWithPopup(auth, googleProvider);
+                const user = result.user;
+                showToast(`歡迎登入，${user.displayName || '使用者'}！`, 'success');
+            } catch (error) {
+                console.error("Google Auth Error:", error);
+                showToast(`登入失敗或已取消：${error.message}`, 'error');
+            }
+        };
+
+        window.handleSignOut = async function () {
+            try {
+                await signOut(auth);
+                showToast("已成功登入 (切換為匿名狀態)", 'info');
+            } catch (error) {
+                showToast("登出失敗", 'error');
+            }
+        };
+
+        // Listen to Auth State
+        onAuthStateChanged(auth, async (user) => {
+            const loginBtn = document.getElementById('google-login-btn');
+            const profileBadge = document.getElementById('user-profile-badge');
+            const avatar = document.getElementById('user-avatar');
+            const displayName = document.getElementById('user-display-name');
+
+            if (user && !user.isAnonymous) {
+                if (loginBtn) loginBtn.classList.add('hidden');
+                if (profileBadge) profileBadge.classList.remove('hidden');
+                if (avatar) avatar.src = user.photoURL || `https://placehold.co/100x100/16a34a/ffffff?text=${encodeURIComponent(user.displayName?.[0] || 'U')}`;
+                if (displayName) displayName.innerText = user.displayName || '已驗證用戶';
+            } else {
+                if (loginBtn) loginBtn.classList.remove('hidden');
+                if (profileBadge) profileBadge.classList.add('hidden');
+            }
+        });
+
+        // Initial Auth Fallback
+        async function initAuth() {
+            if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                try {
+                    await signInWithCustomToken(auth, __initial_auth_token);
+                } catch (e) {
+                    await signInAnonymously(auth);
+                }
+            }
+        }
+        initAuth();
+    </script>
+
+    <!-- Application Logic Script -->
+    <script>
+        // Initial Mock Wish Data (directly incorporating PDF examples)
+        let initialWishes = [
+            {
+                id: 'wish-1',
+                type: '必要',
+                title: '下週要請客，邀新同事下班去吃牛肉麵',
+                category: '吃',
+                description: '下週五晚間團隊聚餐，需安排獨桌或獨立包廂，希望餐點品質佳、氣氛熱絡。',
+                priceMin: 1000,
+                priceMax: 5000,
+                tags: ['#牛肉麵', '#牛腱', '#牛肚', '#牛腩'],
+                deadline: '2026-08-25',
+                notes: '共計 10 人，希望有獨桌或包廂',
+                status: 'open',
+                estimatedSC: 35,
+                offers: [
+                    { merchantName: '老張極品牛肉麵館', offerText: '提供 10 人獨立包廂，專屬特惠牛肉套餐 10 人份只要 $3,800，加贈特製小菜 5 份！', timestamp: '10分鐘前' }
+                ]
+            },
+            {
+                id: 'wish-2',
+                type: '必要',
+                title: '新屋待設計裝潢，希望明年三月底前完工',
+                category: '其他',
+                description: '新北市中和區小坪數建案，年底交屋，追求極簡風格與高機能空間收納。',
+                priceMin: 200000,
+                priceMax: 500000,
+                tags: ['#小坪數', '#極簡風', '#室內設計', '#裝潢'],
+                deadline: '2026-12-10',
+                notes: '年底才交屋，物件地址在新北中和',
+                status: 'open',
+                estimatedSC: 80,
+                offers: []
+            },
+            {
+                id: 'wish-3',
+                type: '想要',
+                title: '想買件可防風、防潑水又能保暖的外套',
+                category: '穿',
+                description: '戶外登山與日常騎車通用，要求容易收納不占空間。',
+                priceMin: 1000,
+                priceMax: 3000,
+                tags: ['#防風防水', '#保暖', '#登山', '#外套'],
+                deadline: '2026-11-15',
+                notes: '容易收納，偏好粉紅色、粉紫色',
+                status: 'open',
+                estimatedSC: 20,
+                offers: []
+            },
+            {
+                id: 'wish-4',
+                type: '想要',
+                title: '計畫明年暑假到東京＆大阪自助旅行六天',
+                category: '玩樂',
+                description: '希望機票含廉航或傳統航空比較，住宿需鄰近地鐵大眾運輸。',
+                priceMin: 15000,
+                priceMax: 48000,
+                tags: ['#機票', '#飯店民宿', '#廉價航空', '#日本'],
+                deadline: '2027-05-20',
+                notes: '想搭商務艙；住宿地點旁有大眾運輸',
+                status: 'open',
+                estimatedSC: 25,
+                offers: []
+            }
+        ];
+
+        // State variables
+        let wishes = [...initialWishes];
+        let userCoinBalance = 120;
+        let quotaMustRemaining = 3;
+        let quotaWantRemaining = 3;
+        let isPenalized = false;
+        let activeTypeFilter = 'all';
+        let activeCatFilter = 'all';
+
+        // Window Onload Initialization
+        window.onload = function () {
+            renderWishes();
+            renderMerchantWishes();
+            updateWishTypeUI();
+            calculateEstimatedSC();
+        };
+
+        // Navigation Switching
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-page').forEach(page => page.classList.add('hidden'));
+            document.getElementById(`page-${tabId}`).classList.remove('hidden');
+
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('text-brand-600', 'font-semibold');
+                btn.classList.add('text-slate-600');
+            });
+            const activeNav = document.getElementById(`nav-${tabId}`);
+            if (activeNav) {
+                activeNav.classList.add('text-brand-600', 'font-semibold');
+                activeNav.classList.remove('text-slate-600');
+            }
+
+            // Close mobile menu if open
+            document.getElementById('mobile-menu').classList.add('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Wish Pool Filtering Logic
+        function filterWishes(filterType, value) {
+            if (filterType === 'type') {
+                activeTypeFilter = value;
+                document.querySelectorAll('.filter-type-btn').forEach(btn => {
+                    btn.classList.remove('bg-white', 'shadow-sm', 'text-slate-800');
+                    btn.classList.add('text-slate-600');
+                });
+                document.getElementById(`filter-type-${value}`).classList.add('bg-white', 'shadow-sm', 'text-slate-800');
+            } else if (filterType === 'cat') {
+                activeCatFilter = value;
+                document.querySelectorAll('.cat-pill').forEach(btn => {
+                    btn.classList.remove('bg-brand-100', 'text-brand-800');
+                    btn.classList.add('bg-slate-100', 'text-slate-700');
+                });
+                event.target.classList.remove('bg-slate-100', 'text-slate-700');
+                event.target.classList.add('bg-brand-100', 'text-brand-800');
+            }
+            renderWishes();
+        }
+
+        function searchWishes() {
+            renderWishes();
+        }
+
+        // Render Wish Cards in User Hub
+        function renderWishes() {
+            const container = document.getElementById('wishes-grid-container');
+            const searchKeyword = document.getElementById('wish-search-input')?.value.toLowerCase() || '';
+
+            const filtered = wishes.filter(w => {
+                const matchType = (activeTypeFilter === 'all') ||
+                    (activeTypeFilter === 'must' && w.type === '必要') ||
+                    (activeTypeFilter === 'want' && w.type === '想要');
+
+                const matchCat = (activeCatFilter === 'all') || (w.category === activeCatFilter);
+
+                const fullText = (w.title + w.description + w.tags.join(' ') + w.notes).toLowerCase();
+                const matchSearch = fullText.includes(searchKeyword);
+
+                return matchType && matchCat && matchSearch;
+            });
+
+            if (filtered.length === 0) {
+                container.innerHTML = `
+                    <div class="col-span-full py-12 text-center text-slate-400 space-y-3">
+                        <i class="fa-solid fa-wind text-4xl"></i>
+                        <p class="text-sm">沒有找到符合條件的願望卡片</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = filtered.map(w => {
+                const isMust = w.type === '必要';
+                const typeBadgeClass = isMust ? 'bg-red-100 text-red-800 border-red-200' : 'bg-blue-100 text-blue-800 border-blue-200';
+
+                return `
+                    <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm hover:shadow-md transition flex flex-col justify-between space-y-4">
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-2">
+                                    <span class="px-2.5 py-0.5 rounded-full text-xs font-bold border ${typeBadgeClass}">
+                                        ${w.type}
+                                    </span>
+                                    <span class="px-2.5 py-0.5 bg-slate-100 text-slate-700 rounded-full text-xs font-medium">
+                                        ${w.category}
+                                    </span>
+                                </div>
+                                <div class="text-xs text-amber-600 font-bold flex items-center space-x-1">
+                                    <i class="fa-solid fa-coins"></i>
+                                    <span>預估 +${w.estimatedSC} SC</span>
+                                </div>
+                            </div>
+
+                            <h3 class="text-lg font-bold text-slate-900 leading-snug">${escapeHtml(w.title)}</h3>
+                            <p class="text-slate-600 text-xs leading-relaxed line-clamp-2">${escapeHtml(w.description)}</p>
+
+                            <div class="flex flex-wrap gap-1.5 pt-1">
+                                ${w.tags.map(t => `<span class="px-2 py-0.5 bg-brand-50 text-brand-700 text-[11px] rounded font-medium">${escapeHtml(t)}</span>`).join('')}
+                            </div>
+                        </div>
+
+                        <div class="border-t border-slate-100 pt-4 space-y-3">
+                            <div class="grid grid-cols-2 text-xs text-slate-500 gap-2">
+                                <div><i class="fa-solid fa-tag text-slate-400 mr-1"></i>預算: <span class="font-semibold text-slate-700">NT$ ${w.priceMin.toLocaleString()} ~ ${w.priceMax.toLocaleString()}</span></div>
+                                <div><i class="fa-solid fa-clock text-slate-400 mr-1"></i>期限: <span class="font-semibold text-slate-700">${w.deadline}</span></div>
+                            </div>
+
+                            ${w.notes ? `<div class="text-[11px] bg-slate-50 p-2 rounded text-slate-500 border border-slate-100"><strong class="text-slate-600">備註:</strong> ${escapeHtml(w.notes)}</div>` : ''}
+
+                            ${w.offers.length > 0 ? `
+                                <div class="bg-amber-50 border border-amber-200 p-3 rounded-xl space-y-2">
+                                    <div class="flex justify-between items-center text-xs">
+                                        <span class="font-bold text-amber-900 flex items-center gap-1">
+                                            <i class="fa-solid fa-store text-amber-600"></i>
+                                            ${escapeHtml(w.offers[0].merchantName)} 提供了接洽方案！
+                                        </span>
+                                        <span class="text-[10px] bg-red-100 text-red-700 px-1.5 py-0.5 rounded font-bold">需7天內回應</span>
+                                    </div>
+                                    <p class="text-xs text-amber-800 leading-normal">${escapeHtml(w.offers[0].offerText)}</p>
+                                    <div class="flex space-x-2 pt-1">
+                                        <button onclick="acceptOffer('${w.id}')" class="flex-1 py-1.5 bg-brand-600 hover:bg-brand-700 text-white font-bold text-xs rounded-lg shadow-sm">
+                                            同意方案並結帳
+                                        </button>
+                                        <button onclick="rejectOffer('${w.id}')" class="px-3 py-1.5 bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold text-xs rounded-lg">
+                                            否決
+                                        </button>
+                                    </div>
+                                </div>
+                            ` : `
+                                <div class="text-center text-[11px] text-slate-400 py-1">
+                                    <i class="fa-solid fa-spinner fa-spin mr-1"></i> 正在公開媒合商家提案中...
+                                </div>
+                            `}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Render Wishes in Merchant View
+        function renderMerchantWishes() {
+            const container = document.getElementById('merchant-wishes-list');
+            container.innerHTML = wishes.map(w => `
+                <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/50 hover:bg-white transition flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                    <div class="space-y-1 max-w-2xl">
+                        <div class="flex items-center space-x-2 text-xs">
+                            <span class="font-bold ${w.type === '必要' ? 'text-red-600' : 'text-blue-600'}">[${w.type}]</span>
+                            <span class="font-bold text-slate-800">${escapeHtml(w.title)}</span>
+                            <span class="text-slate-400">| 預算：NT$ ${w.priceMin.toLocaleString()} ~ ${w.priceMax.toLocaleString()}</span>
+                        </div>
+                        <p class="text-xs text-slate-600">${escapeHtml(w.description)}</p>
+                        <div class="text-[11px] text-slate-400">標籤: ${w.tags.join(', ')}</div>
+                    </div>
+                    <button onclick="submitMerchantOffer('${w.id}')" class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold whitespace-nowrap shadow-sm">
+                        <i class="fa-solid fa-paper-plane mr-1"></i> 主動提案接洽
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        // Wish Form Interactive UI
+        function updateWishTypeUI() {
+            const selectedType = document.querySelector('input[name="wishType"]:checked').value;
+            document.querySelectorAll('.wish-type-option').forEach(option => {
+                option.classList.remove('border-brand-500', 'bg-brand-50/50');
+                option.classList.add('border-slate-200', 'bg-slate-50');
+            });
+            const activeInput = document.querySelector(`input[name="wishType"][value="${selectedType}"]`);
+            if (activeInput) {
+                activeInput.closest('.wish-type-option').classList.add('border-brand-500', 'bg-brand-50/50');
+                activeInput.closest('.wish-type-option').classList.remove('border-slate-200', 'bg-slate-50');
+            }
+            calculateEstimatedSC();
+        }
+
+        function calculateEstimatedSC() {
+            const desc = document.getElementById('form-description').value;
+            const wishType = document.querySelector('input[name="wishType"]:checked').value;
+
+            let baseSC = wishType === '必要' ? 20 : 10;
+            if (desc.length > 20) baseSC += 15;
+            if (desc.length > 50) baseSC += 25;
+
+            document.getElementById('estimated-sc-val').innerText = `+${baseSC}`;
+            return baseSC;
+        }
+
+        // Submit New Wish Handler
+        function handleWishSubmit(e) {
+            e.preventDefault();
+
+            if (isPenalized) {
+                showToast('懲罰凍結中，暫時無法發布新願望！', 'error');
+                return;
+            }
+
+            const type = document.querySelector('input[name="wishType"]:checked').value;
+
+            if (type === '必要' && quotaMustRemaining <= 0) {
+                showToast('今日「必要」願望額度已用完 (3/3)！', 'error');
+                return;
+            }
+            if (type === '想要' && quotaWantRemaining <= 0) {
+                showToast('今日「想要」願望額度已用完 (3/3)！', 'error');
+                return;
+            }
+
+            const title = document.getElementById('form-title').value;
+            const category = document.getElementById('form-category').value;
+            const description = document.getElementById('form-description').value;
+            const priceMin = parseInt(document.getElementById('form-price-min').value) || 0;
+            const priceMax = parseInt(document.getElementById('form-price-max').value) || priceMin || 1000;
+            const deadline = document.getElementById('form-deadline').value;
+            const tagsRaw = document.getElementById('form-tags').value;
+            const notes = document.getElementById('form-notes').value;
+
+            const tags = tagsRaw.split(/[\s,]+/).map(t => t.startsWith('#') ? t : `#${t}`).filter(t => t.length > 1);
+
+            const newWish = {
+                id: `wish-${Date.now()}`,
+                type,
+                title,
+                category,
+                description,
+                priceMin,
+                priceMax,
+                tags,
+                deadline,
+                notes,
+                status: 'open',
+                estimatedSC: calculateEstimatedSC(),
+                offers: []
+            };
+
+            wishes.unshift(newWish);
+
+            // Deduct Quota
+            if (type === '必要') {
+                quotaMustRemaining--;
+                document.getElementById('quota-must-count').innerText = quotaMustRemaining;
+            } else {
+                quotaWantRemaining--;
+                document.getElementById('quota-want-count').innerText = quotaWantRemaining;
+            }
+
+            // Reset Form
+            document.getElementById('new-wish-form').reset();
+            updateWishTypeUI();
+
+            showToast('許願發布成功！商家將主動進行配對接洽。', 'success');
+            renderWishes();
+            renderMerchantWishes();
+            switchTab('pool');
+        }
+
+        // Merchant Actions Simulator
+        function submitMerchantOffer(wishId) {
+            const target = wishes.find(w => w.id === wishId);
+            if (!target) return;
+
+            const sampleOffers = [
+                '提供專屬特惠方案，現折 NT$ 500 再贈原廠禮品組！',
+                '我們有現貨且符合您的規格需求，願意給予團購級專案折扣！',
+                '可提供完全客製化服務，專人免費到府測量與規劃！'
+            ];
+            const randomOffer = sampleOffers[Math.floor(Math.random() * sampleOffers.length)];
+
+            target.offers.unshift({
+                merchantName: '優選認證合作商家',
+                offerText: randomOffer,
+                timestamp: '剛剛'
+            });
+
+            showToast(`已成功向「${target.title}」送出接洽提案！`, 'success');
+            renderWishes();
+            renderMerchantWishes();
+        }
+
+        // Accept/Reject Merchant Offers & SC Handling
+        function acceptOffer(wishId) {
+            const wishIndex = wishes.findIndex(w => w.id === wishId);
+            if (wishIndex === -1) return;
+
+            const wish = wishes[wishIndex];
+            const earnedSC = wish.estimatedSC;
+
+            // Reward User SC
+            userCoinBalance += earnedSC;
+            document.getElementById('user-coin-balance').innerText = userCoinBalance;
+            document.getElementById('modal-coin-balance').innerText = userCoinBalance;
+
+            // Add Record to History
+            const historyList = document.getElementById('wallet-history-list');
+            historyList.innerHTML = `
+                <div class="flex justify-between items-center p-2 bg-emerald-50 rounded">
+                    <div>
+                        <div class="font-semibold text-emerald-800">願望實現 [${escapeHtml(wish.title)}]</div>
+                        <div class="text-[10px] text-emerald-600">剛剛完成結帳</div>
+                    </div>
+                    <span class="font-bold text-emerald-600">+${earnedSC} SC</span>
+                </div>
+            ` + historyList.innerHTML;
+
+            // Remove Wish (Fulfilled)
+            wishes.splice(wishIndex, 1);
+
+            showToast(`願望成功實現！獲得 ${earnedSC} SC 獎勵並已完成折抵結帳！`, 'success');
+            renderWishes();
+            renderMerchantWishes();
+        }
+
+        function rejectOffer(wishId) {
+            const wish = wishes.find(w => w.id === wishId);
+            if (wish) {
+                wish.offers = [];
+                showToast('已否決該商家提案，願望繼續保留在許願池中。', 'info');
+                renderWishes();
+                renderMerchantWishes();
+            }
+        }
+
+        // Wallet Modal Toggle
+        function openWalletModal() {
+            document.getElementById('wallet-modal').classList.remove('hidden');
+        }
+
+        function closeWalletModal() {
+            document.getElementById('wallet-modal').classList.add('hidden');
+        }
+
+        // Toast Notification System
+        function showToast(message, type = 'info') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+
+            let bgClass = 'bg-slate-800 text-white';
+            if (type === 'success') bgClass = 'bg-brand-600 text-white';
+            if (type === 'error') bgClass = 'bg-red-600 text-white';
+
+            toast.className = `pointer-events-auto flex items-center space-x-2 px-4 py-3 rounded-xl shadow-lg ${bgClass} text-xs font-semibold transform transition duration-300 translate-y-2 opacity-0`;
+            toast.innerHTML = `
+                <i class="fa-solid ${type === 'success' ? 'fa-circle-check' : type === 'error' ? 'fa-circle-exclamation' : 'fa-circle-info'}"></i>
+                <span>${escapeHtml(message)}</span>
+            `;
+
+            container.appendChild(toast);
+
+            setTimeout(() => {
+                toast.classList.remove('translate-y-2', 'opacity-0');
+            }, 10);
+
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-y-2');
+                setTimeout(() => toast.remove(), 300);
+            }, 3500);
+        }
+
+        // Security Utility
+        function escapeHtml(str) {
+            if (!str) return '';
+            return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+        }
+    </script>
+</body>
+
 </html>
