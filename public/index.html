@@ -663,49 +663,49 @@
                             class="cat-radio p-2.5 border rounded-xl flex items-center justify-center gap-2 cursor-pointer border-brand-500 bg-brand-50/50 font-bold text-brand-900">
                             <input type="radio" name="wishCategory" value="穿戴" class="hidden" checked
                                 onchange="updateCategoryUI(this)">
-                            <span>穿戴</span>
+                            <span>⌚️ 穿戴</span>
                         </label>
                         <label
                             class="cat-radio p-2.5 border rounded-xl flex items-center justify-center gap-2 cursor-pointer border-slate-200 hover:border-slate-300 text-slate-700">
                             <input type="radio" name="wishCategory" value="吃喝" class="hidden"
                                 onchange="updateCategoryUI(this)">
-                            <span>吃喝</span>
+                            <span>🌭 吃喝</span>
                         </label>
                         <label
                             class="cat-radio p-2.5 border rounded-xl flex items-center justify-center gap-2 cursor-pointer border-slate-200 hover:border-slate-300 text-slate-700">
                             <input type="radio" name="wishCategory" value="玩樂" class="hidden"
                                 onchange="updateCategoryUI(this)">
-                            <span>玩樂</span>
+                            <span>🎮 玩樂</span>
                         </label>
                         <label
                             class="cat-radio p-2.5 border rounded-xl flex items-center justify-center gap-2 cursor-pointer border-slate-200 hover:border-slate-300 text-slate-700">
                             <input type="radio" name="wishCategory" value="生物" class="hidden"
                                 onchange="updateCategoryUI(this)">
-                            <span>生物</span>
+                            <span>🐾 生物</span>
                         </label>
                         <label
                             class="cat-radio p-2.5 border rounded-xl flex items-center justify-center gap-2 cursor-pointer border-slate-200 hover:border-slate-300 text-slate-700">
                             <input type="radio" name="wishCategory" value="用品" class="hidden"
                                 onchange="updateCategoryUI(this)">
-                            <span>用品</span>
+                            <span>🛒 用品</span>
                         </label>
                         <label
                             class="cat-radio p-2.5 border rounded-xl flex items-center justify-center gap-2 cursor-pointer border-slate-200 hover:border-slate-300 text-slate-700">
                             <input type="radio" name="wishCategory" value="居住" class="hidden"
                                 onchange="updateCategoryUI(this)">
-                            <span>居住</span>
+                            <span>🏠 居住</span>
                         </label>
                         <label
                             class="cat-radio p-2.5 border rounded-xl flex items-center justify-center gap-2 cursor-pointer border-slate-200 hover:border-slate-300 text-slate-700">
                             <input type="radio" name="wishCategory" value="服務" class="hidden"
                                 onchange="updateCategoryUI(this)">
-                            <span>服務</span>
+                            <span>🛠️ 服務</span>
                         </label>
                         <label
                             class="cat-radio p-2.5 border rounded-xl flex items-center justify-center gap-2 cursor-pointer border-slate-200 hover:border-slate-300 text-slate-700">
                             <input type="radio" name="wishCategory" value="其他" class="hidden"
                                 onchange="updateCategoryUI(this)">
-                            <span>其他</span>
+                            <span>✨ 其他</span>
                         </label>
                     </div>
                 </div>
@@ -1577,7 +1577,8 @@
             const brand1 = document.getElementById('form-brand1').value.trim();
             const brand2 = document.getElementById('form-brand2').value.trim();
             const brand3 = document.getElementById('form-brand3').value.trim();
-            const imgUrl = document.getElementById('form-img-url').value.trim();
+            const rawImgUrl = document.getElementById('form-img-url').value.trim();
+            const imgUrl = rawImgUrl || 'https://i.pinimg.com/736x/8e/aa/fd/8eaafd68a611aef29f865353a6239778.jpg';
 
             const scGain = wishType === '必要' ? 10 : 5;
             const newWishId = `wish-${Date.now()}`;
