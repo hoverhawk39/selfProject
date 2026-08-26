@@ -452,7 +452,7 @@
                 class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-slate-200 pb-6">
                 <div>
                     <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900">許願池廣場</h2>
-                    <p class="text-slate-500 text-sm mt-1">瀏覽全平台公開願望，點擊【進行接洽】即可發起磋商</p>
+                    <p class="text-slate-500 text-sm mt-1">瀏覽並搜尋所有願望，點擊【進行接洽】即可與許願者磋商</p>
                 </div>
                 <button onclick="switchTab('wish-form')"
                     class="px-4 py-2.5 bg-brand-600 hover:bg-brand-700 text-white rounded-xl text-sm font-semibold shadow-md flex items-center space-x-2 transition">
@@ -464,7 +464,18 @@
             <!-- Comprehensive Search & Filter Controls -->
             <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-4">
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 text-xs">
-                    <!-- 1. Category Filter -->
+                    <!-- 1. Type Filter -->
+                    <div class="space-y-1">
+                        <label class="block font-bold text-slate-700">願望型態</label>
+                        <select id="filter-type" onchange="renderWishes()"
+                            class="w-full p-2.5 bg-slate-50 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-brand-500">
+                            <option value="all">全部型態</option>
+                            <option value="必要">必要</option>
+                            <option value="想要">想要</option>
+                        </select>
+                    </div>
+
+                    <!-- 2. Category Filter -->
                     <div class="space-y-1">
                         <label class="block font-bold text-slate-700">願望分類</label>
                         <select id="filter-cat" onchange="renderWishes()"
@@ -478,17 +489,6 @@
                             <option value="居住">居住</option>
                             <option value="服務">服務</option>
                             <option value="其他">其他</option>
-                        </select>
-                    </div>
-
-                    <!-- 2. Type Filter -->
-                    <div class="space-y-1">
-                        <label class="block font-bold text-slate-700">願望類型</label>
-                        <select id="filter-type" onchange="renderWishes()"
-                            class="w-full p-2.5 bg-slate-50 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-brand-500">
-                            <option value="all">全部類型</option>
-                            <option value="必要">必要</option>
-                            <option value="想要">想要</option>
                         </select>
                     </div>
 
@@ -552,7 +552,7 @@
             <div class="border-b border-slate-200 pb-4 flex justify-between items-end">
                 <div>
                     <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900">發表誠實願望</h2>
-                    <p class="text-slate-500 text-sm mt-1">完整填寫欄位，許願成功即可獲得「預計獲得」SC 累積！</p>
+                    <p class="text-slate-500 text-sm mt-1">許願完成即可增加「預計獲得」SC 數值！（願望不可刪除）</p>
                 </div>
             </div>
 
@@ -573,10 +573,10 @@
             <form id="new-wish-form" onsubmit="handleWishSubmit(event)"
                 class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm space-y-6">
 
-                <!-- 1. 願望類型【單選】: 想要 / 必要 -->
+                <!-- 1. 願望型態【單選】: 想要 / 必要 -->
                 <div class="space-y-2">
                     <label class="block text-xs font-bold uppercase tracking-wider text-slate-700">
-                        1. 願望類型 <span class="text-red-500">*</span>
+                        1. 願望型態 <span class="text-red-500">*</span>
                     </label>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <label id="label-type-must"
@@ -614,7 +614,7 @@
                         <label class="block text-xs font-bold text-slate-700">3. 願望期待 <span
                                 class="text-red-500">*</span></label>
                         <textarea id="form-expectation" required rows="3"
-                            placeholder="請詳細描述您的願望期待細節（例如：獨桌包廂、環境熱絡、提供停車位等）"
+                            placeholder="請詳細描述您對願望的期待（例如：獨桌包廂、環境熱絡、提供停車位等）"
                             class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-brand-500 focus:outline-none"></textarea>
                     </div>
                 </div>
@@ -646,7 +646,7 @@
                             class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-slate-100 text-slate-500 text-sm font-semibold cursor-not-allowed">
                     </div>
                     <div class="space-y-1">
-                        <label class="block text-xs font-bold text-slate-700">7. 願望期限 (日曆，需晚於許願日期) <span
+                        <label class="block text-xs font-bold text-slate-700">7. 願望期限 (需晚於許願日期) <span
                                 class="text-red-500">*</span></label>
                         <input type="date" id="form-deadline" required
                             class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-brand-500 focus:outline-none">
@@ -712,35 +712,35 @@
 
                 <!-- 9, 10, 11. 關鍵字一、二、三 -->
                 <div class="space-y-1">
-                    <label class="block text-xs font-bold text-slate-700">關鍵字 (必填三項) <span
+                    <label class="block text-xs font-bold text-slate-700">9. 關鍵字 (三項皆必填)<span
                             class="text-red-500">*</span></label>
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                        <input type="text" id="form-kw1" required placeholder="9. 關鍵字一"
+                        <input type="text" id="form-kw1" required placeholder="關鍵字一"
                             class="w-full px-3.5 py-2 rounded-xl border border-slate-300 text-xs focus:ring-2 focus:ring-brand-500 focus:outline-none">
-                        <input type="text" id="form-kw2" required placeholder="10. 關鍵字二"
+                        <input type="text" id="form-kw2" required placeholder="關鍵字二"
                             class="w-full px-3.5 py-2 rounded-xl border border-slate-300 text-xs focus:ring-2 focus:ring-brand-500 focus:outline-none">
-                        <input type="text" id="form-kw3" required placeholder="11. 關鍵字三"
+                        <input type="text" id="form-kw3" required placeholder="關鍵字三"
                             class="w-full px-3.5 py-2 rounded-xl border border-slate-300 text-xs focus:ring-2 focus:ring-brand-500 focus:outline-none">
                     </div>
                 </div>
 
                 <!-- 12, 13, 14. 品牌偏好一、二、三 (選填**) -->
                 <div class="space-y-1">
-                    <label class="block text-xs font-bold text-slate-500">品牌偏好 (選填)</label>
+                    <label class="block text-xs font-bold text-slate-500">10. 品牌偏好 (選填)</label>
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                        <input type="text" id="form-brand1" placeholder="12. **品牌偏好一"
+                        <input type="text" id="form-brand1" placeholder="品牌偏好Ａ"
                             class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-brand-500 focus:outline-none">
-                        <input type="text" id="form-brand2" placeholder="13. **品牌偏好二"
+                        <input type="text" id="form-brand2" placeholder="品牌偏好Ｂ"
                             class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-brand-500 focus:outline-none">
-                        <input type="text" id="form-brand3" placeholder="14. **品牌偏好三"
+                        <input type="text" id="form-brand3" placeholder="品牌偏好Ｃ"
                             class="w-full px-3.5 py-2 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-brand-500 focus:outline-none">
                     </div>
                 </div>
 
                 <!-- 15. 參考圖片 (圖片網址 - 選填**) -->
                 <div class="space-y-1">
-                    <label class="block text-xs font-bold text-slate-500">15. **參考圖片 (圖片網址，選填)</label>
-                    <input type="url" id="form-img-url" placeholder="https://images.unsplash.com/photo-..."
+                    <label class="block text-xs font-bold text-slate-500">11. 參考圖片 (選填)</label>
+                    <input type="url" id="form-img-url" placeholder="貼上圖片網址(例如：https://images.unsplash.com/photo-...)"
                         class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-brand-500 focus:outline-none">
                 </div>
 
@@ -1922,8 +1922,8 @@
 
             const toast = document.createElement('div');
             toast.className = `toast-enter pointer-events-auto flex items-center space-x-3 px-4 py-3 rounded-xl shadow-lg border text-xs sm:text-sm font-semibold max-w-sm ${type === 'success' ? 'bg-emerald-900 text-white border-emerald-700' :
-                    type === 'error' ? 'bg-rose-900 text-white border-rose-700' :
-                        'bg-slate-900 text-white border-slate-700'
+                type === 'error' ? 'bg-rose-900 text-white border-rose-700' :
+                    'bg-slate-900 text-white border-slate-700'
                 }`;
 
             const icon = type === 'success' ? 'fa-circle-check text-emerald-400' :
