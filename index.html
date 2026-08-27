@@ -528,8 +528,8 @@
                     <!-- 5. Deadline Filter -->
                     <div class="space-y-1">
                         <label class="block font-bold text-slate-700">願望期限 (至)</label>
-                        <input type="text" id="filter-deadline-date" onfocus="(this.type='date')" onblur="if(!this.value)this.type='text'" onchange="renderWishes()" placeholder="YYYY/MM/DD" title="YYYY/MM/DD"
-                            class="w-full p-2.5 bg-slate-50 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-brand-500 text-xs">
+                        <input type="date" id="filter-deadline-date" onkeydown="return false;" onclick="try{this.showPicker()}catch(e){}" onchange="renderWishes()"
+                            class="w-full p-2.5 bg-slate-50 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-brand-500 text-xs cursor-pointer">
                     </div>
                 </div>
 
@@ -652,8 +652,8 @@
                     <div class="space-y-1">
                         <label class="block text-xs font-bold text-slate-700">7. 願望期限 (需晚於許願日期) <span
                                 class="text-red-500">*</span></label>
-                        <input type="date" id="form-deadline" required
-                            class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-brand-500 focus:outline-none">
+                        <input type="date" id="form-deadline" required onkeydown="return false;" onclick="try{this.showPicker()}catch(e){}"
+                            class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-brand-500 focus:outline-none cursor-pointer">
                     </div>
                 </div>
 
@@ -1163,12 +1163,19 @@
             const createdInput = document.getElementById('form-created-date');
             if (createdInput) createdInput.value = todayStr;
 
-            const defaultDeadline = new Date();
-            defaultDeadline.setDate(defaultDeadline.getDate() + 7);
+            const nextYearDate = new Date();
+            nextYearDate.setFullYear(nextYearDate.getFullYear() + 1);
+            const nextYearStr = nextYearDate.toISOString().split('T')[0];
+
             const deadlineInput = document.getElementById('form-deadline');
             if (deadlineInput) {
-                deadlineInput.value = defaultDeadline.toISOString().split('T')[0];
+                deadlineInput.value = nextYearStr;
                 deadlineInput.min = todayStr;
+            }
+
+            const filterDeadlineInput = document.getElementById('filter-deadline-date');
+            if (filterDeadlineInput) {
+                filterDeadlineInput.value = nextYearStr;
             }
         }
 
