@@ -506,8 +506,8 @@
                     </div>
                 </div>
 
-                <!-- Row 2: Budget & Deadline Filters (2 columns) -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                <!-- Row 2: Budget & Deadline Filters (3 columns) -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
                     <!-- 4. Budget Range Filter -->
                     <div class="space-y-1">
                         <label class="block font-bold text-slate-700">願望預算</label>
@@ -525,9 +525,16 @@
                         </select>
                     </div>
 
-                    <!-- 5. Deadline Filter -->
+                    <!-- 5. Deadline Start Filter -->
                     <div class="space-y-1">
-                        <label class="block font-bold text-slate-700">願望期限 (至)</label>
+                        <label class="block font-bold text-slate-700">願望期限 (起)</label>
+                        <input type="date" id="filter-deadline-start" onkeydown="return false;" onclick="try{this.showPicker()}catch(e){}" onchange="renderWishes()"
+                            class="w-full p-2.5 bg-slate-50 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-brand-500 text-xs cursor-pointer">
+                    </div>
+
+                    <!-- 6. Deadline End Filter -->
+                    <div class="space-y-1">
+                        <label class="block font-bold text-slate-700">願望期限 (迄)</label>
                         <input type="date" id="filter-deadline-date" onkeydown="return false;" onclick="try{this.showPicker()}catch(e){}" onchange="renderWishes()"
                             class="w-full p-2.5 bg-slate-50 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-brand-500 text-xs cursor-pointer">
                     </div>
@@ -1173,6 +1180,11 @@
                 deadlineInput.min = todayStr;
             }
 
+            const filterDeadlineStart = document.getElementById('filter-deadline-start');
+            if (filterDeadlineStart) {
+                filterDeadlineStart.value = '2025-01-01';
+            }
+
             const filterDeadlineInput = document.getElementById('filter-deadline-date');
             if (filterDeadlineInput) {
                 filterDeadlineInput.value = nextYearStr;
@@ -1368,14 +1380,16 @@
             const typeFilter = document.getElementById('filter-type')?.value || 'all';
             const statusFilter = document.getElementById('filter-status')?.value || 'all';
             const budgetFilter = document.getElementById('filter-budget')?.value || 'all';
-            const deadlineFilter = document.getElementById('filter-deadline-date')?.value || '';
+            const deadlineStartFilter = document.getElementById('filter-deadline-start')?.value || '';
+            const deadlineEndFilter = document.getElementById('filter-deadline-date')?.value || '';
             const searchText = document.getElementById('wish-search-input')?.value.toLowerCase() || '';
 
             const filtered = wishes.filter(w => {
                 if (catFilter !== 'all' && w.category !== catFilter) return false;
                 if (typeFilter !== 'all' && w.type !== typeFilter) return false;
                 if (statusFilter !== 'all' && w.status !== statusFilter) return false;
-                if (deadlineFilter && w.deadline > deadlineFilter) return false;
+                if (deadlineStartFilter && w.deadline < deadlineStartFilter) return false;
+                if (deadlineEndFilter && w.deadline > deadlineEndFilter) return false;
 
                 // Budget filter logic (overlapping range)
                 if (budgetFilter !== 'all') {
