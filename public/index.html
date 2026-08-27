@@ -1381,6 +1381,13 @@
                 return true;
             });
 
+            // Sort by latest createdDate descending (newest first)
+            filtered.sort((a, b) => {
+                const dateDiff = (b.createdDate || '').localeCompare(a.createdDate || '');
+                if (dateDiff !== 0) return dateDiff;
+                return (b.id || '').localeCompare(a.id || '');
+            });
+
             // Update badges
             const poolBadge = document.getElementById('nav-badge-pool-count');
             if (poolBadge) poolBadge.innerText = wishes.length;
