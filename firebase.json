@@ -16,6 +16,11 @@
       "README.md",
       "package.json",
       "package-lock.json",
+      "skills-lock.json",
+      ".agents/**",
+      ".firebase/**",
+      ".github/**",
+      ".git/**",
       "**/.*",
       "**/node_modules/**"
     ],
