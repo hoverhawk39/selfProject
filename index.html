@@ -463,7 +463,8 @@
 
             <!-- Comprehensive Search & Filter Controls -->
             <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-4">
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 text-xs">
+                <!-- Row 1: Type, Category, Status Filters (3 columns) -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
                     <!-- 1. Type Filter -->
                     <div class="space-y-1">
                         <label class="block font-bold text-slate-700">願望型態</label>
@@ -503,8 +504,11 @@
                             <option value="已告終">已告終</option>
                         </select>
                     </div>
+                </div>
 
-                    <!-- 4. Budget Range Filter (改為願望預算下拉選單) -->
+                <!-- Row 2: Budget & Deadline Filters (2 columns) -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                    <!-- 4. Budget Range Filter -->
                     <div class="space-y-1">
                         <label class="block font-bold text-slate-700">願望預算</label>
                         <select id="filter-budget" onchange="renderWishes()"
@@ -524,13 +528,13 @@
                     <!-- 5. Deadline Filter -->
                     <div class="space-y-1">
                         <label class="block font-bold text-slate-700">願望期限 (至)</label>
-                        <input type="date" id="filter-deadline-date" onchange="renderWishes()"
-                            class="w-full p-2 bg-slate-50 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-brand-500 text-xs">
+                        <input type="date" id="filter-deadline-date" onchange="renderWishes()" placeholder="yyyy/mm/dd" title="yyyy/mm/dd"
+                            class="w-full p-2.5 bg-slate-50 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-brand-500 text-xs">
                     </div>
                 </div>
 
-                <!-- Text Search -->
-                <div class="relative pt-1">
+                <!-- Row 3: Text Search -->
+                <div class="relative">
                     <i
                         class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400"></i>
                     <input type="text" id="wish-search-input" onkeyup="renderWishes()"
