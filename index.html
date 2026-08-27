@@ -535,7 +535,8 @@
                         <div class="relative">
                             <input type="text" id="filter-deadline-start" placeholder="yyyy/mm/dd"
                                 class="w-full p-2.5 bg-slate-50 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-brand-500 text-xs cursor-pointer pr-8">
-                            <i class="fa-regular fa-calendar absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none"></i>
+                            <i
+                                class="fa-regular fa-calendar absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none"></i>
                         </div>
                     </div>
 
@@ -545,7 +546,8 @@
                         <div class="relative">
                             <input type="text" id="filter-deadline-date" placeholder="yyyy/mm/dd"
                                 class="w-full p-2.5 bg-slate-50 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-brand-500 text-xs cursor-pointer pr-8">
-                            <i class="fa-regular fa-calendar absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none"></i>
+                            <i
+                                class="fa-regular fa-calendar absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none"></i>
                         </div>
                     </div>
                 </div>
@@ -1513,6 +1515,8 @@
                                 ${w.kw2 ? `<span class="px-2 py-0.5 bg-brand-50 text-brand-700 rounded text-[10px] font-semibold">#${escapeHtml(w.kw2)}</span>` : ''}
                                 ${w.kw3 ? `<span class="px-2 py-0.5 bg-brand-50 text-brand-700 rounded text-[10px] font-semibold">#${escapeHtml(w.kw3)}</span>` : ''}
                                 ${w.brand1 ? `<span class="px-2 py-0.5 bg-indigo-50 text-indigo-700 rounded text-[10px] font-semibold">品牌:${escapeHtml(w.brand1)}</span>` : ''}
+                                ${w.brand2 ? `<span class="px-2 py-0.5 bg-indigo-50 text-indigo-700 rounded text-[10px] font-semibold">、${escapeHtml(w.brand2)}</span>` : ''}
+                                ${w.brand3 ? `<span class="px-2 py-0.5 bg-indigo-50 text-indigo-700 rounded text-[10px] font-semibold">、${escapeHtml(w.brand3)}</span>` : ''}
                             </div>
                         </div>
 
