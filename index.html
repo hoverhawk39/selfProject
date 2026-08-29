@@ -859,7 +859,7 @@
     <!-- ================= WALLET MODAL ================= -->
     <div id="wallet-modal"
         class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
-        <div class="bg-white w-full max-w-md rounded-2xl shadow-2xl border border-slate-100 overflow-hidden space-y-6">
+        <div class="bg-white w-full max-w-2xl rounded-2xl shadow-2xl border border-slate-100 overflow-hidden space-y-6">
             <div class="bg-gradient-to-r from-amber-500 to-coin-600 p-6 text-white relative">
                 <button onclick="closeWalletModal()"
                     class="absolute top-4 right-4 text-white/80 hover:text-white text-lg">
@@ -878,13 +878,15 @@
                 </div>
             </div>
 
-            <div class="px-6 space-y-3 text-xs text-slate-600">
+            <div class="px-6 space-y-3 text-xs text-slate-500">
                 <h4 class="font-bold text-slate-800 text-sm">SurveyCoin 規則說明</h4>
-                <ul class="space-y-1.5 list-disc list-inside">
+                <ul class="space-y-3 list-disc list-inside">
                     <li>首次登入可獲【目前累計】<strong>100 SC</strong>。</li>
-                    <li>發布「必要」願望【預計獲得】<strong>+10 SC</strong>；發布「想要」願望【預計獲得】<strong>+5 SC</strong>。</li>
+                    <li>發布「必要」願望可增加【預計獲得】<strong>10 SC</strong>。</li>
+                    <li>發布「想要」願望可增加【預計獲得】<strong>5 SC</strong>。</li>
                     <li>發起磋商需扣除【目前累計】<strong>2 SC</strong>（同願望只需扣除一次）。</li>
-                    <li>磋商成功（即願望實現）後，原先發布之願望所對應的【預計獲得】SC 會轉為【目前累計】SC。</li>
+                    <li>磋商成功（即願望實現）後，原各別發布之願望所對應的【預計獲得】SC 會轉新增至【目前累計】SC。</li>
+                    <li>磋商失敗（即願望告終）後，原各別發布之願望所對應的【預計獲得】SC 會被扣除。</li>
                 </ul>
             </div>
 
