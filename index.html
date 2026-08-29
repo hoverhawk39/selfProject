@@ -689,49 +689,49 @@
                     <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
                         <label
                             class="cat-radio p-2.5 border rounded-xl flex items-center justify-center gap-2 cursor-pointer border-brand-500 bg-brand-50/50 font-bold text-brand-900">
-                            <input type="radio" name="wishCategory" value="⌚️ 穿戴" class="hidden" checked
+                            <input type="radio" name="wishCategory" value="穿戴" class="hidden" checked
                                 onchange="updateCategoryUI(this)">
                             <span>⌚️ 穿戴</span>
                         </label>
                         <label
                             class="cat-radio p-2.5 border rounded-xl flex items-center justify-center gap-2 cursor-pointer border-slate-200 hover:border-slate-300 text-slate-700">
-                            <input type="radio" name="wishCategory" value="🌭 吃喝" class="hidden"
+                            <input type="radio" name="wishCategory" value="吃喝" class="hidden"
                                 onchange="updateCategoryUI(this)">
                             <span>🌭 吃喝</span>
                         </label>
                         <label
                             class="cat-radio p-2.5 border rounded-xl flex items-center justify-center gap-2 cursor-pointer border-slate-200 hover:border-slate-300 text-slate-700">
-                            <input type="radio" name="wishCategory" value="🎮 玩樂" class="hidden"
+                            <input type="radio" name="wishCategory" value="玩樂" class="hidden"
                                 onchange="updateCategoryUI(this)">
                             <span>🎮 玩樂</span>
                         </label>
                         <label
                             class="cat-radio p-2.5 border rounded-xl flex items-center justify-center gap-2 cursor-pointer border-slate-200 hover:border-slate-300 text-slate-700">
-                            <input type="radio" name="wishCategory" value="🐾 生物" class="hidden"
+                            <input type="radio" name="wishCategory" value="生物" class="hidden"
                                 onchange="updateCategoryUI(this)">
                             <span>🐾 生物</span>
                         </label>
                         <label
                             class="cat-radio p-2.5 border rounded-xl flex items-center justify-center gap-2 cursor-pointer border-slate-200 hover:border-slate-300 text-slate-700">
-                            <input type="radio" name="wishCategory" value="🛒 用品" class="hidden"
+                            <input type="radio" name="wishCategory" value="用品" class="hidden"
                                 onchange="updateCategoryUI(this)">
                             <span>🛒 用品</span>
                         </label>
                         <label
                             class="cat-radio p-2.5 border rounded-xl flex items-center justify-center gap-2 cursor-pointer border-slate-200 hover:border-slate-300 text-slate-700">
-                            <input type="radio" name="wishCategory" value="🏠 居住" class="hidden"
+                            <input type="radio" name="wishCategory" value="居住" class="hidden"
                                 onchange="updateCategoryUI(this)">
                             <span>🏠 居住</span>
                         </label>
                         <label
                             class="cat-radio p-2.5 border rounded-xl flex items-center justify-center gap-2 cursor-pointer border-slate-200 hover:border-slate-300 text-slate-700">
-                            <input type="radio" name="wishCategory" value="🛠️ 服務" class="hidden"
+                            <input type="radio" name="wishCategory" value="服務" class="hidden"
                                 onchange="updateCategoryUI(this)">
                             <span>🛠️ 服務</span>
                         </label>
                         <label
                             class="cat-radio p-2.5 border rounded-xl flex items-center justify-center gap-2 cursor-pointer border-slate-200 hover:border-slate-300 text-slate-700">
-                            <input type="radio" name="wishCategory" value="✨ 其他" class="hidden"
+                            <input type="radio" name="wishCategory" value="其他" class="hidden"
                                 onchange="updateCategoryUI(this)">
                             <span>✨ 其他</span>
                         </label>
@@ -842,6 +842,19 @@
         </section>
 
     </main>
+
+    <!-- ================= IMAGE LIGHTBOX MODAL ================= -->
+    <div id="image-lightbox-modal" onclick="if(event.target === this) closeImageLightbox()"
+        class="fixed inset-0 z-[60] bg-slate-900/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="relative max-w-3xl w-full">
+            <button onclick="closeImageLightbox()"
+                class="absolute -top-10 right-0 sm:-top-3 sm:-right-3 w-9 h-9 flex items-center justify-center rounded-full bg-white text-slate-700 hover:bg-slate-100 shadow-lg text-lg z-10">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <img id="image-lightbox-img" src="" alt="願望參考圖片"
+                class="w-full max-h-[85vh] object-contain rounded-2xl shadow-2xl bg-slate-100">
+        </div>
+    </div>
 
     <!-- ================= WALLET MODAL ================= -->
     <div id="wallet-modal"
@@ -1188,6 +1201,38 @@
             return str.replace(/-/g, '/');
         }
 
+        // 分類 emoji 僅用於畫面顯示，資料庫一律儲存純文字分類名稱，
+        // 這樣「篩選下拉選單」與「發願表單」的值才能保持一致，
+        // 同時舊資料（無 emoji 前綴）也能正確補上對應 emoji 顯示。
+        const categoryEmojiMap = {
+            '穿戴': '⌚️',
+            '吃喝': '🌭',
+            '玩樂': '🎮',
+            '生物': '🐾',
+            '用品': '🛒',
+            '居住': '🏠',
+            '服務': '🛠️',
+            '其他': '✨'
+        };
+
+        function getCategoryEmoji(category) {
+            // 相容舊資料：若 category 本身已包含 emoji 前綴（例如「🛒 用品」），
+            // 取出後半段純文字去對照表比對，避免重複顯示 emoji；
+            // 若是純文字（例如「用品」）則直接查表補上 emoji。
+            if (!category) return '';
+            if (categoryEmojiMap[category]) {
+                return `${categoryEmojiMap[category]} ${category}`;
+            }
+            const spaceIdx = category.indexOf(' ');
+            if (spaceIdx > -1) {
+                const namePart = category.slice(spaceIdx + 1).trim();
+                if (categoryEmojiMap[namePart]) {
+                    return `${categoryEmojiMap[namePart]} ${namePart}`;
+                }
+            }
+            return category;
+        }
+
         function initDatePickers() {
             if (typeof flatpickr !== 'undefined') {
                 window.fpStart = flatpickr("#filter-deadline-start", {
@@ -1291,6 +1336,33 @@
             }, (error) => console.error('chatThreads onSnapshot error:', error));
         }
 
+        // 願望狀態變成【已告終】時，把當初發布願望所預計獲得的 SC
+        // （必要 -10 / 想要 -5）從許願者的「預計獲得」中扣除。
+        // 由 checkAndExpireWishes()（到期未成交）與 handleOopsClick()
+        // （Oops 破局）共用，確保兩種觸發路徑規則一致。
+        async function deductWisherExpectedSC(wish) {
+            if (!wish || !wish.wisherUid) return;
+            const scAmount = wish.type === '必要' ? 10 : 5;
+            const { setDoc } = fs();
+            try {
+                let wisherExpected;
+                if (currentUser && currentUser.uid === wish.wisherUid) {
+                    // 目前使用者就是許願者，本地快取值已即時同步，直接使用。
+                    wisherExpected = scExpected;
+                } else {
+                    const { getDoc } = fs();
+                    const snap = await getDoc(userProfileDocRef(wish.wisherUid));
+                    const d = snap.exists() ? snap.data() : { scExpected: 0 };
+                    wisherExpected = d.scExpected || 0;
+                }
+                await setDoc(userProfileDocRef(wish.wisherUid), {
+                    scExpected: Math.max(0, wisherExpected - scAmount)
+                }, { merge: true });
+            } catch (error) {
+                console.error('deductWisherExpectedSC error:', error);
+            }
+        }
+
         // Detects wishes that passed their deadline without a deal and writes
         // the expired status back to Firestore (idempotent - only writes once
         // per wish since the next snapshot will already show '已告終').
@@ -1302,6 +1374,7 @@
                     w.status = '已告終'; // optimistic local update
                     setDoc(wishDocRef(w.id), { status: '已告終' }, { merge: true })
                         .catch(err => console.error('expire write error:', err));
+                    deductWisherExpectedSC(w);
                 }
             });
         }
@@ -1502,7 +1575,7 @@
                             <div class="flex items-center justify-between">
                                 <div class="flex items-center gap-1.5 flex-wrap">
                                     <span class="px-2.5 py-0.5 rounded-full text-[11px] font-extrabold ${isMust ? 'bg-red-500 text-white' : 'bg-amber-500 text-white'}">${w.type}</span>
-                                    <span class="px-2 py-0.5 rounded-md text-[11px] font-bold bg-slate-100 text-slate-600">${w.category}</span>
+                                    <span class="px-2 py-0.5 rounded-md text-[11px] font-bold bg-slate-100 text-slate-600">${getCategoryEmoji(w.category)}</span>
                                     <span class="px-2 py-0.5 rounded-md text-[11px] font-bold ${statusBadgeStyle}">${w.status}</span>
                                     <!-- 新增放入願望的許願日期 -->
                                     <span class="px-2 py-0.5 rounded-md text-[11px] font-medium bg-slate-100 text-slate-500">許願日 ${formatSlashDate(w.createdDate)}</span>
@@ -1519,7 +1592,7 @@
                             </p>
 
                             <!-- Optional Image Preview -->
-                            ${w.imgUrl ? `<img src="${escapeHtml(w.imgUrl)}" onerror="this.style.display='none'" class="w-full h-32 object-cover rounded-xl border border-slate-100">` : ''}
+                            ${w.imgUrl ? `<img src="${escapeHtml(w.imgUrl)}" onerror="this.style.display='none'" onclick="openImageLightbox('${escapeHtml(w.imgUrl)}')" class="w-full h-32 object-cover rounded-xl border border-slate-100 cursor-zoom-in hover:opacity-90 transition" title="點擊放大檢視">` : ''}
 
                             <!-- Keywords & Brands -->
                             <div class="flex flex-wrap gap-1">
@@ -1986,10 +2059,19 @@
             if (!wish || !thread) return;
 
             const { setDoc } = fs();
+            const previousStatus = wish.status;
+            const scAmount = wish.type === '必要' ? 10 : 5;
+
             try {
                 await setDoc(threadDocRef(thread.threadId), { isLocked: true }, { merge: true });
                 await setDoc(wishDocRef(wish.id), { status: '已告終' }, { merge: true });
-                showToast("已標記本次磋商為【Oops 破局】，願望狀態設為「已告終」", "info");
+
+                if (previousStatus !== '已告終') {
+                    await deductWisherExpectedSC(wish);
+                    showToast(`已標記本次磋商為【Oops 破局】，願望狀態設為「已告終」，許願者「預計獲得」SC -${scAmount}`, "info");
+                } else {
+                    showToast("已標記本次磋商為【Oops 破局】，願望狀態設為「已告終」", "info");
+                }
             } catch (error) {
                 console.error('handleOopsClick write error:', error);
                 showToast("操作失敗，請稍後再試", "error");
@@ -2010,6 +2092,27 @@
         function closeWalletModal() {
             document.getElementById('wallet-modal').classList.add('hidden');
         }
+
+        // Image Lightbox Controls (願望參考圖片點擊放大)
+        function openImageLightbox(imgUrl) {
+            if (!imgUrl) return;
+            document.getElementById('image-lightbox-img').src = imgUrl;
+            document.getElementById('image-lightbox-modal').classList.remove('hidden');
+        }
+
+        function closeImageLightbox() {
+            document.getElementById('image-lightbox-modal').classList.add('hidden');
+            document.getElementById('image-lightbox-img').src = '';
+        }
+
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') {
+                const lightbox = document.getElementById('image-lightbox-modal');
+                if (lightbox && !lightbox.classList.contains('hidden')) {
+                    closeImageLightbox();
+                }
+            }
+        });
 
         // Toast Notification Helper
         function showToast(message, type = 'info') {
