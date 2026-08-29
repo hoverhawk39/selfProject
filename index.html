@@ -210,8 +210,9 @@
                     <span class="text-emerald-500 font-black">誠實還能賺 (省) 錢！</span>
                 </h1>
                 <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
-                    擺脫廣告中介束縛，讓用戶自主決定公開喜好。讓商家直接找到對產品感興趣的你，將省下的廣告行銷費用，全數化為高額折扣與 <strong
-                        class="text-amber-600 font-bold">SurveyCoin</strong> 回饋給你！
+                    擺脫廣告中介束縛，讓用戶自主決定公開喜好。<br>
+                    讓商家直接找到對產品感興趣的你，將省下的廣告行銷費用，全數化為高額折扣與 <strong class="text-amber-600 font-bold">SurveyCoin</strong>
+                    回饋給你！
                 </p>
                 <div class="flex flex-wrap items-center justify-center gap-4 pt-2">
                     <button onclick="switchTab('wish-form')"
@@ -671,9 +672,11 @@
                     <div class="space-y-1">
                         <label class="block text-xs font-bold text-slate-700">7. 願望期限 (需晚於許願日期) <span
                                 class="text-red-500">*</span></label>
-                        <input type="date" id="form-deadline" required onkeydown="return false;"
-                            onclick="try{this.showPicker()}catch(e){}"
-                            class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-brand-500 focus:outline-none cursor-pointer">
+                        <div class="relative">
+                            <input type="text" id="form-deadline" required placeholder="yyyy/mm/dd"
+                                class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-brand-500 focus:outline-none cursor-pointer pr-8">
+                            <i class="fa-regular fa-calendar absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none"></i>
+                        </div>
                     </div>
                 </div>
 
@@ -1203,6 +1206,13 @@
                         renderWishes();
                     }
                 });
+
+                window.fpFormDeadline = flatpickr("#form-deadline", {
+                    locale: "zh",
+                    dateFormat: "Y/m/d",
+                    allowInput: false,
+                    minDate: "today"
+                });
             }
         }
 
@@ -1216,10 +1226,11 @@
             const nextYearStr = nextYearDate.toISOString().split('T')[0];
             const nextYearSlash = nextYearStr.replace(/-/g, '/');
 
-            const deadlineInput = document.getElementById('form-deadline');
-            if (deadlineInput) {
-                deadlineInput.value = nextYearStr;
-                deadlineInput.min = todayStr;
+            if (window.fpFormDeadline) {
+                window.fpFormDeadline.setDate(nextYearSlash);
+            } else {
+                const deadlineInput = document.getElementById('form-deadline');
+                if (deadlineInput) deadlineInput.value = nextYearSlash;
             }
 
             initDatePickers();
@@ -1644,7 +1655,8 @@
             }
 
             const createdDate = document.getElementById('form-created-date').value;
-            const deadline = document.getElementById('form-deadline').value;
+            const deadlineRaw = document.getElementById('form-deadline').value;
+            const deadline = deadlineRaw.replace(/\//g, '-');
 
             if (deadline <= createdDate) {
                 showToast("願望期限必須晚於許願日期！", "error");
@@ -1672,7 +1684,7 @@
                 priceMin: priceMin,
                 priceMax: priceMax,
                 createdDate: createdDate,
-                deadline: deadline,
+                deadline: deadlineRaw,
                 category: category,
                 kw1: kw1,
                 kw2: kw2,
