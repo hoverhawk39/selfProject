@@ -967,7 +967,7 @@
 
             <!-- Thread Selector Tabs if multiple threads exist -->
             <div id="chat-threads-bar"
-                class="hidden bg-slate-100 px-4 py-2 border-b border-slate-200 flex gap-2 overflow-x-auto text-xs">
+                class="hidden bg-slate-100 px-4 py-2 border-b border-slate-200 flex flex-nowrap items-center gap-2 overflow-x-auto custom-scrollbar text-xs">
                 <!-- Dynamically populated thread tabs -->
             </div>
 
@@ -1001,7 +1001,8 @@
                 <!-- Input Message Box -->
                 <div class="flex gap-2" id="chat-input-row">
                     <input type="text" id="chat-input-text" placeholder="輸入磋商訊息..."
-                        onkeydown="if(event.key==='Enter') sendChatMessage()"
+                        onkeydown="handleChatInputKeydown(event)" oncompositionstart="isChatInputComposing = true"
+                        oncompositionend="isChatInputComposing = false"
                         class="flex-grow px-3.5 py-2 rounded-xl border border-slate-300 text-xs focus:ring-2 focus:ring-indigo-500 focus:outline-none">
                     <button onclick="sendChatMessage()"
                         class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl text-xs transition shrink-0">
@@ -2021,15 +2022,25 @@
             // Threads bar if multiple suppliers exist
             const threadsBar = document.getElementById('chat-threads-bar');
             if (threads.length > 1 && currentUser && wish.wisherUid === currentUser.uid) {
+                // 用「供給方 uid + 名稱 + 是否為目前選取」組成簽章值，若跟上次渲染
+                // 結果完全相同就跳過 innerHTML 重繪。Firestore 即時監聽在傳送訊息
+                // 等操作時，wishes/chatThreads 兩個集合經常在極短時間內連續觸發
+                // 多次快照更新，若每次都重新產生 DOM，容易造成畫面短暫擠壓或
+                // 重疊的視覺閃爍，用這個簽章比對可以大幅降低不必要的重繪次數。
+                const signature = threads.map(t => `${t.supplierUid}:${t.supplierName}:${t.supplierUid === activeChatSupplierUid}`).join('|');
+                if (threadsBar.dataset.signature !== signature) {
+                    threadsBar.dataset.signature = signature;
+                    threadsBar.innerHTML = threads.map(t => `
+                        <button onclick="switchChatSupplier('${t.supplierUid}')"
+                            class="inline-flex items-center justify-center whitespace-nowrap px-3 py-1.5 rounded-lg font-bold flex-shrink-0 leading-tight ${t.supplierUid === activeChatSupplierUid ? 'bg-indigo-600 text-white' : 'bg-white text-slate-700 border border-slate-200'}">
+                            供給方: ${escapeHtml(t.supplierName)}
+                        </button>
+                    `).join('');
+                }
                 threadsBar.classList.remove('hidden');
-                threadsBar.innerHTML = threads.map(t => `
-                    <button onclick="switchChatSupplier('${t.supplierUid}')"
-                        class="px-3 py-1 rounded-lg font-bold shrink-0 ${t.supplierUid === activeChatSupplierUid ? 'bg-indigo-600 text-white' : 'bg-white text-slate-700 border border-slate-200'}">
-                        供給方: ${escapeHtml(t.supplierName)}
-                    </button>
-                `).join('');
             } else {
                 threadsBar.classList.add('hidden');
+                threadsBar.dataset.signature = '';
             }
 
             const activeThread = threads.find(t => t.supplierUid === activeChatSupplierUid) || threads[0];
@@ -2086,6 +2097,23 @@
                 activeChatSupplierUid = threads[0].supplierUid;
             }
             renderChatModalUI(wish, threads);
+        }
+
+        // 標記輸入框目前是否正處於「輸入法組字中」（例如注音/拼音選字候選中）。
+        // 中文輸入法在使用者按 Enter 確認候選字時，也會觸發 keydown 事件，
+        // 若不排除這個狀態，會誤判成「使用者要送出訊息」，導致清空輸入框
+        // 與輸入法提交文字兩者互相搶跑，出現「訊息已送出、輸入框卻還留著
+        // 剛送出文字」的殘留問題。
+        let isChatInputComposing = false;
+
+        function handleChatInputKeydown(event) {
+            if (event.key !== 'Enter') return;
+            // event.isComposing 是瀏覽器原生判斷組字狀態的標準屬性，
+            // isChatInputComposing 則是我們自己用 compositionstart/end 補強的保險，
+            // 兩者任一為 true 都代表輸入法正在組字，此時的 Enter 只是選字用，不應送出。
+            if (event.isComposing || isChatInputComposing) return;
+            event.preventDefault();
+            sendChatMessage();
         }
 
         async function sendChatMessage() {
