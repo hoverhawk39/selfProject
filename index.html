@@ -124,6 +124,8 @@
                 </button>
                 <button onclick="switchTab('wish-form')" id="nav-wish-form"
                     class="nav-btn text-slate-600 hover:text-brand-600 px-3 py-2 rounded-lg hover:bg-slate-100 transition">我要許願</button>
+                <button onclick="switchTab('trend')" id="nav-trend"
+                    class="nav-btn text-slate-600 hover:text-brand-600 px-3 py-2 rounded-lg hover:bg-slate-100 transition">願望風向球</button>
                 <button onclick="switchTab('negotiate')" id="nav-negotiate"
                     class="nav-btn text-slate-600 hover:text-brand-600 px-3 py-2 rounded-lg hover:bg-slate-100 transition flex items-center gap-1.5">
                     <span>願望磋商區</span>
@@ -184,6 +186,8 @@
             </button>
             <button onclick="switchTab('wish-form')"
                 class="block w-full text-left px-3 py-2 text-slate-700 font-medium rounded-lg hover:bg-slate-100">我要許願</button>
+            <button onclick="switchTab('trend')"
+                class="block w-full text-left px-3 py-2 text-slate-700 font-medium rounded-lg hover:bg-slate-100">願望風向球</button>
             <button onclick="switchTab('negotiate')"
                 class="block w-full text-left px-3 py-2 text-slate-700 font-medium rounded-lg hover:bg-slate-100">願望磋商區</button>
         </div>
@@ -785,6 +789,47 @@
 
         </section>
 
+        <!-- ================= PAGE: WISH TREND (願望風向球) ================= -->
+        <section id="page-trend" class="tab-page hidden py-8 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto space-y-8">
+
+            <div
+                class="bg-gradient-to-r from-slate-900 via-emerald-950 to-slate-900 text-white p-6 sm:p-8 rounded-2xl shadow-xl">
+                <div
+                    class="inline-block px-3 py-1 bg-emerald-500/30 border border-emerald-400/30 text-emerald-200 text-xs rounded-full font-semibold">
+                    <i class="fa-solid fa-wind"></i> 願望風向球
+                </div>
+                <h2 class="text-2xl sm:text-3xl font-extrabold mt-2">看看大家最近都在許什麼願</h2>
+                <p class="text-slate-300 text-xs sm:text-sm max-w-2xl mt-1">
+                    彙整目前許願池廣場上所有願望的「三個關鍵字」與「品牌偏好」，字體越大代表出現次數越多，隨著願望數量增加即時動態更新。
+                </p>
+            </div>
+
+            <!-- Keyword Word Cloud -->
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8">
+                <h3 class="text-base sm:text-lg font-bold text-slate-900 flex items-center gap-2 mb-1">
+                    <i class="fa-solid fa-hashtag text-brand-600"></i>
+                    <span>許願池「關鍵字」趨勢</span>
+                </h3>
+                <p class="text-xs text-slate-400 mb-5">資料來源：所有願望的關鍵字一、二、三</p>
+                <div id="keyword-cloud-container"
+                    class="min-h-[180px] flex flex-wrap items-center justify-center gap-x-4 gap-y-2 py-4">
+                </div>
+            </div>
+
+            <!-- Brand Word Cloud -->
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8">
+                <h3 class="text-base sm:text-lg font-bold text-slate-900 flex items-center gap-2 mb-1">
+                    <i class="fa-solid fa-tags text-indigo-600"></i>
+                    <span>許願池「品牌偏好」趨勢</span>
+                </h3>
+                <p class="text-xs text-slate-400 mb-5">資料來源：所有願望的品牌偏好一、二、三</p>
+                <div id="brand-cloud-container"
+                    class="min-h-[180px] flex flex-wrap items-center justify-center gap-x-4 gap-y-2 py-4">
+                </div>
+            </div>
+
+        </section>
+
         <!-- ================= PAGE 4: NEGOTIATION HUB (願望磋商區) ================= -->
         <section id="page-negotiate" class="tab-page hidden py-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-8">
 
@@ -1327,6 +1372,7 @@
                 checkAndExpireWishes();
                 renderWishes();
                 renderNegotiationPage();
+                renderWishTrendClouds();
                 refreshChatModalIfOpen();
             }, (error) => console.error('wishes onSnapshot error:', error));
 
@@ -1507,6 +1553,79 @@
         }
 
         // ================= WISH POOL RENDERING =================
+        // ================= WISH TREND WORD CLOUDS (願望風向球) =================
+        // 純前端自製文字雲，不依賴外部函式庫：出現次數越多字體越大，
+        // 顏色與傾斜角度以字詞內容做確定性雜湊，確保同一個字詞每次
+        // 重新渲染時視覺穩定（不會忽大忽小、忽左忽右閃爍）。
+        function hashStringToInt(str) {
+            let hash = 0;
+            for (let i = 0; i < str.length; i++) {
+                hash = (hash * 31 + str.charCodeAt(i)) | 0;
+            }
+            return Math.abs(hash);
+        }
+
+        function renderWishTrendClouds() {
+            const kwCounts = {};
+            const brandCounts = {};
+
+            wishes.forEach(w => {
+                [w.kw1, w.kw2, w.kw3].forEach(kw => {
+                    const k = (kw || '').trim();
+                    if (!k) return;
+                    kwCounts[k] = (kwCounts[k] || 0) + 1;
+                });
+                [w.brand1, w.brand2, w.brand3].forEach(b => {
+                    const v = (b || '').trim();
+                    if (!v) return;
+                    brandCounts[v] = (brandCounts[v] || 0) + 1;
+                });
+            });
+
+            renderCloudInto('keyword-cloud-container', kwCounts,
+                ['text-brand-700', 'text-emerald-600', 'text-teal-600', 'text-lime-600', 'text-green-700'],
+                '目前尚無關鍵字資料，快去發布第一個願望吧！');
+
+            renderCloudInto('brand-cloud-container', brandCounts,
+                ['text-indigo-700', 'text-violet-600', 'text-blue-600', 'text-purple-600', 'text-sky-600'],
+                '目前尚無品牌偏好資料，快去發布第一個願望吧！');
+        }
+
+        function renderCloudInto(containerId, countsMap, colorClasses, emptyMessage) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+
+            const entries = Object.entries(countsMap);
+            if (entries.length === 0) {
+                container.innerHTML = `<div class="w-full text-center text-xs text-slate-400 py-8">${escapeHtml(emptyMessage)}</div>`;
+                return;
+            }
+
+            const counts = entries.map(e => e[1]);
+            const minCount = Math.min(...counts);
+            const maxCount = Math.max(...counts);
+
+            const minSize = 13; // px
+            const maxSize = 42; // px
+
+            // 出現次數高的排前面，最熱門的字詞最先映入眼簾
+            entries.sort((a, b) => b[1] - a[1]);
+
+            container.innerHTML = entries.map(([word, count]) => {
+                const ratio = maxCount === minCount ? 1 : (count - minCount) / (maxCount - minCount);
+                const fontSize = minSize + ratio * (maxSize - minSize);
+                const fontWeight = 600 + Math.round(ratio * 300);
+                const colorClass = colorClasses[hashStringToInt(word) % colorClasses.length];
+                const rotate = (hashStringToInt(word + '_rotate') % 9) - 4; // -4 ~ 4 度，營造文字雲的自然錯落感
+
+                return `
+                    <span class="inline-block ${colorClass} hover:opacity-70 transition cursor-default select-none"
+                        style="font-size:${fontSize.toFixed(1)}px; font-weight:${fontWeight}; transform:rotate(${rotate}deg); line-height:1.3;"
+                        title="出現 ${count} 次">${escapeHtml(word)}</span>
+                `;
+            }).join('');
+        }
+
         function renderWishes() {
             const container = document.getElementById('wishes-grid-container');
             if (!container) return;
