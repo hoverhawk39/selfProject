@@ -1993,9 +1993,8 @@
                                 </div>
                             </summary>
                             <div class="px-4 pb-4 pt-2 border-t border-slate-200 space-y-2 text-[11px] text-slate-600">
-                                ${w.expectation ? `<div><strong class="text-slate-700">期望說明：</strong>${escapeHtml(w.expectation)}</div>` : ''}
-                                <div><strong class="text-slate-700">預算範圍：</strong>${w.priceMin ?? '—'} ~ ${w.priceMax ?? '—'}</div>
-                                <div><strong class="text-slate-700">分類：</strong>${escapeHtml(w.category || '—')}</div>
+                                ${w.expectation ? `<div><strong class="text-slate-700">願望期待：</strong>${escapeHtml(w.expectation)}</div>` : ''}
+                                <div><strong class="text-slate-700">預算範圍：</strong>NT$ ${w.priceMin ?? '—'} ~ ${w.priceMax ?? '—'}</div>
                                 <button onclick="openChatModal('${w.id}')"
                                     class="mt-2 inline-flex items-center gap-1.5 px-3 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-[11px] font-bold transition">
                                     查看磋商對話 <i class="fa-solid fa-chevron-right text-[10px]"></i>
@@ -2049,9 +2048,8 @@
                                 </div>
                             </summary>
                             <div class="px-4 pb-4 pt-2 border-t border-slate-200 space-y-2 text-[11px] text-slate-600">
-                                ${wish.expectation ? `<div><strong class="text-slate-700">期望說明：</strong>${escapeHtml(wish.expectation)}</div>` : ''}
-                                <div><strong class="text-slate-700">期限：</strong>${wish.deadline || '—'}</div>
-                                <div><strong class="text-slate-700">分類：</strong>${escapeHtml(wish.category || '—')}</div>
+                                ${wish.expectation ? `<div><strong class="text-slate-700">願望期待：</strong>${escapeHtml(wish.expectation)}</div>` : ''}
+                                <div><strong class="text-slate-700">願望期限：</strong>${wish.deadline || '—'}</div>
                                 <button onclick="openChatModal('${wish.id}', '${currentUser.uid}')"
                                     class="mt-2 inline-flex items-center gap-1.5 px-3 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-[11px] font-bold transition">
                                     查看磋商對話 <i class="fa-solid fa-chevron-right text-[10px]"></i>
