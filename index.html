@@ -120,7 +120,7 @@
                     class="nav-btn text-brand-600 font-semibold px-3 py-2 rounded-lg hover:bg-slate-100 transition">平台理念</button>
                 <button onclick="switchTab('pool')" id="nav-pool"
                     class="nav-btn text-slate-600 hover:text-brand-600 px-3 py-2 rounded-lg hover:bg-slate-100 transition flex items-center gap-1.5">
-                    <span>許願池廣場</span>
+                    <span>許願池</span>
                     <span id="nav-badge-pool-count"
                         class="bg-brand-100 text-brand-700 text-[10px] font-bold px-1.5 py-0.5 rounded-full">0</span>
                 </button>
@@ -143,9 +143,9 @@
                     class="flex items-center space-x-2 bg-amber-50 hover:bg-amber-100 border border-amber-200 px-2.5 py-1.5 rounded-full cursor-pointer transition shadow-sm">
                     <i class="fa-solid fa-coins text-coin-500 text-sm sm:text-base"></i>
                     <div class="flex flex-col text-left text-[11px] leading-tight">
-                        <span class="text-slate-600 font-medium">目前累計: <strong id="sc-accumulated-display"
+                        <span class="text-slate-600 font-medium">已累計 <strong id="sc-accumulated-display"
                                 class="text-amber-700 font-extrabold">100</strong> SC</span>
-                        <span class="text-slate-400 font-normal">預計獲得: <strong id="sc-expected-display"
+                        <span class="text-slate-400 font-normal">待獲取 <strong id="sc-expected-display"
                                 class="text-emerald-600 font-bold">0</strong> SC</span>
                     </div>
                 </div>
@@ -182,7 +182,7 @@
                 class="block w-full text-left px-3 py-2 text-slate-700 font-medium rounded-lg hover:bg-slate-100">平台理念</button>
             <button onclick="switchTab('pool')"
                 class="block w-full text-left px-3 py-2 text-slate-700 font-medium rounded-lg hover:bg-slate-100 flex justify-between items-center">
-                <span>許願池廣場</span>
+                <span>許願池</span>
                 <span class="bg-brand-100 text-brand-700 text-xs font-bold px-2 py-0.5 rounded-full"
                     id="mobile-pool-count">0</span>
             </button>
@@ -224,12 +224,12 @@
                     <button onclick="switchTab('wish-form')"
                         class="px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl shadow-lg shadow-emerald-600/30 transition duration-200 flex items-center space-x-2 text-sm">
                         <i class="fa-solid fa-wand-magic-sparkles"></i>
-                        <span>立即公開許願</span>
+                        <span>立即許願</span>
                     </button>
                     <button onclick="switchTab('pool')"
                         class="px-6 py-3 bg-white border border-slate-300 hover:bg-slate-50 text-slate-700 font-bold rounded-xl shadow-sm transition duration-200 flex items-center space-x-2 text-sm">
                         <i class="fa-solid fa-fire text-amber-500"></i>
-                        <span>探索大眾許願池</span>
+                        <span>探索許願池</span>
                     </button>
                 </div>
             </div>
@@ -462,8 +462,8 @@
             <div
                 class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-slate-200 pb-6">
                 <div>
-                    <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900">許願池廣場</h2>
-                    <p class="text-slate-500 text-sm mt-1">瀏覽並搜尋所有願望，點擊【進行接洽】即可與許願者磋商</p>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900">許願池</h2>
+                    <p class="text-slate-500 text-sm mt-1">瀏覽並搜尋所有願望，點擊【按讚磋商】即可與許願者對話磋商</p>
                 </div>
                 <button onclick="switchTab('wish-form')"
                     class="px-4 py-2.5 bg-brand-600 hover:bg-brand-700 text-white rounded-xl text-sm font-semibold shadow-md flex items-center space-x-2 transition">
@@ -582,7 +582,7 @@
             <div class="border-b border-slate-200 pb-4 flex justify-between items-end">
                 <div>
                     <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900">誠實發布願望</h2>
-                    <p class="text-slate-500 text-sm mt-1">許願完成即可增加「預計獲得」SC 數值！（願望不可刪除）</p>
+                    <p class="text-slate-500 text-sm mt-1">許願完成即可增加「待獲取」SC 數值！（願望不可刪除）</p>
                 </div>
             </div>
 
@@ -617,7 +617,7 @@
                                 必要 (Must)
                                 <i class="fa-solid fa-circle-check text-brand-600"></i>
                             </span>
-                            <span class="text-[11px] text-slate-500 leading-tight">必定購買需求。發布成功「預計獲得」SC +10。</span>
+                            <span class="text-[11px] text-slate-500 leading-tight">必定購買需求。發布成功「待獲取」SC +10。</span>
                         </label>
                         <label id="label-type-want"
                             class="wish-type-option cursor-pointer p-4 rounded-xl border-2 border-slate-200 bg-slate-50 flex flex-col space-y-1 transition">
@@ -626,7 +626,7 @@
                                 想要 (Want)
                                 <i class="fa-solid fa-heart text-slate-400"></i>
                             </span>
-                            <span class="text-[11px] text-slate-500 leading-tight">潛在購物渴望。發布成功「預計獲得」SC +5。</span>
+                            <span class="text-[11px] text-slate-500 leading-tight">潛在購物渴望。發布成功「待獲取」SC +5。</span>
                         </label>
                     </div>
                 </div>
@@ -643,7 +643,7 @@
                     <div class="space-y-1">
                         <label class="block text-xs font-bold text-slate-700">3. 願望期待 <span
                                 class="text-red-500">*</span></label>
-                        <textarea id="form-expectation" required rows="3"
+                        <textarea maxlength="60" id="form-expectation" required rows="3"
                             placeholder="請詳細描述您對願望的期待（例如：獨桌包廂、環境熱絡、提供停車位等）"
                             class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-brand-500 focus:outline-none"></textarea>
                     </div>
@@ -659,7 +659,7 @@
                             class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-brand-500 focus:outline-none">
                     </div>
                     <div class="space-y-1">
-                        <label class="block text-xs font-bold text-slate-700">5. 最高預算 (NTD，需大於最低預算) <span
+                        <label class="block text-xs font-bold text-slate-700">5. 最高預算 (NTD，限大於最低預算) <span
                                 class="text-red-500">*</span></label>
                         <input type="number" id="form-price-max" required min="1" max="9999999999" value="3000"
                             placeholder="需大於最低預算"
@@ -774,8 +774,7 @@
                 <!-- 15. 參考圖片 (圖片網址 - 選填**) -->
                 <div class="space-y-1">
                     <label class="block text-xs font-bold text-slate-500">11. 參考圖片 (選填)</label>
-                    <input type="url" id="form-img-url"
-                        placeholder="請提供圖片網址 (例如：https://images.unsplash/photo)，若未提供將套用預設圖片"
+                    <input type="url" id="form-img-url" placeholder="貼上圖片網址 (如：https://image.un/photo)，若未提供將套用預設圖片"
                         class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-brand-500 focus:outline-none">
                 </div>
 
@@ -802,7 +801,7 @@
                 </div>
                 <h2 class="text-2xl sm:text-3xl font-extrabold mt-2">看看大家最近都在許什麼願</h2>
                 <p class="text-slate-300 text-xs sm:text-sm max-w-2xl mt-1">
-                    彙整目前許願池廣場上所有願望的「三個關鍵字」與「品牌偏好」，字體越大代表出現次數越多，隨著願望數量增加即時動態更新。
+                    彙整目前許願池上所有願望的「三個關鍵字」與「品牌偏好」，字體越大代表出現次數越多，隨著願望數量增加即時動態更新。
                 </p>
             </div>
 
@@ -853,8 +852,8 @@
             <div id="negotiate-auth-notice"
                 class="hidden bg-indigo-50 border border-indigo-200 p-6 rounded-2xl text-center space-y-3">
                 <i class="fa-solid fa-lock text-3xl text-indigo-600"></i>
-                <h3 class="text-lg font-bold text-slate-800">請先登入 Google 帳號以進入【願望磋商區】</h3>
-                <p class="text-xs text-slate-500">登入後即可馬上進行磋商。</p>
+                <h3 class="text-lg font-bold text-slate-800">請先登入 Google 帳號以查看【願望磋商區】</h3>
+                <p class="text-xs text-slate-500">登入後即可進行磋商。</p>
                 <button onclick="handleGoogleSignIn()"
                     class="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold transition">
                     立即 Google 登入
@@ -939,11 +938,11 @@
                 <div class="text-xs font-semibold text-amber-100 uppercase tracking-wider">SurveyCoin 帳戶資產</div>
                 <div class="grid grid-cols-2 gap-2 mt-4 text-left">
                     <div class="bg-white/10 p-3 rounded-xl border border-white/20">
-                        <span class="text-[10px] text-amber-100 block font-medium"><strong>【目前累計】SC</strong></span>
+                        <span class="text-[14px] text-amber-100 block font-medium"><strong>【已累計】SC</strong></span>
                         <span id="modal-accumulated-sc" class="text-2xl font-black">100</span>
                     </div>
                     <div class="bg-white/10 p-3 rounded-xl border border-white/20">
-                        <span class="text-[10px] text-amber-100 block font-medium"><strong>【預計獲得】SC</strong></span>
+                        <span class="text-[14px] text-amber-100 block font-medium"><strong>【待獲取】SC</strong></span>
                         <span id="modal-expected-sc" class="text-2xl font-black">0</span>
                     </div>
                 </div>
@@ -952,12 +951,12 @@
             <div class="px-6 space-y-3 text-xs text-slate-500">
                 <h4 class="font-bold text-slate-800 text-sm">SurveyCoin 規則說明</h4>
                 <ul class="space-y-3 list-disc list-inside">
-                    <li>首次登入可獲【目前累計】<strong>100 SC</strong>。</li>
-                    <li>發布「必要」願望可增加【預計獲得】<strong>10 SC</strong>。</li>
-                    <li>發布「想要」願望可增加【預計獲得】<strong>5 SC</strong>。</li>
-                    <li>發起磋商需扣除【目前累計】<strong>2 SC</strong>（同願望只需扣除一次）。</li>
-                    <li>磋商成功（即願望實現）後，原各別發布之願望所對應的【預計獲得】SC 會轉新增至【目前累計】SC。</li>
-                    <li>磋商失敗（即願望告終）後，原各別發布之願望所對應的【預計獲得】SC 會被扣除。</li>
+                    <li>首次登入可獲【已累計】<strong>100 SC</strong>。</li>
+                    <li>發布「必要」願望可增加【待獲取】<strong>10 SC</strong>。</li>
+                    <li>發布「想要」願望可增加【待獲取】<strong>5 SC</strong>。</li>
+                    <li>發起磋商需扣除【已累計】<strong>2 SC</strong>（同願望只需扣除一次）。</li>
+                    <li>磋商成功（即願望實現）後，原各別發布之願望所對應的【待獲取】SC 會轉新增至【已累計】SC。</li>
+                    <li>磋商失敗（即願望告終）後，原各別發布之願望所對應的【待獲取】SC 會被扣除。</li>
                 </ul>
             </div>
 
@@ -1049,7 +1048,7 @@
                 </div>
                 <div class="flex space-x-6 text-slate-400">
                     <a href="#" onclick="switchTab('hero'); return false;" class="hover:text-white">平台理念</a>
-                    <a href="#" onclick="switchTab('pool'); return false;" class="hover:text-white">許願池廣場</a>
+                    <a href="#" onclick="switchTab('pool'); return false;" class="hover:text-white">許願池</a>
                     <a href="#" onclick="switchTab('wish-form'); return false;" class="hover:text-white">我要許願</a>
                     <a href="#" onclick="switchTab('trend'); return false;" class="hover:text-white">願望風向球</a>
                     <a href="#" onclick="switchTab('negotiate'); return false;" class="hover:text-white">願望磋商區</a>
@@ -1152,8 +1151,8 @@
         // wishes / chatThreads are now local *caches* kept in sync in real time
         // with Firestore via onSnapshot listeners (see attachRealtimeListeners()).
         let currentUser = null; // { uid, displayName, photoURL, email }
-        let scAccumulated = 0; // 「目前累計」SC (synced live from Firestore user profile)
-        let scExpected = 0;    // 「預計獲得」SC (synced live from Firestore user profile)
+        let scAccumulated = 0; // 「已累計」SC (synced live from Firestore user profile)
+        let scExpected = 0;    // 「待獲取」SC (synced live from Firestore user profile)
 
         let wishes = [];
         let chatThreads = [];
@@ -1413,8 +1412,8 @@
             }, (error) => console.error('chatThreads onSnapshot error:', error));
         }
 
-        // 願望狀態變成【已告終】時，把當初發布願望所預計獲得的 SC
-        // （必要 -10 / 想要 -5）從許願者的「預計獲得」中扣除。
+        // 願望狀態變成【已告終】時，把當初發布願望所待獲取的 SC
+        // （必要 -10 / 想要 -5）從許願者的「待獲取」中扣除。
         // 由 checkAndExpireWishes()（到期未成交）與 handleOopsClick()
         // （Oops 破局）共用，確保兩種觸發路徑規則一致。
         async function deductWisherExpectedSC(wish) {
@@ -1730,16 +1729,12 @@
                                     <!-- 新增放入願望的許願日期 -->
                                     <span class="px-2 py-0.5 rounded-md text-[11px] font-medium bg-slate-100 text-slate-500">許願日 ${formatSlashDate(w.createdDate)}</span>
                                 </div>
-                                <span class="text-[11px] text-slate-400">願望期限 ${formatSlashDate(w.deadline)}</span>
+                                <span class="text-[11px] text-indigo-700 font-bold">願望期限 ${formatSlashDate(w.deadline)}</span>
                             </div>
 
                             <h3 class="text-base font-bold text-slate-900 leading-snug">
                                 ${escapeHtml(w.title)}
                             </h3>
-
-                            <p class="text-xs text-slate-600 line-clamp-2 leading-relaxed">
-                                ${escapeHtml(w.expectation)}
-                            </p>
 
                             <!-- Optional Image Preview -->
                             ${w.imgUrl ? `<img src="${escapeHtml(w.imgUrl)}" onerror="this.style.display='none'" onclick="openImageLightbox('${escapeHtml(w.imgUrl)}')" class="w-full h-32 object-cover rounded-xl border border-slate-100 cursor-zoom-in hover:opacity-90 transition" title="點擊放大檢視">` : ''}
@@ -1753,18 +1748,22 @@
                                 ${w.brand2 ? `<span class="px-2 py-0.5 bg-indigo-50 text-indigo-700 rounded text-[10px] font-semibold">${escapeHtml(w.brand2)}</span>` : ''}
                                 ${w.brand3 ? `<span class="px-2 py-0.5 bg-indigo-50 text-indigo-700 rounded text-[10px] font-semibold">${escapeHtml(w.brand3)}</span>` : ''}
                             </div>
+
+                            <p class="text-xs text-slate-600 line-clamp-2 leading-relaxed">
+                                ${escapeHtml(w.expectation)}
+                            </p>
                         </div>
 
                         <div class="border-t border-slate-100 pt-3 flex items-center justify-between text-xs">
                             <div>
                                 <!-- 將『心理預算』改成『願望預算』 -->
-                                <span class="block text-[10px] text-slate-400">願望預算</span>
+                                <span class="block text-[10px] font-bold text-slate-400">願望預算</span>
                                 <span class="font-bold text-emerald-600">NT$ ${w.priceMin.toLocaleString()} ~ ${w.priceMax.toLocaleString()}</span>
                             </div>
                             <button onclick="handleContactClick('${w.id}')"
                                 class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl font-bold transition shadow-sm flex items-center gap-1">
-                                <i class="fa-solid fa-comments"></i>
-                                <span>進行接洽</span>
+                                <i class="fa-solid fa-heart"></i>
+                                <span>按讚磋商</span>
                             </button>
                         </div>
                     </div>
@@ -1772,10 +1771,10 @@
             }).join('');
         }
 
-        // 【進行接洽】Button Logic
+        // 【按讚磋商】Button Logic
         async function handleContactClick(wishId) {
             if (!currentUser) {
-                showToast("【進行接洽】限已登入 Google 帳號者點擊，請先登入！", "error");
+                showToast("【按讚磋商】限已登入 Google 帳號者點擊，請先登入！", "error");
                 handleGoogleSignIn();
                 return;
             }
@@ -1801,7 +1800,7 @@
 
             // Deduct 2 SC from supplier's accumulated balance
             if (scAccumulated < 2) {
-                showToast("您的「目前累計」SC 不足 2 點，無法發起磋商！", "error");
+                showToast("您的「已累計」SC 不足 2 點，無法發起磋商！", "error");
                 return;
             }
 
@@ -1927,7 +1926,7 @@
                 await setDoc(wishDocRef(newWishId), newWish);
                 await setDoc(userProfileDocRef(currentUser.uid), { scExpected: scExpected + scGain }, { merge: true });
 
-                showToast(`成功發表許願！「預計獲得」SC +${scGain}！`, "success");
+                showToast(`成功發表許願！「待獲取」SC +${scGain}！`, "success");
 
                 document.getElementById('new-wish-form').reset();
                 setCurrentDateDefault();
@@ -1985,7 +1984,7 @@
                                         <span class="px-2 py-0.5 rounded text-[10px] font-bold ${w.type === '必要' ? 'bg-red-500 text-white' : 'bg-amber-500 text-white'}">${w.type}</span>
                                         <span class="text-xs font-bold text-slate-800">${escapeHtml(w.title)}</span>
                                     </div>
-                                    <div class="text-[11px] text-slate-500">發布日期: ${w.createdDate || '—'} | 期限: ${w.deadline} | 狀態: <strong class="text-indigo-600">${w.status}</strong></div>
+                                    <div class="text-[11px] text-slate-500">發布日: ${w.createdDate || '—'} | 期限: ${w.deadline} | 狀態: <strong class="text-indigo-600">${w.status}</strong></div>
                                 </div>
                                 <div class="flex items-center gap-2 flex-shrink-0">
                                     <span class="px-2.5 py-1 bg-indigo-100 text-indigo-700 font-bold rounded-lg text-xs">${threadsCount} 人磋商中</span>
@@ -2271,7 +2270,7 @@
                         scAccumulated: wisherAccumulated + scAmount
                     }, { merge: true });
 
-                    showToast(`🎉 磋商成功！「預計獲得」轉為「目前累計」+${scAmount} SC！`, "success");
+                    showToast(`🎉 磋商成功！「待獲取」轉為「已累計」+${scAmount} SC！`, "success");
                 } else {
                     // Rule 19: If deal after ended, no SC change
                     showToast("願望已告終後磋商成交，SC 預計與累計保持不變", "info");
@@ -2298,7 +2297,7 @@
 
                 if (previousStatus !== '已告終') {
                     await deductWisherExpectedSC(wish);
-                    showToast(`已標記本次磋商為【Oops 破局】，願望狀態設為「已告終」，許願者「預計獲得」SC -${scAmount}`, "info");
+                    showToast(`已標記本次磋商為【Oops 破局】，願望狀態設為「已告終」，許願者「待獲取」SC -${scAmount}`, "info");
                 } else {
                     showToast("已標記本次磋商為【Oops 破局】，願望狀態設為「已告終」", "info");
                 }
