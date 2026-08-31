@@ -643,9 +643,12 @@
                     <div class="space-y-1">
                         <label class="block text-xs font-bold text-slate-700">3. 願望期待 <span
                                 class="text-red-500">*</span></label>
-                        <textarea maxlength="80" id="form-expectation" required rows="3"
-                            placeholder="請詳細描述您對願望的期待（例如：獨桌包廂、環境熱絡、提供停車位等）"
+                        <textarea id="form-expectation" required rows="3" placeholder="請描述您對願望的期待（例如：獨桌包廂、環境熱絡、提供停車位等）"
                             class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-brand-500 focus:outline-none"></textarea>
+
+                        <div class="mt-1 text-xs text-slate-400 text-right">
+                            <span id="expectation-counter">0 / 80</span>
+                        </div>
                     </div>
                 </div>
 
@@ -1080,6 +1083,40 @@
             collection,
             onSnapshot
         } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // 願望期待字數限制
+        const expectation = document.getElementById('form-expectation');
+        const counter = document.getElementById('expectation-counter');
+
+        function calculateExpectationLength(text) {
+            let chineseCount = 0;
+            let otherCount = 0;
+
+            for (const char of text) {
+                if (/[\u4e00-\u9fff]/.test(char)) {
+                    chineseCount++;
+                } else {
+                    otherCount++;
+                }
+            }
+
+            // 中文 1 字 = 1 單位
+            // 英文/其他字元 7.5 個 ≈ 1 單位
+            return chineseCount + otherCount / 7.5;
+        }
+
+        expectation.addEventListener('input', function () {
+
+            // 如果超過 80 中文等值字，從尾端刪除
+            while (calculateExpectationLength(this.value) > 80) {
+                this.value = this.value.slice(0, -1);
+            }
+
+            const length = calculateExpectationLength(this.value);
+
+            counter.textContent = `${Math.ceil(length)} / 80`;
+        });
+
 
         // Fallback Firebase Configuration for preview environment
         const defaultConfig = {
