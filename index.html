@@ -865,10 +865,22 @@
             <div id="negotiate-content" class="space-y-8">
                 <!-- Section 1: Wishes I Created -->
                 <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
-                    <h3 class="text-lg font-bold text-slate-900 flex items-center gap-2">
-                        <i class="fa-solid fa-user-pen text-brand-600"></i>
-                        我許過的願望 (<span id="my-created-count">0</span>)
-                    </h3>
+                    <div class="flex items-center justify-between flex-wrap gap-3">
+                        <h3 class="text-lg font-bold text-slate-900 flex items-center gap-2">
+                            <i class="fa-solid fa-user-pen text-brand-600"></i>
+                            我許過的願望 (<span id="my-created-count">0</span>)
+                        </h3>
+                        <div id="my-created-filter-wrap" class="hidden items-center gap-2 text-xs">
+                            <label for="my-created-status-filter" class="font-bold text-slate-700">願望狀態</label>
+                            <select id="my-created-status-filter" onchange="renderNegotiationPage()"
+                                class="p-2 bg-slate-50 rounded-lg border border-slate-300 text-xs focus:outline-none focus:ring-2 focus:ring-brand-500">
+                                <option value="all" selected>顯示全部</option>
+                                <option value="待接洽">待接洽</option>
+                                <option value="已實現">已實現</option>
+                                <option value="已告終">已告終</option>
+                            </select>
+                        </div>
+                    </div>
                     <div id="my-created-wishes-list" class="space-y-3">
                         <!-- Populated by JS -->
                     </div>
@@ -876,10 +888,22 @@
 
                 <!-- Section 2: Wishes I Participated as Supplier -->
                 <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
-                    <h3 class="text-lg font-bold text-slate-900 flex items-center gap-2">
-                        <i class="fa-solid fa-handshake text-indigo-600"></i>
-                        我曾參與磋商的願望 (<span id="my-joined-count">0</span>)
-                    </h3>
+                    <div class="flex items-center justify-between flex-wrap gap-3">
+                        <h3 class="text-lg font-bold text-slate-900 flex items-center gap-2">
+                            <i class="fa-solid fa-handshake text-indigo-600"></i>
+                            我曾參與磋商的願望 (<span id="my-joined-count">0</span>)
+                        </h3>
+                        <div id="my-joined-filter-wrap" class="hidden items-center gap-2 text-xs">
+                            <label for="my-joined-status-filter" class="font-bold text-slate-700">願望狀態</label>
+                            <select id="my-joined-status-filter" onchange="renderNegotiationPage()"
+                                class="p-2 bg-slate-50 rounded-lg border border-slate-300 text-xs focus:outline-none focus:ring-2 focus:ring-brand-500">
+                                <option value="all" selected>顯示全部</option>
+                                <option value="待接洽">待接洽</option>
+                                <option value="已實現">已實現</option>
+                                <option value="已告終">已告終</option>
+                            </select>
+                        </div>
+                    </div>
                     <div id="my-joined-wishes-list" class="space-y-3">
                         <!-- Populated by JS -->
                     </div>
@@ -1927,61 +1951,116 @@
 
             if (!myCreatedList || !myJoinedList) return;
 
-            // 1. My Created Wishes
-            const createdWishes = wishes.filter(w => w.wisherUid === currentUser.uid);
+            // 1. My Created Wishes（最新發布的願望排在最上方）
+            const createdWishes = wishes
+                .filter(w => w.wisherUid === currentUser.uid)
+                .sort((a, b) => (b.createdDate || '').localeCompare(a.createdDate || '') || (b.id || '').localeCompare(a.id || ''));
             document.getElementById('my-created-count').innerText = createdWishes.length;
 
+            const createdFilterWrap = document.getElementById('my-created-filter-wrap');
+            const createdFilterSelect = document.getElementById('my-created-status-filter');
+
             if (createdWishes.length === 0) {
+                createdFilterWrap.classList.add('hidden');
+                createdFilterWrap.classList.remove('flex');
                 myCreatedList.innerHTML = `<div class="text-xs text-slate-400 p-4 text-center">您尚未發表過許願</div>`;
             } else {
-                myCreatedList.innerHTML = createdWishes.map(w => {
-                    const threadsCount = chatThreads.filter(t => t.wishId === w.id).length;
-                    return `
-                        <div class="p-4 rounded-xl border border-slate-200 hover:border-indigo-300 bg-slate-50 flex items-center justify-between gap-4 cursor-pointer transition"
-                             onclick="openChatModal('${w.id}')">
-                            <div>
-                                <div class="flex items-center gap-2 mb-1">
-                                    <span class="px-2 py-0.5 rounded text-[10px] font-bold ${w.type === '必要' ? 'bg-red-500 text-white' : 'bg-amber-500 text-white'}">${w.type}</span>
-                                    <span class="text-xs font-bold text-slate-800">${escapeHtml(w.title)}</span>
+                createdFilterWrap.classList.remove('hidden');
+                createdFilterWrap.classList.add('flex');
+                const createdStatusFilter = createdFilterSelect ? createdFilterSelect.value : 'all';
+                const filteredCreatedWishes = createdStatusFilter === 'all'
+                    ? createdWishes
+                    : createdWishes.filter(w => w.status === createdStatusFilter);
+
+                if (filteredCreatedWishes.length === 0) {
+                    myCreatedList.innerHTML = `<div class="text-xs text-slate-400 p-4 text-center">此狀態下沒有符合的願望</div>`;
+                } else {
+                    myCreatedList.innerHTML = filteredCreatedWishes.map(w => {
+                        const threadsCount = chatThreads.filter(t => t.wishId === w.id).length;
+                        return `
+                        <details class="group rounded-xl border border-slate-200 hover:border-indigo-300 bg-slate-50 transition overflow-hidden">
+                            <summary class="list-none cursor-pointer p-4 flex items-center justify-between gap-4 marker:content-none [&::-webkit-details-marker]:hidden">
+                                <div>
+                                    <div class="flex items-center gap-2 mb-1">
+                                        <span class="px-2 py-0.5 rounded text-[10px] font-bold ${w.type === '必要' ? 'bg-red-500 text-white' : 'bg-amber-500 text-white'}">${w.type}</span>
+                                        <span class="text-xs font-bold text-slate-800">${escapeHtml(w.title)}</span>
+                                    </div>
+                                    <div class="text-[11px] text-slate-500">發布日期: ${w.createdDate || '—'} | 期限: ${w.deadline} | 狀態: <strong class="text-indigo-600">${w.status}</strong></div>
                                 </div>
-                                <div class="text-[11px] text-slate-500">期限: ${w.deadline} | 狀態: <strong class="text-indigo-600">${w.status}</strong></div>
+                                <div class="flex items-center gap-2 flex-shrink-0">
+                                    <span class="px-2.5 py-1 bg-indigo-100 text-indigo-700 font-bold rounded-lg text-xs">${threadsCount} 人磋商中</span>
+                                    <i class="fa-solid fa-chevron-down text-slate-400 text-xs transition-transform duration-200 group-open:rotate-180"></i>
+                                </div>
+                            </summary>
+                            <div class="px-4 pb-4 pt-2 border-t border-slate-200 space-y-2 text-[11px] text-slate-600">
+                                ${w.expectation ? `<div><strong class="text-slate-700">期望說明：</strong>${escapeHtml(w.expectation)}</div>` : ''}
+                                <div><strong class="text-slate-700">預算範圍：</strong>${w.priceMin ?? '—'} ~ ${w.priceMax ?? '—'}</div>
+                                <div><strong class="text-slate-700">分類：</strong>${escapeHtml(w.category || '—')}</div>
+                                <button onclick="openChatModal('${w.id}')"
+                                    class="mt-2 inline-flex items-center gap-1.5 px-3 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-[11px] font-bold transition">
+                                    查看磋商對話 <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                                </button>
                             </div>
-                            <div class="flex items-center gap-2">
-                                <span class="px-2.5 py-1 bg-indigo-100 text-indigo-700 font-bold rounded-lg text-xs">${threadsCount} 人磋商中</span>
-                                <i class="fa-solid fa-chevron-right text-slate-400 text-xs"></i>
-                            </div>
-                        </div>
+                        </details>
                     `;
-                }).join('');
+                    }).join('');
+                }
             }
 
             // 2. Wishes I Joined as Supplier
             const mySupplierThreads = chatThreads.filter(t => t.supplierUid === currentUser.uid);
             document.getElementById('my-joined-count').innerText = mySupplierThreads.length;
 
+            const joinedFilterWrap = document.getElementById('my-joined-filter-wrap');
+            const joinedFilterSelect = document.getElementById('my-joined-status-filter');
+
             if (mySupplierThreads.length === 0) {
+                joinedFilterWrap.classList.add('hidden');
+                joinedFilterWrap.classList.remove('flex');
                 myJoinedList.innerHTML = `<div class="text-xs text-slate-400 p-4 text-center">您尚未對任何願望發起磋商</div>`;
             } else {
-                myJoinedList.innerHTML = mySupplierThreads.map(t => {
-                    const wish = wishes.find(w => w.id === t.wishId);
-                    if (!wish) return '';
-                    return `
-                        <div class="p-4 rounded-xl border border-slate-200 hover:border-indigo-300 bg-slate-50 flex items-center justify-between gap-4 cursor-pointer transition"
-                             onclick="openChatModal('${wish.id}', '${currentUser.uid}')">
-                            <div>
-                                <div class="flex items-center gap-2 mb-1">
-                                    <span class="px-2 py-0.5 rounded text-[10px] font-bold ${wish.type === '必要' ? 'bg-red-500 text-white' : 'bg-amber-500 text-white'}">${wish.type}</span>
-                                    <span class="text-xs font-bold text-slate-800">${escapeHtml(wish.title)}</span>
+                joinedFilterWrap.classList.remove('hidden');
+                joinedFilterWrap.classList.add('flex');
+                const joinedStatusFilter = joinedFilterSelect ? joinedFilterSelect.value : 'all';
+                const joinedRows = mySupplierThreads
+                    .map(t => ({ thread: t, wish: wishes.find(w => w.id === t.wishId) }))
+                    .filter(row => row.wish);
+                const filteredJoinedRows = joinedStatusFilter === 'all'
+                    ? joinedRows
+                    : joinedRows.filter(row => row.wish.status === joinedStatusFilter);
+
+                if (filteredJoinedRows.length === 0) {
+                    myJoinedList.innerHTML = `<div class="text-xs text-slate-400 p-4 text-center">此狀態下沒有符合的願望</div>`;
+                } else {
+                    myJoinedList.innerHTML = filteredJoinedRows.map(({ thread: t, wish }) => {
+                        return `
+                        <details class="group rounded-xl border border-slate-200 hover:border-indigo-300 bg-slate-50 transition overflow-hidden">
+                            <summary class="list-none cursor-pointer p-4 flex items-center justify-between gap-4 marker:content-none [&::-webkit-details-marker]:hidden">
+                                <div>
+                                    <div class="flex items-center gap-2 mb-1">
+                                        <span class="px-2 py-0.5 rounded text-[10px] font-bold ${wish.type === '必要' ? 'bg-red-500 text-white' : 'bg-amber-500 text-white'}">${wish.type}</span>
+                                        <span class="text-xs font-bold text-slate-800">${escapeHtml(wish.title)}</span>
+                                    </div>
+                                    <div class="text-[11px] text-slate-500">許願者: ${escapeHtml(wish.wisherName)} | 狀態: <strong class="text-indigo-600">${wish.status}</strong></div>
                                 </div>
-                                <div class="text-[11px] text-slate-500">許願者: ${escapeHtml(wish.wisherName)} | 狀態: <strong class="text-indigo-600">${wish.status}</strong></div>
+                                <div class="flex items-center gap-2 flex-shrink-0">
+                                    <span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 font-bold rounded-lg text-xs">查看對話</span>
+                                    <i class="fa-solid fa-chevron-down text-slate-400 text-xs transition-transform duration-200 group-open:rotate-180"></i>
+                                </div>
+                            </summary>
+                            <div class="px-4 pb-4 pt-2 border-t border-slate-200 space-y-2 text-[11px] text-slate-600">
+                                ${wish.expectation ? `<div><strong class="text-slate-700">期望說明：</strong>${escapeHtml(wish.expectation)}</div>` : ''}
+                                <div><strong class="text-slate-700">期限：</strong>${wish.deadline || '—'}</div>
+                                <div><strong class="text-slate-700">分類：</strong>${escapeHtml(wish.category || '—')}</div>
+                                <button onclick="openChatModal('${wish.id}', '${currentUser.uid}')"
+                                    class="mt-2 inline-flex items-center gap-1.5 px-3 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-[11px] font-bold transition">
+                                    查看磋商對話 <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                                </button>
                             </div>
-                            <div class="flex items-center gap-2">
-                                <span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 font-bold rounded-lg text-xs">查看對話</span>
-                                <i class="fa-solid fa-chevron-right text-slate-400 text-xs"></i>
-                            </div>
-                        </div>
+                        </details>
                     `;
-                }).join('');
+                    }).join('');
+                }
             }
 
             const totalNegotiations = createdWishes.length + mySupplierThreads.length;
