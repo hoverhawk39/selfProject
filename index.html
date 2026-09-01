@@ -862,13 +862,26 @@
             <!-- Negotiation Content (Only visible when logged in) -->
             <div id="negotiate-content" class="space-y-8">
                 <!-- Section 1: Wishes I Created -->
-                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
-                    <div class="flex items-center justify-between flex-wrap gap-3">
-                        <h3 class="text-lg font-bold text-slate-900 flex items-center gap-2">
-                            <i class="fa-solid fa-user-pen text-brand-600"></i>
-                            我許過的願望 (<span id="my-created-count">0</span>)
-                        </h3>
-                        <div id="my-created-filter-wrap" class="hidden items-center gap-2 text-xs">
+                <!-- 整個區塊本身即為一張可展開/收闔的卡片：分頁載入時預設收闔，
+                     只顯示標題列；點擊標題列後才會展開顯示該區塊內的所有願望。 -->
+                <details id="section-created-details"
+                    class="group bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+                    <summary
+                        class="list-none cursor-pointer p-6 flex items-center justify-between flex-wrap gap-3 marker:content-none [&::-webkit-details-marker]:hidden hover:bg-slate-50 transition">
+                        <div class="flex items-center flex-wrap gap-3">
+                            <h3 class="text-lg font-bold text-slate-900 flex items-center gap-2">
+                                <i class="fa-solid fa-user-pen text-brand-600"></i>
+                                我許過的願望 (<span id="my-created-count">0</span>)
+                            </h3>
+                            <span
+                                class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-slate-100 text-slate-600 text-[11px] font-bold rounded-lg">
+                                <i
+                                    class="fa-solid fa-chevron-down text-[10px] transition-transform duration-200 group-open:rotate-180"></i>
+                                展開 / 收闔
+                            </span>
+                        </div>
+                        <div id="my-created-filter-wrap" onclick="event.stopPropagation()"
+                            class="hidden items-center gap-2 text-xs">
                             <label for="my-created-status-filter" class="font-bold text-slate-700">願望狀態</label>
                             <select id="my-created-status-filter" onchange="renderNegotiationPage()"
                                 class="p-2 bg-slate-50 rounded-lg border border-slate-300 text-xs focus:outline-none focus:ring-2 focus:ring-brand-500">
@@ -878,20 +891,33 @@
                                 <option value="已告終">已告終</option>
                             </select>
                         </div>
+                    </summary>
+                    <div class="px-6 pb-6 pt-1 border-t border-slate-100 space-y-4">
+                        <div id="my-created-wishes-list" class="space-y-3 pt-3">
+                            <!-- Populated by JS -->
+                        </div>
                     </div>
-                    <div id="my-created-wishes-list" class="space-y-3">
-                        <!-- Populated by JS -->
-                    </div>
-                </div>
+                </details>
 
                 <!-- Section 2: Wishes I Participated as Supplier -->
-                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
-                    <div class="flex items-center justify-between flex-wrap gap-3">
-                        <h3 class="text-lg font-bold text-slate-900 flex items-center gap-2">
-                            <i class="fa-solid fa-handshake text-indigo-600"></i>
-                            我曾參與磋商的願望 (<span id="my-joined-count">0</span>)
-                        </h3>
-                        <div id="my-joined-filter-wrap" class="hidden items-center gap-2 text-xs">
+                <details id="section-joined-details"
+                    class="group bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+                    <summary
+                        class="list-none cursor-pointer p-6 flex items-center justify-between flex-wrap gap-3 marker:content-none [&::-webkit-details-marker]:hidden hover:bg-slate-50 transition">
+                        <div class="flex items-center flex-wrap gap-3">
+                            <h3 class="text-lg font-bold text-slate-900 flex items-center gap-2">
+                                <i class="fa-solid fa-handshake text-indigo-600"></i>
+                                我曾參與磋商的願望 (<span id="my-joined-count">0</span>)
+                            </h3>
+                            <span
+                                class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-slate-100 text-slate-600 text-[11px] font-bold rounded-lg">
+                                <i
+                                    class="fa-solid fa-chevron-down text-[10px] transition-transform duration-200 group-open:rotate-180"></i>
+                                展開 / 收闔
+                            </span>
+                        </div>
+                        <div id="my-joined-filter-wrap" onclick="event.stopPropagation()"
+                            class="hidden items-center gap-2 text-xs">
                             <label for="my-joined-status-filter" class="font-bold text-slate-700">願望狀態</label>
                             <select id="my-joined-status-filter" onchange="renderNegotiationPage()"
                                 class="p-2 bg-slate-50 rounded-lg border border-slate-300 text-xs focus:outline-none focus:ring-2 focus:ring-brand-500">
@@ -901,11 +927,13 @@
                                 <option value="已告終">已告終</option>
                             </select>
                         </div>
+                    </summary>
+                    <div class="px-6 pb-6 pt-1 border-t border-slate-100 space-y-4">
+                        <div id="my-joined-wishes-list" class="space-y-3 pt-3">
+                            <!-- Populated by JS -->
+                        </div>
                     </div>
-                    <div id="my-joined-wishes-list" class="space-y-3">
-                        <!-- Populated by JS -->
-                    </div>
-                </div>
+                </details>
             </div>
 
         </section>
@@ -1797,11 +1825,14 @@
                                 <span class="block text-[10px] font-bold text-slate-400">願望預算</span>
                                 <span class="font-bold text-emerald-600">NT$ ${w.priceMin.toLocaleString()} ~ ${w.priceMax.toLocaleString()}</span>
                             </div>
-                            <button onclick="handleContactClick('${w.id}')"
-                                class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl font-bold transition shadow-sm flex items-center gap-1">
-                                <i class="fa-solid fa-heart"></i>
-                                <span>按讚磋商</span>
-                            </button>
+                            <div class="flex items-center gap-3">
+                                <span class="text-sm font-bold" style="color:#EF4444">總按讚數 ${chatThreads.filter(t => t.wishId === w.id).length}</span>
+                                <button onclick="handleContactClick('${w.id}')"
+                                    class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl font-bold transition shadow-sm flex items-center gap-1">
+                                    <i class="fa-solid fa-heart"></i>
+                                    <span>按讚磋商</span>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 `;
@@ -1979,6 +2010,12 @@
         }
 
         // ================= NEGOTIATION HUB (願望磋商區) =================
+        // 「我許過的願望」與「我曾參與磋商的願望」兩個區塊本身，各自都是一張
+        // 可展開/收闔的卡片（<details id="section-created-details"> /
+        // <details id="section-joined-details">），分頁載入時預設收闔，只顯示
+        // 標題列；使用者點擊標題列後才會展開，顯示該區塊內的所有願望項目。
+        // 這裡不需要額外的 JS 控制展開/收闔，交由瀏覽器原生 <details> 行為處理。
+
         function renderNegotiationPage() {
             if (!currentUser) return;
 
@@ -2183,12 +2220,21 @@
             const disabledBanner = document.getElementById('chat-disabled-banner');
             const inputRow = document.getElementById('chat-input-row');
 
-            // Lock if thread is locked or wish status is fulfilled/ended
-            if (activeThread.isLocked || wish.status === '已實現' || wish.status === '已告終') {
+            // 僅許願者本人能看到並點擊【Deal 成交】/【Oops 破局】按鈕，
+            // 非許願者（供給方 / 訪客）一律看不到這兩個按鈕。
+            const isWisher = !!(currentUser && wish.wisherUid === currentUser.uid);
+            const isEndedOrLocked = activeThread.isLocked || wish.status === '已實現' || wish.status === '已告終';
+
+            if (isWisher && !isEndedOrLocked) {
+                actionButtons.classList.remove('hidden');
+                disabledBanner.classList.add('hidden');
+            } else if (isWisher && isEndedOrLocked) {
+                // 許願者本人查看已完成/已鎖定的磋商，顯示提示文字取代按鈕
                 actionButtons.classList.add('hidden');
                 disabledBanner.classList.remove('hidden');
             } else {
-                actionButtons.classList.remove('hidden');
+                // 非許願者：不顯示按鈕，也不顯示「已標記完成」提示文字
+                actionButtons.classList.add('hidden');
                 disabledBanner.classList.add('hidden');
             }
         }
