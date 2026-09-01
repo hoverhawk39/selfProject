@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon"
         href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧞‍♂️</text></svg>">
-    <title>SurveyPool 誠實許願池 | 擺脫廣告束縛，物盡其用</title>
+    <title>SurveyPool 誠實許願池</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Font Awesome Icons -->
@@ -102,10 +102,6 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
             <!-- Brand Logo -->
             <div class="flex items-center space-x-3 cursor-pointer" onclick="switchTab('hero')">
-                <div
-                    class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 to-emerald-400 flex items-center justify-center text-white font-black text-xl shadow-md shadow-brand-500/20">
-                    S
-                </div>
                 <div>
                     <span
                         class="text-xl font-extrabold bg-gradient-to-r from-brand-700 to-emerald-600 bg-clip-text text-transparent">SurveyPool</span>
@@ -662,10 +658,10 @@
                             class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-brand-500 focus:outline-none">
                     </div>
                     <div class="space-y-1">
-                        <label class="block text-xs font-bold text-slate-700">5. 最高預算 (NTD，需大於最低預算) <span
+                        <label class="block text-xs font-bold text-slate-700">5. 最高預算 (NTD，不能小於最低預算) <span
                                 class="text-red-500">*</span></label>
                         <input type="number" id="form-price-max" required min="1" max="9999999999" value="3000"
-                            placeholder="需大於最低預算"
+                            placeholder="不能小於最低預算"
                             class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-brand-500 focus:outline-none">
                     </div>
                 </div>
@@ -776,8 +772,8 @@
 
                 <!-- 15. 參考圖片 (圖片網址 - 選填**) -->
                 <div class="space-y-1">
-                    <label class="block text-xs font-bold text-slate-500">11. 參考圖片 (選填)</label>
-                    <input type="url" id="form-img-url" placeholder="貼上圖片網址 (如：https://image.un/photo)，若未提供將套用預設圖片"
+                    <label class="block text-xs font-bold text-slate-500">11. 參考圖片 (選填，若未提供將套用預設圖片)</label>
+                    <input type="url" id="form-img-url" placeholder="貼上圖片網址 (如：https://image.un/photo)"
                         class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-xs focus:ring-2 focus:ring-brand-500 focus:outline-none">
                 </div>
 
@@ -1369,7 +1365,7 @@
                     locale: "zh",
                     dateFormat: "Y/m/d",
                     allowInput: false,
-                    minDate: "today"
+                    minDate: new Date().fp_incr(1)
                 });
             }
         }
@@ -1909,8 +1905,8 @@
             const priceMin = parseFloat(document.getElementById('form-price-min').value) || 0;
             const priceMax = parseFloat(document.getElementById('form-price-max').value) || 0;
 
-            if (priceMax <= priceMin) {
-                showToast("最高預算必須大於最低預算！", "error");
+            if (priceMax < priceMin) {
+                showToast("最高預算不能小於最低預算！", "error");
                 return;
             }
 
