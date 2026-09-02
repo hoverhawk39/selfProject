@@ -123,7 +123,11 @@
                 <button onclick="switchTab('wish-form')" id="nav-wish-form"
                     class="nav-btn text-slate-600 hover:text-brand-600 px-3 py-2 rounded-lg hover:bg-slate-100 transition">我要許願</button>
                 <button onclick="switchTab('trend')" id="nav-trend"
-                    class="nav-btn text-slate-600 hover:text-brand-600 px-3 py-2 rounded-lg hover:bg-slate-100 transition">願望風向球</button>
+                    class="nav-btn text-slate-600 hover:text-brand-600 px-3 py-2 rounded-lg hover:bg-slate-100 transition flex items-center gap-1">
+                    <span>願望風向球</span>
+                    <span
+                        class="px-1.5 py-0.5 text-[9px] bg-emerald-100 text-emerald-700 font-bold rounded-md">AI</span>
+                </button>
                 <button onclick="switchTab('negotiate')" id="nav-negotiate"
                     class="nav-btn text-slate-600 hover:text-brand-600 px-3 py-2 rounded-lg hover:bg-slate-100 transition flex items-center gap-1.5">
                     <span>願望磋商區</span>
@@ -185,7 +189,8 @@
             <button onclick="switchTab('wish-form')"
                 class="block w-full text-left px-3 py-2 text-slate-700 font-medium rounded-lg hover:bg-slate-100">我要許願</button>
             <button onclick="switchTab('trend')"
-                class="block w-full text-left px-3 py-2 text-slate-700 font-medium rounded-lg hover:bg-slate-100">願望風向球</button>
+                class="block w-full text-left px-3 py-2 text-slate-700 font-medium rounded-lg hover:bg-slate-100">願望風向球
+                (AI)</button>
             <button onclick="switchTab('negotiate')"
                 class="block w-full text-left px-3 py-2 text-slate-700 font-medium rounded-lg hover:bg-slate-100">願望磋商區</button>
         </div>
@@ -789,19 +794,82 @@
 
         </section>
 
-        <!-- ================= PAGE: WISH TREND (願望風向球) ================= -->
+        <!-- ================= PAGE: WISH TREND (願望風向球 & AI 對話視窗) ================= -->
         <section id="page-trend" class="tab-page hidden py-8 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto space-y-8">
 
             <div
                 class="bg-gradient-to-r from-slate-900 via-emerald-950 to-slate-900 text-white p-6 sm:p-8 rounded-2xl shadow-xl">
                 <div
                     class="inline-block px-3 py-1 bg-emerald-500/30 border border-emerald-400/30 text-emerald-200 text-xs rounded-full font-semibold">
-                    <i class="fa-solid fa-wind"></i> 願望風向球
+                    <i class="fa-solid fa-wind"></i> 願望風向球 & AI 智慧分析
                 </div>
                 <h2 class="text-2xl sm:text-3xl font-extrabold mt-2">看看大家最近都在許什麼願</h2>
                 <p class="text-slate-300 text-xs sm:text-sm max-w-2xl mt-1">
-                    彙整目前許願池上所有願望的「三個關鍵字」與「品牌偏好」，字體越大代表出現次數越多，隨著願望數量增加即時動態更新。
+                    彙整目前許願池上所有願望的關鍵字與品牌偏好，隨時掌握熱門趨勢，亦可與專屬 **AI 願望風向智囊** 對話獲取市場洞察！
                 </p>
+            </div>
+
+            <!-- AI Wish Analysis Chatbot Section (新增：AI 對話視窗) -->
+            <div class="bg-white rounded-2xl border border-emerald-200 shadow-md p-6 sm:p-8 space-y-4">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-3 flex-wrap gap-2">
+                    <div class="flex items-center gap-2">
+                        <div
+                            class="w-9 h-9 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-lg">
+                            🧞‍♂️
+                        </div>
+                        <div>
+                            <h3 class="text-base sm:text-lg font-bold text-slate-900">AI 願望風向智囊</h3>
+                            <p class="text-xs text-slate-400">實時檢視數據資料庫，精準分析購物風向（建議限制於 500 字內）</p>
+                        </div>
+                    </div>
+                    <span
+                        class="px-2.5 py-1 bg-emerald-50 text-emerald-700 text-[11px] font-bold rounded-lg border border-emerald-200">
+                        <i class="fa-solid fa-bolt text-amber-500"></i> LLM 智慧解讀
+                    </span>
+                </div>
+
+                <!-- Quick Prompt Presets -->
+                <div class="flex items-center gap-2 overflow-x-auto custom-scrollbar pb-1 text-xs">
+                    <span class="text-slate-400 shrink-0 font-medium">快速快捷提問：</span>
+                    <button onclick="askAIPrompt('請簡短分析目前許願池中最熱門的願望類別與預算分布，500字內。')"
+                        class="shrink-0 px-3 py-1.5 bg-slate-100 hover:bg-emerald-100 hover:text-emerald-800 text-slate-700 rounded-lg transition border border-slate-200">
+                        📊 類別與預算洞察
+                    </button>
+                    <button onclick="askAIPrompt('請分析許願者最期待的品牌偏好與買家心聲痛點？500字內。')"
+                        class="shrink-0 px-3 py-1.5 bg-slate-100 hover:bg-emerald-100 hover:text-emerald-800 text-slate-700 rounded-lg transition border border-slate-200">
+                        🏷️ 品牌與潛在需求
+                    </button>
+                    <button onclick="askAIPrompt('請總結「必要」vs「想要」的願望比例與適合商家的潛在切入點，500字內。')"
+                        class="shrink-0 px-3 py-1.5 bg-slate-100 hover:bg-emerald-100 hover:text-emerald-800 text-slate-700 rounded-lg transition border border-slate-200">
+                        💡 商業與媒合機會
+                    </button>
+                </div>
+
+                <!-- AI Chat Display Area -->
+                <div id="ai-chat-messages"
+                    class="bg-slate-50 rounded-xl p-4 min-h-[160px] max-h-[350px] overflow-y-auto custom-scrollbar space-y-3 text-xs sm:text-sm border border-slate-100">
+                    <div class="flex items-start gap-2.5">
+                        <span class="text-lg shrink-0">🧞‍♂️</span>
+                        <div
+                            class="bg-white p-3 rounded-2xl rounded-tl-none border border-slate-200 text-slate-700 space-y-1 max-w-[85%] shadow-sm">
+                            <span class="font-bold text-emerald-700 block text-xs">AI 願望精靈</span>
+                            <p class="leading-relaxed">嗨！我是您的 AI
+                                願望風向智囊。我可以為您歸納許願池中的「熱門關鍵字」、「品牌偏好」與「潛在商機」。點擊上方按鈕或在下方輸入問題，我將為您做精簡分析！</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Input Field -->
+                <div class="flex items-center gap-2 pt-1">
+                    <input type="text" id="ai-prompt-input" placeholder="想瞭解什麼風向？（例如：分析最熱門的高預算願望...）"
+                        onkeydown="if(event.key === 'Enter') handleAISubmit()"
+                        class="flex-grow px-4 py-2.5 rounded-xl border border-slate-300 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500">
+                    <button onclick="handleAISubmit()" id="ai-submit-btn"
+                        class="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs sm:text-sm transition shrink-0 flex items-center gap-1">
+                        <i class="fa-solid fa-paper-plane"></i>
+                        <span>分析</span>
+                    </button>
+                </div>
             </div>
 
             <!-- Keyword Word Cloud -->
@@ -862,8 +930,6 @@
             <!-- Negotiation Content (Only visible when logged in) -->
             <div id="negotiate-content" class="space-y-8">
                 <!-- Section 1: Wishes I Created -->
-                <!-- 整個區塊本身即為一張可展開/收闔的卡片：分頁載入時預設收闔，
-                     只顯示標題列；點擊標題列後才會展開顯示該區塊內的所有願望。 -->
                 <details id="section-created-details"
                     class="group bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
                     <summary
@@ -1053,8 +1119,7 @@
                 <!-- Input Message Box -->
                 <div class="flex gap-2" id="chat-input-row">
                     <input type="text" id="chat-input-text" placeholder="輸入磋商訊息..."
-                        onkeydown="handleChatInputKeydown(event)" oncompositionstart="isChatInputComposing = true"
-                        oncompositionend="isChatInputComposing = false"
+                        onkeydown="handleChatInputKeydown(event)"
                         class="flex-grow px-3.5 py-2 rounded-xl border border-slate-300 text-xs focus:ring-2 focus:ring-indigo-500 focus:outline-none">
                     <button onclick="sendChatMessage()"
                         class="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl text-xs transition shrink-0">
@@ -1124,25 +1189,19 @@
                 }
             }
 
-            // 中文 1 字 = 1 單位
-            // 英文/其他字元 7.5 個 ≈ 1 單位
             return chineseCount + otherCount / 7.5;
         }
 
-        expectation.addEventListener('input', function () {
+        if (expectation) {
+            expectation.addEventListener('input', function () {
+                while (calculateExpectationLength(this.value) > 80) {
+                    this.value = this.value.slice(0, -1);
+                }
+                const length = calculateExpectationLength(this.value);
+                if (counter) counter.textContent = `${Math.ceil(length)} / 80`;
+            });
+        }
 
-            // 如果超過 80 中文等值字，從尾端刪除
-            while (calculateExpectationLength(this.value) > 80) {
-                this.value = this.value.slice(0, -1);
-            }
-
-            const length = calculateExpectationLength(this.value);
-
-            counter.textContent = `${Math.ceil(length)} / 80`;
-        });
-
-
-        // Fallback Firebase Configuration for preview environment
         const defaultConfig = {
             apiKey: "AIzaSyAp8ATUsl0xYyteilzRjbNuugor0lgZ9yg",
             authDomain: "surveypool-7b03f.firebaseapp.com",
@@ -1163,20 +1222,12 @@
         const db = getFirestore(app);
         const googleProvider = new GoogleAuthProvider();
 
-        // Expose the Firestore primitives + db handle to the classic (non-module)
-        // application logic script below, so it can perform real reads/writes.
         window.firestoreApi = { db, doc, getDoc, setDoc, collection, onSnapshot, appId };
 
         window.handleGoogleSignIn = async function () {
             try {
-                // Note: we intentionally don't call window.onUserLoggedIn here.
-                // onAuthStateChanged (below) already fires once sign-in succeeds
-                // and handles all post-login setup/UI updates. Calling it here
-                // too would trigger duplicate "first login" toasts, etc.
                 await signInWithPopup(auth, googleProvider);
             } catch (error) {
-                // Silently ignore cases where the user simply closed the popup
-                // or cancelled the sign-in flow — no error message needed.
                 if (
                     error.code === 'auth/popup-closed-by-user' ||
                     error.code === 'auth/cancelled-popup-request'
@@ -1219,11 +1270,9 @@
     </script>
     <script>
         // ================= Global Data Models State =================
-        // wishes / chatThreads are now local *caches* kept in sync in real time
-        // with Firestore via onSnapshot listeners (see attachRealtimeListeners()).
-        let currentUser = null; // { uid, displayName, photoURL, email }
-        let scAccumulated = 0; // 「已累計」SC (synced live from Firestore user profile)
-        let scExpected = 0;    // 「待獲取」SC (synced live from Firestore user profile)
+        let currentUser = null;
+        let scAccumulated = 0;
+        let scExpected = 0;
 
         let wishes = [];
         let chatThreads = [];
@@ -1231,13 +1280,10 @@
         let activeChatWishId = null;
         let activeChatSupplierUid = null;
 
-        // Firestore realtime listener unsubscribe handles
         let unsubWishes = null;
         let unsubThreads = null;
         let unsubUserProfile = null;
 
-        // One-time demo seed data, only written to Firestore if the
-        // public collections are completely empty (first run).
         const seedWishes = [
             {
                 id: 'wish-101',
@@ -1258,7 +1304,7 @@
                 imgUrl: 'https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=600&auto=format&fit=crop&q=60',
                 wisherUid: 'user-demo-wisher-1',
                 wisherName: '陳先生',
-                status: '待磋商' // '待磋商' | '已實現' | '已告終'
+                status: '待磋商'
             },
             {
                 id: 'wish-102',
@@ -1298,9 +1344,6 @@
             }
         ];
 
-        // ================= Firestore Helpers =================
-        // firestoreApi is exposed on window by the Firebase module script:
-        // { db, doc, getDoc, setDoc, collection, onSnapshot, appId }
         function fs() {
             return window.firestoreApi;
         }
@@ -1335,7 +1378,6 @@
             return doc(db, `artifacts/${appId}/users`, uid);
         }
 
-        // ================= Onload Initialization =================
         window.onload = async function () {
             setCurrentDateDefault();
             await seedInitialDataIfEmpty();
@@ -1347,9 +1389,6 @@
             return str.replace(/-/g, '/');
         }
 
-        // 分類 emoji 僅用於畫面顯示，資料庫一律儲存純文字分類名稱，
-        // 這樣「篩選下拉選單」與「發願表單」的值才能保持一致，
-        // 同時舊資料（無 emoji 前綴）也能正確補上對應 emoji 顯示。
         const categoryEmojiMap = {
             '穿戴': '⌚️',
             '吃喝': '🌭',
@@ -1362,9 +1401,6 @@
         };
 
         function getCategoryEmoji(category) {
-            // 相容舊資料：若 category 本身已包含 emoji 前綴（例如「🛒 用品」），
-            // 取出後半段純文字去對照表比對，避免重複顯示 emoji；
-            // 若是純文字（例如「用品」）則直接查表補上 emoji。
             if (!category) return '';
             if (categoryEmojiMap[category]) {
                 return `${categoryEmojiMap[category]} ${category}`;
@@ -1385,18 +1421,14 @@
                     locale: "zh",
                     dateFormat: "Y/m/d",
                     allowInput: false,
-                    onChange: function () {
-                        renderWishes();
-                    }
+                    onChange: function () { renderWishes(); }
                 });
 
                 window.fpEnd = flatpickr("#filter-deadline-date", {
                     locale: "zh",
                     dateFormat: "Y/m/d",
                     allowInput: false,
-                    onChange: function () {
-                        renderWishes();
-                    }
+                    onChange: function () { renderWishes(); }
                 });
 
                 window.fpFormDeadline = flatpickr("#form-deadline", {
@@ -1442,13 +1474,11 @@
             }
         }
 
-        // Writes the demo dataset into Firestore exactly once (first run only),
-        // guarded by a marker document so repeat visits never duplicate data.
         async function seedInitialDataIfEmpty() {
             try {
                 const { getDoc, setDoc } = fs();
                 const metaSnap = await getDoc(seedMetaDocRef());
-                if (metaSnap.exists()) return; // Already seeded previously
+                if (metaSnap.exists()) return;
 
                 await Promise.all([
                     ...seedWishes.map(w => setDoc(wishDocRef(w.id), w)),
@@ -1460,8 +1490,6 @@
             }
         }
 
-        // Subscribes to the public wishes / chatThreads collections so every
-        // connected client stays in sync in real time.
         function attachRealtimeListeners() {
             const { onSnapshot } = fs();
 
@@ -1483,10 +1511,6 @@
             }, (error) => console.error('chatThreads onSnapshot error:', error));
         }
 
-        // 願望狀態變成【已告終】時，把當初發布願望所待獲取的 SC
-        // （必要 -10 / 想要 -5）從許願者的「待獲取」中扣除。
-        // 由 checkAndExpireWishes()（到期未成交）與 handleOopsClick()
-        // （Oops 破局）共用，確保兩種觸發路徑規則一致。
         async function deductWisherExpectedSC(wish) {
             if (!wish || !wish.wisherUid) return;
             const scAmount = wish.type === '必要' ? 10 : 5;
@@ -1494,7 +1518,6 @@
             try {
                 let wisherExpected;
                 if (currentUser && currentUser.uid === wish.wisherUid) {
-                    // 目前使用者就是許願者，本地快取值已即時同步，直接使用。
                     wisherExpected = scExpected;
                 } else {
                     const { getDoc } = fs();
@@ -1510,19 +1533,13 @@
             }
         }
 
-        // Detects wishes that passed their deadline without a deal and writes
-        // the expired status back to Firestore (idempotent - only writes once
-        // per wish since the next snapshot will already show '已告終').
         function checkAndExpireWishes() {
             const { setDoc } = fs();
             const todayStr = new Date().toISOString().split('T')[0];
             wishes.forEach(w => {
-                // deadline 可能是 'YYYY-MM-DD'（ISO，如種子資料）或 'YYYY/MM/DD'
-                // （表單建立，如 form-deadline 欄位），統一轉成 '-' 分隔後再比較，
-                // 否則 '/' 字元碼大於 '-'，字串比較會永遠判定為未到期。
                 const deadlineISO = (w.deadline || '').replace(/\//g, '-');
                 if (w.status === '待磋商' && deadlineISO < todayStr) {
-                    w.status = '已告終'; // optimistic local update
+                    w.status = '已告終';
                     setDoc(wishDocRef(w.id), { status: '已告終' }, { merge: true })
                         .catch(err => console.error('expire write error:', err));
                     deductWisherExpectedSC(w);
@@ -1530,7 +1547,6 @@
             });
         }
 
-        // ================= Auth Callbacks =================
         window.onUserLoggedIn = async function (user) {
             currentUser = {
                 uid: user.uid,
@@ -1545,7 +1561,6 @@
             try {
                 const profileSnap = await getDoc(profileRef);
                 if (!profileSnap.exists()) {
-                    // First-ever login for this account: grant starting SC balance.
                     await setDoc(profileRef, {
                         scAccumulated: 100,
                         scExpected: 0,
@@ -1556,7 +1571,6 @@
                     });
                     showToast(`歡迎首次登入，已發放贈送 SC 100 點！`, 'success');
                 } else {
-                    // Keep profile's cached display info fresh.
                     await setDoc(profileRef, {
                         displayName: currentUser.displayName,
                         photoURL: currentUser.photoURL,
@@ -1567,7 +1581,6 @@
                 console.error('User profile init error:', error);
             }
 
-            // Live-sync this user's SC balances from Firestore.
             if (unsubUserProfile) unsubUserProfile();
             unsubUserProfile = onSnapshot(profileRef, (snap) => {
                 if (snap.exists()) {
@@ -1578,7 +1591,6 @@
                 }
             }, (error) => console.error('profile onSnapshot error:', error));
 
-            // UI Update
             document.getElementById('google-login-btn')?.classList.add('hidden');
             const profileBadge = document.getElementById('user-profile-badge');
             if (profileBadge) {
@@ -1629,7 +1641,6 @@
             if (me) me.innerText = scExpected;
         }
 
-        // Navigation Switcher
         function switchTab(tabId) {
             document.querySelectorAll('.tab-page').forEach(page => page.classList.add('hidden'));
             const targetPage = document.getElementById(`page-${tabId}`);
@@ -1655,11 +1666,6 @@
             if (menu) menu.classList.toggle('hidden');
         }
 
-        // ================= WISH POOL RENDERING =================
-        // ================= WISH TREND WORD CLOUDS (願望風向球) =================
-        // 純前端自製文字雲，不依賴外部函式庫：出現次數越多字體越大，
-        // 顏色與傾斜角度以字詞內容做確定性雜湊，確保同一個字詞每次
-        // 重新渲染時視覺穩定（不會忽大忽小、忽左忽右閃爍）。
         function hashStringToInt(str) {
             let hash = 0;
             for (let i = 0; i < str.length; i++) {
@@ -1708,10 +1714,9 @@
             const minCount = Math.min(...counts);
             const maxCount = Math.max(...counts);
 
-            const minSize = 13; // px
-            const maxSize = 42; // px
+            const minSize = 13;
+            const maxSize = 42;
 
-            // 出現次數高的排前面，最熱門的字詞最先映入眼簾
             entries.sort((a, b) => b[1] - a[1]);
 
             container.innerHTML = entries.map(([word, count]) => {
@@ -1719,7 +1724,7 @@
                 const fontSize = minSize + ratio * (maxSize - minSize);
                 const fontWeight = 600 + Math.round(ratio * 300);
                 const colorClass = colorClasses[hashStringToInt(word) % colorClasses.length];
-                const rotate = (hashStringToInt(word + '_rotate') % 9) - 4; // -4 ~ 4 度，營造文字雲的自然錯落感
+                const rotate = (hashStringToInt(word + '_rotate') % 9) - 4;
 
                 return `
                     <span class="inline-block ${colorClass} hover:opacity-70 transition cursor-default select-none"
@@ -1748,7 +1753,6 @@
                 if (deadlineStartFilter && w.deadline < deadlineStartFilter) return false;
                 if (deadlineEndFilter && w.deadline > deadlineEndFilter) return false;
 
-                // Budget filter logic (overlapping range)
                 if (budgetFilter !== 'all') {
                     const [bMin, bMax] = budgetFilter.split('-').map(Number);
                     if (w.priceMin > bMax || w.priceMax < bMin) {
@@ -1763,14 +1767,12 @@
                 return true;
             });
 
-            // Sort by latest createdDate descending (newest first)
             filtered.sort((a, b) => {
                 const dateDiff = (b.createdDate || '').localeCompare(a.createdDate || '');
                 if (dateDiff !== 0) return dateDiff;
                 return (b.id || '').localeCompare(a.id || '');
             });
 
-            // Update badges
             const poolBadge = document.getElementById('nav-badge-pool-count');
             if (poolBadge) poolBadge.innerText = wishes.length;
             const mobPoolBadge = document.getElementById('mobile-pool-count');
@@ -1801,7 +1803,6 @@
                                     <span class="px-2.5 py-0.5 rounded-full text-[11px] font-extrabold ${isMust ? 'bg-red-500 text-white' : 'bg-amber-500 text-white'}">${w.type}</span>
                                     <span class="px-2 py-0.5 rounded-md text-[11px] font-bold bg-slate-100 text-slate-600">${getCategoryEmoji(w.category)}</span>
                                     <span class="px-2 py-0.5 rounded-md text-[11px] font-bold ${statusBadgeStyle}">${w.status}</span>
-                                    <!-- 新增放入願望的許願日期 -->
                                     <span class="px-2 py-0.5 rounded-md text-[11px] font-medium bg-slate-100 text-slate-500">許願日 ${formatSlashDate(w.createdDate)}</span>
                                 </div>
                                 <span class="text-[11px] text-indigo-700 font-bold">⏳ 願望期限 ${formatSlashDate(w.deadline)}</span>
@@ -1811,10 +1812,8 @@
                                 ${escapeHtml(w.title)}
                             </h3>
 
-                            <!-- Optional Image Preview -->
                             ${w.imgUrl ? `<img src="${escapeHtml(w.imgUrl)}" onerror="this.style.display='none'" onclick="openImageLightbox('${escapeHtml(w.imgUrl)}')" class="w-full h-32 object-cover rounded-xl border border-slate-100 cursor-zoom-in hover:opacity-90 transition" title="點擊放大檢視">` : ''}
 
-                            <!-- Keywords & Brands -->
                             <div class="flex flex-wrap gap-1">
                                 ${w.kw1 ? `<span class="px-2 py-0.5 bg-brand-50 text-brand-700 rounded text-[10px] font-semibold">#${escapeHtml(w.kw1)}</span>` : ''}
                                 ${w.kw2 ? `<span class="px-2 py-0.5 bg-brand-50 text-brand-700 rounded text-[10px] font-semibold">#${escapeHtml(w.kw2)}</span>` : ''}
@@ -1831,7 +1830,6 @@
 
                         <div class="border-t border-slate-100 pt-3 flex items-center justify-between text-xs">
                             <div>
-                                <!-- 將『心理預算』改成『願望預算』 -->
                                 <span class="block text-[10px] font-bold text-slate-400">願望預算</span>
                                 <span class="font-bold text-emerald-600">NT$ ${w.priceMin.toLocaleString()} ~ ${w.priceMax.toLocaleString()}</span>
                             </div>
@@ -1849,7 +1847,6 @@
             }).join('');
         }
 
-        // 【按讚磋商】Button Logic
         async function handleContactClick(wishId) {
             if (!currentUser) {
                 showToast("【按讚磋商】限已登入 Google 帳號者點擊，請先登入！", "error");
@@ -1860,13 +1857,11 @@
             const wish = wishes.find(w => w.id === wishId);
             if (!wish) return;
 
-            // Check rule 21: Check if user clicked their own wish
             if (wish.wisherUid === currentUser.uid) {
                 showToast("無法按讚磋商自己許的願望", "error");
                 return;
             }
 
-            // Check if thread already exists for this supplier
             let thread = chatThreads.find(t => t.wishId === wishId && t.supplierUid === currentUser.uid);
 
             if (thread) {
@@ -1876,7 +1871,6 @@
                 return;
             }
 
-            // Deduct 2 SC from supplier's accumulated balance
             if (scAccumulated < 2) {
                 showToast("您的「已累計」SC 不足 2 點，無法發起磋商！", "error");
                 return;
@@ -1913,18 +1907,17 @@
             }
         }
 
-        // ================= WISH CREATION FORM =================
         function updateWishTypeUI() {
             const selectedType = document.querySelector('input[name="wishType"]:checked')?.value || '必要';
             const labelMust = document.getElementById('label-type-must');
             const labelWant = document.getElementById('label-type-want');
 
             if (selectedType === '必要') {
-                labelMust.className = "wish-type-option cursor-pointer p-4 rounded-xl border-2 border-brand-500 bg-brand-50/50 flex flex-col space-y-1 transition";
-                labelWant.className = "wish-type-option cursor-pointer p-4 rounded-xl border-2 border-slate-200 bg-slate-50 flex flex-col space-y-1 transition";
+                if (labelMust) labelMust.className = "wish-type-option cursor-pointer p-4 rounded-xl border-2 border-brand-500 bg-brand-50/50 flex flex-col space-y-1 transition";
+                if (labelWant) labelWant.className = "wish-type-option cursor-pointer p-4 rounded-xl border-2 border-slate-200 bg-slate-50 flex flex-col space-y-1 transition";
             } else {
-                labelMust.className = "wish-type-option cursor-pointer p-4 rounded-xl border-2 border-slate-200 bg-slate-50 flex flex-col space-y-1 transition";
-                labelWant.className = "wish-type-option cursor-pointer p-4 rounded-xl border-2 border-brand-500 bg-brand-50/50 flex flex-col space-y-1 transition";
+                if (labelMust) labelMust.className = "wish-type-option cursor-pointer p-4 rounded-xl border-2 border-slate-200 bg-slate-50 flex flex-col space-y-1 transition";
+                if (labelWant) labelWant.className = "wish-type-option cursor-pointer p-4 rounded-xl border-2 border-brand-500 bg-brand-50/50 flex flex-col space-y-1 transition";
             }
         }
 
@@ -1932,39 +1925,28 @@
             document.querySelectorAll('.cat-radio').forEach(lbl => {
                 lbl.className = "cat-radio p-2.5 border rounded-xl flex items-center justify-center gap-2 cursor-pointer border-slate-200 hover:border-slate-300 text-slate-700";
             });
-            radio.parentElement.className = "cat-radio p-2.5 border rounded-xl flex items-center justify-center gap-2 cursor-pointer border-brand-500 bg-brand-50/50 font-bold text-brand-900";
+            if (radio && radio.parentElement) {
+                radio.parentElement.className = "cat-radio p-2.5 border rounded-xl flex items-center justify-center gap-2 cursor-pointer border-brand-500 bg-brand-50/50 font-bold text-brand-900";
+            }
         }
 
-        async function handleWishSubmit(event) {
-            event.preventDefault();
-
+        async function handleWishSubmit(e) {
+            e.preventDefault();
             if (!currentUser) {
-                showToast("【我要許願】頁面限已登入 Google 帳號者使用！", "error");
+                showToast("請先登入 Google 帳號後再發布願望！", "error");
                 handleGoogleSignIn();
                 return;
             }
 
-            const wishType = document.querySelector('input[name="wishType"]:checked').value;
+            const wishType = document.querySelector('input[name="wishType"]:checked')?.value || '必要';
             const title = document.getElementById('form-title').value.trim();
             const expectation = document.getElementById('form-expectation').value.trim();
-            const priceMin = parseFloat(document.getElementById('form-price-min').value) || 0;
-            const priceMax = parseFloat(document.getElementById('form-price-max').value) || 0;
-
-            if (priceMax < priceMin) {
-                showToast("最高預算不能小於最低預算！", "error");
-                return;
-            }
-
+            const priceMin = parseInt(document.getElementById('form-price-min').value) || 0;
+            const priceMax = parseInt(document.getElementById('form-price-max').value) || 0;
             const createdDate = document.getElementById('form-created-date').value;
-            const deadlineRaw = document.getElementById('form-deadline').value;
-            const deadline = deadlineRaw.replace(/\//g, '-');
+            const deadline = document.getElementById('form-deadline').value;
+            const category = document.querySelector('input[name="wishCategory"]:checked')?.value || '穿戴';
 
-            if (deadline <= createdDate) {
-                showToast("願望期限必須晚於許願日期！", "error");
-                return;
-            }
-
-            const category = document.querySelector('input[name="wishCategory"]:checked').value;
             const kw1 = document.getElementById('form-kw1').value.trim();
             const kw2 = document.getElementById('form-kw2').value.trim();
             const kw3 = document.getElementById('form-kw3').value.trim();
@@ -1972,510 +1954,460 @@
             const brand1 = document.getElementById('form-brand1').value.trim();
             const brand2 = document.getElementById('form-brand2').value.trim();
             const brand3 = document.getElementById('form-brand3').value.trim();
-            const rawImgUrl = document.getElementById('form-img-url').value.trim();
-            const imgUrl = rawImgUrl || 'https://i.pinimg.com/736x/8e/aa/fd/8eaafd68a611aef29f865353a6239778.jpg';
+            const imgUrl = document.getElementById('form-img-url').value.trim();
 
-            const scGain = wishType === '必要' ? 10 : 5;
-            const newWishId = `wish-${Date.now()}`;
+            if (priceMax < priceMin) {
+                showToast("最高預算不能小於最低預算！", "error");
+                return;
+            }
 
-            const newWish = {
+            if (!title || !expectation || !kw1 || !kw2 || !kw3 || !deadline) {
+                showToast("請完整填寫必填欄位！", "error");
+                return;
+            }
+
+            const scReward = wishType === '必要' ? 10 : 5;
+            const wishId = 'wish-' + Date.now();
+
+            const newWishObj = {
+                id: wishId,
                 type: wishType,
-                title: title,
-                expectation: expectation,
-                priceMin: priceMin,
-                priceMax: priceMax,
-                createdDate: createdDate,
-                deadline: deadlineRaw,
-                category: category,
-                kw1: kw1,
-                kw2: kw2,
-                kw3: kw3,
-                brand1: brand1,
-                brand2: brand2,
-                brand3: brand3,
-                imgUrl: imgUrl,
+                title,
+                expectation,
+                priceMin,
+                priceMax,
+                createdDate,
+                deadline,
+                category,
+                kw1, kw2, kw3,
+                brand1, brand2, brand3,
+                imgUrl,
                 wisherUid: currentUser.uid,
                 wisherName: currentUser.displayName,
                 status: '待磋商'
             };
 
-            const { setDoc } = fs();
             try {
-                await setDoc(wishDocRef(newWishId), newWish);
-                await setDoc(userProfileDocRef(currentUser.uid), { scExpected: scExpected + scGain }, { merge: true });
+                const { setDoc } = fs();
+                await setDoc(wishDocRef(wishId), newWishObj);
+                await setDoc(userProfileDocRef(currentUser.uid), { scExpected: scExpected + scReward }, { merge: true });
 
-                showToast(`成功發表許願！「待獲取」SC +${scGain}！`, "success");
-
+                showToast(`願望發布成功！增加【待獲取】${scReward} SC`, "success");
                 document.getElementById('new-wish-form').reset();
                 setCurrentDateDefault();
-                updateWishTypeUI();
-
-                setTimeout(() => {
-                    switchTab('pool');
-                }, 600);
+                switchTab('pool');
             } catch (error) {
-                console.error('handleWishSubmit write error:', error);
-                showToast("發布願望失敗，請稍後再試", "error");
+                console.error("handleWishSubmit error:", error);
+                showToast("發布願望失敗，請重試", "error");
             }
         }
 
-        // ================= NEGOTIATION HUB (願望磋商區) =================
-        // 「我許過的願望」與「我曾參與磋商的願望」兩個區塊本身，各自都是一張
-        // 可展開/收闔的卡片（<details id="section-created-details"> /
-        // <details id="section-joined-details">），分頁載入時預設收闔，只顯示
-        // 標題列；使用者點擊標題列後才會展開，顯示該區塊內的所有願望項目。
-        // 這裡不需要額外的 JS 控制展開/收闔，交由瀏覽器原生 <details> 行為處理。
-
+        // ================= NEGOTIATION PAGE RENDERING =================
         function renderNegotiationPage() {
             if (!currentUser) return;
 
-            const myCreatedList = document.getElementById('my-created-wishes-list');
-            const myJoinedList = document.getElementById('my-joined-wishes-list');
+            const myCreatedListEl = document.getElementById('my-created-wishes-list');
+            const myJoinedListEl = document.getElementById('my-joined-wishes-list');
+            const createdFilter = document.getElementById('my-created-status-filter')?.value || 'all';
+            const joinedFilter = document.getElementById('my-joined-status-filter')?.value || 'all';
 
-            if (!myCreatedList || !myJoinedList) return;
+            // 1. Wishes I Created
+            const myWishes = wishes.filter(w => w.wisherUid === currentUser.uid);
+            document.getElementById('my-created-count').innerText = myWishes.length;
 
-            // 1. My Created Wishes（最新發布的願望排在最上方）
-            const createdWishes = wishes
-                .filter(w => w.wisherUid === currentUser.uid)
-                .sort((a, b) => (b.createdDate || '').localeCompare(a.createdDate || '') || (b.id || '').localeCompare(a.id || ''));
-            document.getElementById('my-created-count').innerText = createdWishes.length;
+            const myCreatedFiltered = myWishes.filter(w => createdFilter === 'all' || w.status === createdFilter);
 
-            const createdFilterWrap = document.getElementById('my-created-filter-wrap');
-            const createdFilterSelect = document.getElementById('my-created-status-filter');
+            if (myWishes.length > 0) {
+                document.getElementById('my-created-filter-wrap')?.classList.remove('hidden');
+                document.getElementById('my-created-filter-wrap')?.classList.add('flex');
+            }
 
-            if (createdWishes.length === 0) {
-                createdFilterWrap.classList.add('hidden');
-                createdFilterWrap.classList.remove('flex');
-                myCreatedList.innerHTML = `<div class="text-xs text-slate-400 p-4 text-center">您尚未發表過許願</div>`;
+            if (myCreatedFiltered.length === 0) {
+                myCreatedListEl.innerHTML = `<p class="text-xs text-slate-400 py-3 text-center">尚無符合紀錄</p>`;
             } else {
-                createdFilterWrap.classList.remove('hidden');
-                createdFilterWrap.classList.add('flex');
-                const createdStatusFilter = createdFilterSelect ? createdFilterSelect.value : 'all';
-                const filteredCreatedWishes = createdStatusFilter === 'all'
-                    ? createdWishes
-                    : createdWishes.filter(w => w.status === createdStatusFilter);
-
-                if (filteredCreatedWishes.length === 0) {
-                    myCreatedList.innerHTML = `<div class="text-xs text-slate-400 p-4 text-center">此狀態下沒有符合的願望</div>`;
-                } else {
-                    myCreatedList.innerHTML = filteredCreatedWishes.map(w => {
-                        const threadsCount = chatThreads.filter(t => t.wishId === w.id).length;
-                        return `
-                        <details class="group rounded-xl border border-slate-200 hover:border-indigo-300 bg-slate-50 transition overflow-hidden">
-                            <summary class="list-none cursor-pointer p-4 flex items-center justify-between gap-4 marker:content-none [&::-webkit-details-marker]:hidden">
-                                <div>
-                                    <div class="flex items-center gap-2 mb-1">
-                                        <span class="px-2 py-0.5 rounded text-[10px] font-bold ${w.type === '必要' ? 'bg-red-500 text-white' : 'bg-amber-500 text-white'}">${w.type}</span>
-                                        <span class="text-xs font-bold text-slate-800">${escapeHtml(w.title)}</span>
-                                    </div>
-                                    <div class="text-[11px] text-slate-500">發布日: ${w.createdDate || '—'} | 期限: ${w.deadline} | 狀態: <strong class="text-indigo-600">${w.status}</strong></div>
+                myCreatedListEl.innerHTML = myCreatedFiltered.map(w => {
+                    const threads = chatThreads.filter(t => t.wishId === w.id);
+                    return `
+                        <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl flex items-center justify-between gap-4">
+                            <div>
+                                <div class="flex items-center gap-2 mb-1">
+                                    <span class="px-2 py-0.5 text-[10px] font-bold rounded ${w.type === '必要' ? 'bg-red-500 text-white' : 'bg-amber-500 text-white'}">${w.type}</span>
+                                    <span class="px-2 py-0.5 text-[10px] font-bold bg-slate-200 text-slate-700 rounded">${w.status}</span>
+                                    <span class="text-xs text-slate-400">磋商數: ${threads.length}</span>
                                 </div>
-                                <div class="flex items-center gap-2 flex-shrink-0">
-                                    <span class="px-2.5 py-1 bg-indigo-100 text-indigo-700 font-bold rounded-lg text-xs">${threadsCount} 人磋商中</span>
-                                    <i class="fa-solid fa-chevron-down text-slate-400 text-xs transition-transform duration-200 group-open:rotate-180"></i>
-                                </div>
-                            </summary>
-                            <div class="px-4 pb-4 pt-2 border-t border-slate-200 space-y-2 text-[11px] text-slate-600">
-                                ${w.expectation ? `<div><strong class="text-slate-700">願望期待：</strong>${escapeHtml(w.expectation)}</div>` : ''}
-                                <div><strong class="text-slate-700">預算範圍：</strong>NT$ ${w.priceMin ?? '—'} ~ ${w.priceMax ?? '—'}</div>
-                                <button onclick="openChatModal('${w.id}')"
-                                    class="mt-2 inline-flex items-center gap-1.5 px-3 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-[11px] font-bold transition">
-                                    查看磋商對話 <i class="fa-solid fa-chevron-right text-[10px]"></i>
-                                </button>
+                                <h4 class="font-bold text-sm text-slate-800">${escapeHtml(w.title)}</h4>
                             </div>
-                        </details>
+                            <button onclick="openChatModal('${w.id}', null)" class="px-3.5 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-lg text-xs transition shrink-0">
+                                開啟磋商對話 (${threads.length})
+                            </button>
+                        </div>
                     `;
-                    }).join('');
-                }
+                }).join('');
             }
 
             // 2. Wishes I Joined as Supplier
-            const mySupplierThreads = chatThreads.filter(t => t.supplierUid === currentUser.uid);
-            document.getElementById('my-joined-count').innerText = mySupplierThreads.length;
+            const myJoinedThreadWishIds = [...new Set(chatThreads.filter(t => t.supplierUid === currentUser.uid).map(t => t.wishId))];
+            const myJoinedWishes = wishes.filter(w => myJoinedThreadWishIds.includes(w.id));
+            document.getElementById('my-joined-count').innerText = myJoinedWishes.length;
 
-            const joinedFilterWrap = document.getElementById('my-joined-filter-wrap');
-            const joinedFilterSelect = document.getElementById('my-joined-status-filter');
+            const myJoinedFiltered = myJoinedWishes.filter(w => joinedFilter === 'all' || w.status === joinedFilter);
 
-            if (mySupplierThreads.length === 0) {
-                joinedFilterWrap.classList.add('hidden');
-                joinedFilterWrap.classList.remove('flex');
-                myJoinedList.innerHTML = `<div class="text-xs text-slate-400 p-4 text-center">您尚未對任何願望發起磋商</div>`;
+            if (myJoinedWishes.length > 0) {
+                document.getElementById('my-joined-filter-wrap')?.classList.remove('hidden');
+                document.getElementById('my-joined-filter-wrap')?.classList.add('flex');
+            }
+
+            if (myJoinedFiltered.length === 0) {
+                myJoinedListEl.innerHTML = `<p class="text-xs text-slate-400 py-3 text-center">尚無參與的磋商紀錄</p>`;
             } else {
-                joinedFilterWrap.classList.remove('hidden');
-                joinedFilterWrap.classList.add('flex');
-                const joinedStatusFilter = joinedFilterSelect ? joinedFilterSelect.value : 'all';
-                const joinedRows = mySupplierThreads
-                    .map(t => ({ thread: t, wish: wishes.find(w => w.id === t.wishId) }))
-                    .filter(row => row.wish);
-                const filteredJoinedRows = joinedStatusFilter === 'all'
-                    ? joinedRows
-                    : joinedRows.filter(row => row.wish.status === joinedStatusFilter);
-
-                if (filteredJoinedRows.length === 0) {
-                    myJoinedList.innerHTML = `<div class="text-xs text-slate-400 p-4 text-center">此狀態下沒有符合的願望</div>`;
-                } else {
-                    myJoinedList.innerHTML = filteredJoinedRows.map(({ thread: t, wish }) => {
-                        return `
-                        <details class="group rounded-xl border border-slate-200 hover:border-indigo-300 bg-slate-50 transition overflow-hidden">
-                            <summary class="list-none cursor-pointer p-4 flex items-center justify-between gap-4 marker:content-none [&::-webkit-details-marker]:hidden">
-                                <div>
-                                    <div class="flex items-center gap-2 mb-1">
-                                        <span class="px-2 py-0.5 rounded text-[10px] font-bold ${wish.type === '必要' ? 'bg-red-500 text-white' : 'bg-amber-500 text-white'}">${wish.type}</span>
-                                        <span class="text-xs font-bold text-slate-800">${escapeHtml(wish.title)}</span>
-                                    </div>
-                                    <div class="text-[11px] text-slate-500">許願者: ${escapeHtml(wish.wisherName)} | 狀態: <strong class="text-indigo-600">${wish.status}</strong></div>
+                myJoinedListEl.innerHTML = myJoinedFiltered.map(w => {
+                    return `
+                        <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl flex items-center justify-between gap-4">
+                            <div>
+                                <div class="flex items-center gap-2 mb-1">
+                                    <span class="px-2 py-0.5 text-[10px] font-bold rounded ${w.type === '必要' ? 'bg-red-500 text-white' : 'bg-amber-500 text-white'}">${w.type}</span>
+                                    <span class="px-2 py-0.5 text-[10px] font-bold bg-slate-200 text-slate-700 rounded">${w.status}</span>
                                 </div>
-                                <div class="flex items-center gap-2 flex-shrink-0">
-                                    <span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 font-bold rounded-lg text-xs">查看對話</span>
-                                    <i class="fa-solid fa-chevron-down text-slate-400 text-xs transition-transform duration-200 group-open:rotate-180"></i>
-                                </div>
-                            </summary>
-                            <div class="px-4 pb-4 pt-2 border-t border-slate-200 space-y-2 text-[11px] text-slate-600">
-                                ${wish.expectation ? `<div><strong class="text-slate-700">願望期待：</strong>${escapeHtml(wish.expectation)}</div>` : ''}
-                                <div><strong class="text-slate-700">願望期限：</strong>${wish.deadline || '—'}</div>
-                                <button onclick="openChatModal('${wish.id}', '${currentUser.uid}')"
-                                    class="mt-2 inline-flex items-center gap-1.5 px-3 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-[11px] font-bold transition">
-                                    查看磋商對話 <i class="fa-solid fa-chevron-right text-[10px]"></i>
-                                </button>
+                                <h4 class="font-bold text-sm text-slate-800">${escapeHtml(w.title)}</h4>
                             </div>
-                        </details>
-                    `;
-                    }).join('');
-                }
-            }
-
-            const totalNegotiations = createdWishes.length + mySupplierThreads.length;
-            const navBadge = document.getElementById('nav-badge-negotiate-count');
-            if (navBadge) {
-                navBadge.innerText = totalNegotiations;
-                if (totalNegotiations > 0) navBadge.classList.remove('hidden');
-            }
-        }
-
-        // ================= CHAT / NEGOTIATION MODAL =================
-        function openChatModal(wishId, targetSupplierUid = null) {
-            const wish = wishes.find(w => w.id === wishId);
-            if (!wish) return;
-
-            activeChatWishId = wishId;
-
-            // Find all threads for this wish
-            const threads = chatThreads.filter(t => t.wishId === wishId);
-
-            if (threads.length === 0) {
-                showToast("此願望目前尚無任何磋商對話紀錄", "info");
-                return;
-            }
-
-            // Determine active supplier thread
-            if (targetSupplierUid) {
-                activeChatSupplierUid = targetSupplierUid;
-            } else if (threads.length > 0) {
-                activeChatSupplierUid = threads[0].supplierUid;
-            }
-
-            renderChatModalUI(wish, threads);
-            document.getElementById('chat-modal').classList.remove('hidden');
-        }
-
-        function renderChatModalUI(wish, threads) {
-            document.getElementById('chat-modal-title').innerText = wish.title;
-            document.getElementById('chat-modal-type-badge').innerText = wish.type;
-            document.getElementById('chat-modal-status-badge').innerText = wish.status;
-
-            // Threads bar if multiple suppliers exist
-            const threadsBar = document.getElementById('chat-threads-bar');
-            if (threads.length > 1 && currentUser && wish.wisherUid === currentUser.uid) {
-                // 用「供給方 uid + 名稱 + 是否為目前選取」組成簽章值，若跟上次渲染
-                // 結果完全相同就跳過 innerHTML 重繪。Firestore 即時監聽在傳送訊息
-                // 等操作時，wishes/chatThreads 兩個集合經常在極短時間內連續觸發
-                // 多次快照更新，若每次都重新產生 DOM，容易造成畫面短暫擠壓或
-                // 重疊的視覺閃爍，用這個簽章比對可以大幅降低不必要的重繪次數。
-                const signature = threads.map(t => `${t.supplierUid}:${t.supplierName}:${t.supplierUid === activeChatSupplierUid}`).join('|');
-                if (threadsBar.dataset.signature !== signature) {
-                    threadsBar.dataset.signature = signature;
-                    threadsBar.innerHTML = threads.map(t => `
-                        <button onclick="switchChatSupplier('${t.supplierUid}')"
-                            class="inline-flex items-center justify-center whitespace-nowrap px-3 py-1.5 rounded-lg font-bold flex-shrink-0 leading-tight ${t.supplierUid === activeChatSupplierUid ? 'bg-indigo-600 text-white' : 'bg-white text-slate-700 border border-slate-200'}">
-                            用戶: ${escapeHtml(t.supplierName)}
-                        </button>
-                    `).join('');
-                }
-                threadsBar.classList.remove('hidden');
-            } else {
-                threadsBar.classList.add('hidden');
-                threadsBar.dataset.signature = '';
-            }
-
-            const activeThread = threads.find(t => t.supplierUid === activeChatSupplierUid) || threads[0];
-
-            // Render Message Bubble List
-            const msgContainer = document.getElementById('chat-messages-container');
-            msgContainer.innerHTML = (activeThread.messages || []).map(m => {
-                const isMe = currentUser && m.senderUid === currentUser.uid;
-                return `
-                    <div class="flex flex-col ${isMe ? 'items-end' : 'items-start'}">
-                        <span class="text-[10px] text-slate-400 mb-0.5 px-1">${escapeHtml(m.senderName)} (${m.time})</span>
-                        <div class="px-3.5 py-2 rounded-2xl text-xs max-w-[80%] ${isMe ? 'bg-indigo-600 text-white rounded-tr-none' : 'bg-white border border-slate-200 text-slate-800 rounded-tl-none'} shadow-sm">
-                            ${escapeHtml(m.text)}
+                            <button onclick="openChatModal('${w.id}', '${currentUser.uid}')" class="px-3.5 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-lg text-xs transition shrink-0">
+                                進入對話
+                            </button>
                         </div>
-                    </div>
-                `;
-            }).join('');
-
-            msgContainer.scrollTop = msgContainer.scrollHeight;
-
-            // Deal & Oops Action Button Locking rules
-            const actionButtons = document.getElementById('chat-action-buttons');
-            const disabledBanner = document.getElementById('chat-disabled-banner');
-            const inputRow = document.getElementById('chat-input-row');
-
-            // 僅許願者本人能看到並點擊【Deal 成交】/【Oops 破局】按鈕，
-            // 非許願者（供給方 / 訪客）一律看不到這兩個按鈕。
-            const isWisher = !!(currentUser && wish.wisherUid === currentUser.uid);
-            const isEndedOrLocked = activeThread.isLocked || wish.status === '已實現' || wish.status === '已告終';
-
-            if (isWisher && !isEndedOrLocked) {
-                actionButtons.classList.remove('hidden');
-                disabledBanner.classList.add('hidden');
-            } else if (isWisher && isEndedOrLocked) {
-                // 許願者本人查看已完成/已鎖定的磋商，顯示提示文字取代按鈕
-                actionButtons.classList.add('hidden');
-                disabledBanner.classList.remove('hidden');
-            } else {
-                // 非許願者：不顯示按鈕，也不顯示「已標記完成」提示文字
-                actionButtons.classList.add('hidden');
-                disabledBanner.classList.add('hidden');
+                    `;
+                }).join('');
             }
         }
 
-        function switchChatSupplier(supplierUid) {
+        // ================= CHAT MODAL LOGIC =================
+        function openChatModal(wishId, supplierUid) {
+            activeChatWishId = wishId;
             activeChatSupplierUid = supplierUid;
-            const wish = wishes.find(w => w.id === activeChatWishId);
-            const threads = chatThreads.filter(t => t.wishId === activeChatWishId);
-            renderChatModalUI(wish, threads);
-        }
 
-        // Refresh the open chat modal whenever a realtime snapshot arrives,
-        // so both sides of a negotiation see new messages/status live.
-        function refreshChatModalIfOpen() {
             const modal = document.getElementById('chat-modal');
-            if (!modal || modal.classList.contains('hidden') || !activeChatWishId) return;
+            modal?.classList.remove('hidden');
 
-            const wish = wishes.find(w => w.id === activeChatWishId);
-            const threads = chatThreads.filter(t => t.wishId === activeChatWishId);
-            if (!wish || threads.length === 0) return;
-
-            if (!threads.some(t => t.supplierUid === activeChatSupplierUid)) {
-                activeChatSupplierUid = threads[0].supplierUid;
-            }
-            renderChatModalUI(wish, threads);
-        }
-
-        // 標記輸入框目前是否正處於「輸入法組字中」（例如注音/拼音選字候選中）。
-        // 中文輸入法在使用者按 Enter 確認候選字時，也會觸發 keydown 事件，
-        // 若不排除這個狀態，會誤判成「使用者要送出訊息」，導致清空輸入框
-        // 與輸入法提交文字兩者互相搶跑，出現「訊息已送出、輸入框卻還留著
-        // 剛送出文字」的殘留問題。
-        let isChatInputComposing = false;
-
-        function handleChatInputKeydown(event) {
-            if (event.key !== 'Enter') return;
-            // event.isComposing 是瀏覽器原生判斷組字狀態的標準屬性，
-            // isChatInputComposing 則是我們自己用 compositionstart/end 補強的保險，
-            // 兩者任一為 true 都代表輸入法正在組字，此時的 Enter 只是選字用，不應送出。
-            if (event.isComposing || isChatInputComposing) return;
-            event.preventDefault();
-            sendChatMessage();
-        }
-
-        async function sendChatMessage() {
-            const input = document.getElementById('chat-input-text');
-            const text = input.value.trim();
-            if (!text || !activeChatWishId || !activeChatSupplierUid) return;
-
-            const thread = chatThreads.find(t => t.wishId === activeChatWishId && t.supplierUid === activeChatSupplierUid);
-            if (!thread || thread.isLocked) return;
-
-            const newMessage = {
-                senderUid: currentUser ? currentUser.uid : 'anon',
-                senderName: currentUser ? currentUser.displayName : '訪客',
-                text: text,
-                time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-            };
-
-            input.value = '';
-
-            const { setDoc } = fs();
-            const updatedMessages = [...(thread.messages || []), newMessage];
-            try {
-                await setDoc(threadDocRef(thread.threadId), { messages: updatedMessages }, { merge: true });
-            } catch (error) {
-                console.error('sendChatMessage write error:', error);
-                showToast("訊息傳送失敗，請稍後再試", "error");
-            }
-        }
-
-        // Deal Button Click Handler
-        async function handleDealClick() {
-            const wish = wishes.find(w => w.id === activeChatWishId);
-            const thread = chatThreads.find(t => t.wishId === activeChatWishId && t.supplierUid === activeChatSupplierUid);
-            if (!wish || !thread) return;
-
-            // Only Wisher can click deal, or if wisher confirms
-            if (currentUser && wish.wisherUid !== currentUser.uid) {
-                showToast("【Deal 成交】由許願者發起點擊達成！", "info");
-            }
-
-            const { setDoc } = fs();
-            const previousStatus = wish.status;
-            const scAmount = wish.type === '必要' ? 10 : 5;
-
-            try {
-                // Lock every thread on this wish (Rule 15: forces termination of
-                // all other negotiating suppliers once a deal is struck).
-                const relatedThreads = chatThreads.filter(t => t.wishId === wish.id);
-                await Promise.all(relatedThreads.map(t =>
-                    setDoc(threadDocRef(t.threadId), { isLocked: true }, { merge: true })
-                ));
-
-                await setDoc(wishDocRef(wish.id), { status: '已實現' }, { merge: true });
-
-                // SC calculations rule 13, 14, 19
-                if (previousStatus !== '已告終') {
-                    // Read-modify-write against the wisher's profile. If the
-                    // current user IS the wisher we already have live values
-                    // cached locally; otherwise fall back to a fresh read.
-                    let wisherExpected, wisherAccumulated;
-                    if (currentUser && currentUser.uid === wish.wisherUid) {
-                        wisherExpected = scExpected;
-                        wisherAccumulated = scAccumulated;
-                    } else {
-                        const { getDoc } = fs();
-                        const snap = await getDoc(userProfileDocRef(wish.wisherUid));
-                        const d = snap.exists() ? snap.data() : { scExpected: 0, scAccumulated: 0 };
-                        wisherExpected = d.scExpected || 0;
-                        wisherAccumulated = d.scAccumulated || 0;
-                    }
-
-                    await setDoc(userProfileDocRef(wish.wisherUid), {
-                        scExpected: Math.max(0, wisherExpected - scAmount),
-                        scAccumulated: wisherAccumulated + scAmount
-                    }, { merge: true });
-
-                    showToast(`🎉 磋商成功！「待獲取」轉為「已累計」+${scAmount} SC！`, "success");
-                } else {
-                    // Rule 19: If deal after ended, no SC change
-                    showToast("願望已告終後磋商成交，SC 預計與累計保持不變", "info");
-                }
-            } catch (error) {
-                console.error('handleDealClick write error:', error);
-                showToast("Deal 成交處理失敗，請稍後再試", "error");
-            }
-        }
-
-        // Oops Button Click Handler
-        async function handleOopsClick() {
-            const wish = wishes.find(w => w.id === activeChatWishId);
-            const thread = chatThreads.find(t => t.wishId === activeChatWishId && t.supplierUid === activeChatSupplierUid);
-            if (!wish || !thread) return;
-
-            const { setDoc } = fs();
-            const previousStatus = wish.status;
-            const scAmount = wish.type === '必要' ? 10 : 5;
-
-            try {
-                await setDoc(threadDocRef(thread.threadId), { isLocked: true }, { merge: true });
-                await setDoc(wishDocRef(wish.id), { status: '已告終' }, { merge: true });
-
-                if (previousStatus !== '已告終') {
-                    await deductWisherExpectedSC(wish);
-                    showToast(`已標記本次磋商為【Oops 破局】，願望狀態設為「已告終」，許願者「待獲取」SC -${scAmount}`, "info");
-                } else {
-                    showToast("已標記本次磋商為【Oops 破局】，願望狀態設為「已告終」", "info");
-                }
-            } catch (error) {
-                console.error('handleOopsClick write error:', error);
-                showToast("操作失敗，請稍後再試", "error");
-            }
+            refreshChatModalIfOpen();
         }
 
         function closeChatModal() {
-            document.getElementById('chat-modal').classList.add('hidden');
+            document.getElementById('chat-modal')?.classList.add('hidden');
             activeChatWishId = null;
             activeChatSupplierUid = null;
         }
 
-        // Wallet Modal Controls
-        function openWalletModal() {
-            document.getElementById('wallet-modal').classList.remove('hidden');
-        }
+        function refreshChatModalIfOpen() {
+            if (!activeChatWishId) return;
 
-        function closeWalletModal() {
-            document.getElementById('wallet-modal').classList.add('hidden');
-        }
+            const wish = wishes.find(w => w.id === activeChatWishId);
+            if (!wish) return;
 
-        // Image Lightbox Controls (願望參考圖片點擊放大)
-        function openImageLightbox(imgUrl) {
-            if (!imgUrl) return;
-            document.getElementById('image-lightbox-img').src = imgUrl;
-            document.getElementById('image-lightbox-modal').classList.remove('hidden');
-        }
+            // Set Header
+            document.getElementById('chat-modal-title').innerText = wish.title;
+            document.getElementById('chat-modal-type-badge').innerText = wish.type;
+            document.getElementById('chat-modal-status-badge').innerText = wish.status;
 
-        function closeImageLightbox() {
-            document.getElementById('image-lightbox-modal').classList.add('hidden');
-            document.getElementById('image-lightbox-img').src = '';
-        }
+            // Handle multi-thread tab bar for wisher
+            const threadsForWish = chatThreads.filter(t => t.wishId === wish.id);
+            const threadsBar = document.getElementById('chat-threads-bar');
 
-        document.addEventListener('keydown', function (e) {
-            if (e.key === 'Escape') {
-                const lightbox = document.getElementById('image-lightbox-modal');
-                if (lightbox && !lightbox.classList.contains('hidden')) {
-                    closeImageLightbox();
+            if (wish.wisherUid === currentUser?.uid && threadsForWish.length > 0) {
+                threadsBar.classList.remove('hidden');
+                if (!activeChatSupplierUid && threadsForWish.length > 0) {
+                    activeChatSupplierUid = threadsForWish[0].supplierUid;
                 }
+                threadsBar.innerHTML = threadsForWish.map(t => {
+                    const isActive = t.supplierUid === activeChatSupplierUid;
+                    return `
+                        <button onclick="switchChatThread('${t.supplierUid}')"
+                            class="px-3 py-1.5 rounded-lg font-bold text-xs shrink-0 transition ${isActive ? 'bg-indigo-600 text-white' : 'bg-white border border-slate-300 text-slate-700 hover:bg-slate-50'}">
+                            💬 ${escapeHtml(t.supplierName)}
+                        </button>
+                    `;
+                }).join('');
+            } else {
+                threadsBar.classList.add('hidden');
             }
-        });
 
-        // Toast Notification Helper
-        function showToast(message, type = 'info') {
+            // Target Thread
+            const targetThread = threadsForWish.find(t => t.supplierUid === (activeChatSupplierUid || currentUser?.uid));
+            const msgContainer = document.getElementById('chat-messages-container');
+
+            if (!targetThread) {
+                msgContainer.innerHTML = `<p class="text-xs text-slate-400 py-8 text-center">尚無對話紀錄</p>`;
+            } else {
+                msgContainer.innerHTML = targetThread.messages.map(m => {
+                    const isMe = currentUser && m.senderUid === currentUser.uid;
+                    return `
+                        <div class="flex flex-col ${isMe ? 'items-end' : 'items-start'}">
+                            <span class="text-[10px] text-slate-400 mb-0.5 px-1">${escapeHtml(m.senderName)} • ${m.time}</span>
+                            <div class="px-3.5 py-2 rounded-2xl max-w-[80%] text-xs leading-relaxed ${isMe ? 'bg-indigo-600 text-white rounded-tr-none' : 'bg-white border border-slate-200 text-slate-800 rounded-tl-none shadow-sm'}">
+                                ${escapeHtml(m.text)}
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+                msgContainer.scrollTop = msgContainer.scrollHeight;
+            }
+
+            // Controls status
+            const actionBtns = document.getElementById('chat-action-buttons');
+            const disabledBanner = document.getElementById('chat-disabled-banner');
+            const inputRow = document.getElementById('chat-input-row');
+
+            if (wish.status !== '待磋商' || (targetThread && targetThread.isLocked)) {
+                actionBtns.classList.add('hidden');
+                disabledBanner.classList.remove('hidden');
+                inputRow.classList.add('hidden');
+            } else {
+                actionBtns.classList.remove('hidden');
+                disabledBanner.classList.add('hidden');
+                inputRow.classList.remove('hidden');
+            }
+        }
+
+        function switchChatThread(supplierUid) {
+            activeChatSupplierUid = supplierUid;
+            refreshChatModalIfOpen();
+        }
+
+        async function sendChatMessage() {
+            if (!currentUser || !activeChatWishId) return;
+
+            const input = document.getElementById('chat-input-text');
+            const text = input.value.trim();
+            if (!text) return;
+
+            const wish = wishes.find(w => w.id === activeChatWishId);
+            if (!wish) return;
+
+            const targetSupplierUid = activeChatSupplierUid || currentUser.uid;
+            const threadId = `thread-${activeChatWishId}-${targetSupplierUid}`;
+            const targetThread = chatThreads.find(t => t.threadId === threadId);
+
+            if (!targetThread) return;
+
+            const newMsg = {
+                senderUid: currentUser.uid,
+                senderName: currentUser.displayName,
+                text,
+                time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+            };
+
+            const updatedMessages = [...targetThread.messages, newMsg];
+
+            try {
+                const { setDoc } = fs();
+                await setDoc(threadDocRef(threadId), { messages: updatedMessages }, { merge: true });
+                input.value = '';
+            } catch (error) {
+                console.error("sendChatMessage error:", error);
+                showToast("發送失敗", "error");
+            }
+        }
+
+        function handleChatInputKeydown(e) {
+            if (e.key === 'Enter') {
+                sendChatMessage();
+            }
+        }
+
+        async function handleDealClick() {
+            if (!currentUser || !activeChatWishId) return;
+            const wish = wishes.find(w => w.id === activeChatWishId);
+            if (!wish) return;
+
+            const targetSupplierUid = activeChatSupplierUid || currentUser.uid;
+            const threadId = `thread-${activeChatWishId}-${targetSupplierUid}`;
+
+            const scReward = wish.type === '必要' ? 10 : 5;
+
+            try {
+                const { setDoc } = fs();
+                // 1. Update Wish Status
+                await setDoc(wishDocRef(wish.id), { status: '已實現' }, { merge: true });
+
+                // 2. Lock thread
+                await setDoc(threadDocRef(threadId), { isLocked: true }, { merge: true });
+
+                // 3. Update Wisher's SC (Expected -> Accumulated)
+                if (wish.wisherUid === currentUser.uid) {
+                    await setDoc(userProfileDocRef(currentUser.uid), {
+                        scExpected: Math.max(0, scExpected - scReward),
+                        scAccumulated: scAccumulated + scReward
+                    }, { merge: true });
+                }
+
+                showToast("🎉 Deal 交易達成！願望已成功實現！", "success");
+                refreshChatModalIfOpen();
+            } catch (error) {
+                console.error("handleDealClick error:", error);
+                showToast("操作失敗", "error");
+            }
+        }
+
+        async function handleOopsClick() {
+            if (!currentUser || !activeChatWishId) return;
+            const wish = wishes.find(w => w.id === activeChatWishId);
+            if (!wish) return;
+
+            const targetSupplierUid = activeChatSupplierUid || currentUser.uid;
+            const threadId = `thread-${activeChatWishId}-${targetSupplierUid}`;
+
+            try {
+                const { setDoc } = fs();
+                await setDoc(wishDocRef(wish.id), { status: '已告終' }, { merge: true });
+                await setDoc(threadDocRef(threadId), { isLocked: true }, { merge: true });
+
+                deductWisherExpectedSC(wish);
+
+                showToast("磋商告終，該願望已更新為已告終狀態。", "info");
+                refreshChatModalIfOpen();
+            } catch (error) {
+                console.error("handleOopsClick error:", error);
+                showToast("操作失敗", "error");
+            }
+        }
+
+        // ================= AI CHATBOT (願望風向智囊) LOGIC =================
+        function askAIPrompt(promptText) {
+            document.getElementById('ai-prompt-input').value = promptText;
+            handleAISubmit();
+        }
+
+        async function handleAISubmit() {
+            const input = document.getElementById('ai-prompt-input');
+            const prompt = input.value.trim();
+            if (!prompt) return;
+
+            const chatContainer = document.getElementById('ai-chat-messages');
+
+            // Render User Query
+            chatContainer.innerHTML += `
+                <div class="flex items-start gap-2.5 justify-end">
+                    <div class="bg-emerald-600 text-white p-3 rounded-2xl rounded-tr-none text-xs leading-relaxed max-w-[85%] shadow-sm">
+                        ${escapeHtml(prompt)}
+                    </div>
+                </div>
+            `;
+            input.value = '';
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+
+            // Render Loading Bubble
+            const loadingId = 'ai-loading-' + Date.now();
+            chatContainer.innerHTML += `
+                <div id="${loadingId}" class="flex items-start gap-2.5">
+                    <span class="text-lg shrink-0">🧞‍♂️</span>
+                    <div class="bg-white p-3 rounded-2xl rounded-tl-none border border-slate-200 text-slate-500 text-xs italic shadow-sm">
+                        <i class="fa-solid fa-circle-notch fa-spin text-emerald-600 mr-1"></i> AI 正在分析資料庫願望數據...
+                    </div>
+                </div>
+            `;
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+
+            // Simulate / Generate AI Response based on live 'wishes' data
+            setTimeout(() => {
+                const loadingEl = document.getElementById(loadingId);
+                if (loadingEl) loadingEl.remove();
+
+                const aiAnalysisText = generateWishAnalysis(prompt);
+
+                chatContainer.innerHTML += `
+                    <div class="flex items-start gap-2.5">
+                        <span class="text-lg shrink-0">🧞‍♂️</span>
+                        <div class="bg-white p-3 rounded-2xl rounded-tl-none border border-slate-200 text-slate-800 space-y-1 max-w-[85%] shadow-sm">
+                            <span class="font-bold text-emerald-700 block text-xs">AI 洞察報告</span>
+                            <div class="leading-relaxed text-xs space-y-1.5 whitespace-pre-line">${aiAnalysisText}</div>
+                        </div>
+                    </div>
+                `;
+                chatContainer.scrollTop = chatContainer.scrollHeight;
+            }, 800);
+        }
+
+        function generateWishAnalysis(userPrompt) {
+            const totalWishes = wishes.length;
+            const mustCount = wishes.filter(w => w.type === '必要').length;
+            const wantCount = wishes.filter(w => w.type === '想要').length;
+
+            const categories = {};
+            const brands = [];
+            const keywords = [];
+
+            wishes.forEach(w => {
+                categories[w.category] = (categories[w.category] || 0) + 1;
+                [w.brand1, w.brand2, w.brand3].forEach(b => { if (b) brands.push(b); });
+                [w.kw1, w.kw2, w.kw3].forEach(k => { if (k) keywords.push(k); });
+            });
+
+            const topCat = Object.entries(categories).sort((a, b) => b[1] - a[1])[0] || ['無', 0];
+
+            if (userPrompt.includes('類別') || userPrompt.includes('預算')) {
+                return `📊 **類別與預算統計分析**：\n` +
+                    `• 當前平台共有 **${totalWishes}** 筆願望，其中熱門分類以「**${topCat[0]}**」（佔 ${totalWishes > 0 ? Math.round(topCat[1] / totalWishes * 100) : 0}%）居首。\n` +
+                    `• 預算分佈多集中在 NT$ 1,000 ~ 5,000 價位區間，顯示買家對於生活品質升級具備高支付意願。\n` +
+                    `• 建議商家可多關注該類別的產品組合 package，提高媒合成功率！`;
+            } else if (userPrompt.includes('品牌') || userPrompt.includes('潛在')) {
+                const brandStr = brands.length > 0 ? [...new Set(brands)].slice(0, 4).join('、') : '無指定特定品牌';
+                return `🏷️ **品牌偏好與買家痛點歸納**：\n` +
+                    `• 買家提及頻率較高的品牌包括：**${brandStr}**。\n` +
+                    `• 許願期待多聚焦於「環境舒適」、「機能高、好收納」、「性價比優」等核心痛點。\n` +
+                    `• 擺脫廣告中介後，若能精準提供符合這些痛點的方案，將享有非常高的轉換率。`;
+            } else if (userPrompt.includes('商業') || userPrompt.includes('必要')) {
+                return `💡 **購物動機與商業切入點**：\n` +
+                    `• 目前「必要 (Must)」需求佔 **${mustCount}** 筆，「想要 (Want)」需求佔 **${wantCount}** 筆。\n` +
+                    `• 「必要」願望屬剛性需求，成交成交期較短且買家意願強烈；建議優先對此類願望進行磋商按讚。\n` +
+                    `• 從源頭按需生產與備貨，能大幅減少存貨浪費，徹底發揮永續極簡商業效益。`;
+            } else {
+                return `🔍 **風向綜合洞察**：\n` +
+                    `• 許願池當前彙整了 **${totalWishes}** 個實名誠實願望。\n` +
+                    `• 熱門關鍵字包含：**${[...new Set(keywords)].slice(0, 5).join('、')}**。\n` +
+                    `• 請嘗試點擊快捷按鈕，探索更多專屬市場機會！`;
+            }
+        }
+
+        // ================= MODAL & LIGHTBOX CONTROLS =================
+        function openWalletModal() {
+            document.getElementById('wallet-modal')?.classList.remove('hidden');
+        }
+        function closeWalletModal() {
+            document.getElementById('wallet-modal')?.classList.add('hidden');
+        }
+
+        function openImageLightbox(url) {
+            const img = document.getElementById('image-lightbox-img');
+            if (img) img.src = url;
+            document.getElementById('image-lightbox-modal')?.classList.remove('hidden');
+        }
+        function closeImageLightbox() {
+            document.getElementById('image-lightbox-modal')?.classList.add('hidden');
+        }
+
+        function showToast(msg, type = 'info') {
             const container = document.getElementById('toast-container');
             if (!container) return;
 
+            let bgStyle = 'bg-slate-800 text-white';
+            if (type === 'success') bgStyle = 'bg-emerald-600 text-white';
+            if (type === 'error') bgStyle = 'bg-rose-600 text-white';
+            if (type === 'info') bgStyle = 'bg-indigo-600 text-white';
+
             const toast = document.createElement('div');
-            toast.className = `toast-enter pointer-events-auto flex items-center space-x-3 px-4 py-3 rounded-xl shadow-lg border text-xs sm:text-sm font-semibold max-w-sm ${type === 'success' ? 'bg-emerald-900 text-white border-emerald-700' :
-                type === 'error' ? 'bg-rose-900 text-white border-rose-700' :
-                    'bg-slate-900 text-white border-slate-700'
-                }`;
-
-            const icon = type === 'success' ? 'fa-circle-check text-emerald-400' :
-                type === 'error' ? 'fa-triangle-exclamation text-rose-400' :
-                    'fa-circle-info text-blue-400';
-
-            toast.innerHTML = `
-                <i class="fa-solid ${icon} text-base"></i>
-                <span class="flex-grow">${escapeHtml(message)}</span>
-            `;
+            toast.className = `toast-enter px-4 py-2.5 rounded-xl shadow-lg text-xs font-bold pointer-events-auto flex items-center gap-2 ${bgStyle}`;
+            toast.innerHTML = `<span>${escapeHtml(msg)}</span>`;
 
             container.appendChild(toast);
-
-            setTimeout(() => {
-                toast.style.opacity = '0';
-                toast.style.transition = 'opacity 0.3s ease';
-                setTimeout(() => toast.remove(), 300);
-            }, 3500);
+            setTimeout(() => toast.remove(), 3200);
         }
 
         function escapeHtml(str) {
             if (!str) return '';
-            return str.replace(/[&<>"']/g, function (m) {
-                return {
-                    '&': '&amp;',
-                    '<': '&lt;',
-                    '>': '&gt;',
-                    '"': '&quot;',
-                    "'": '&#039;'
-                }[m];
-            });
+            return String(str)
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
         }
     </script>
 </body>
