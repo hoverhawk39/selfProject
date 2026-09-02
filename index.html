@@ -1169,12 +1169,22 @@
 
         window.handleGoogleSignIn = async function () {
             try {
-                const result = await signInWithPopup(auth, googleProvider);
-                const user = result.user;
-                window.onUserLoggedIn(user);
+                // Note: we intentionally don't call window.onUserLoggedIn here.
+                // onAuthStateChanged (below) already fires once sign-in succeeds
+                // and handles all post-login setup/UI updates. Calling it here
+                // too would trigger duplicate "first login" toasts, etc.
+                await signInWithPopup(auth, googleProvider);
             } catch (error) {
+                // Silently ignore cases where the user simply closed the popup
+                // or cancelled the sign-in flow — no error message needed.
+                if (
+                    error.code === 'auth/popup-closed-by-user' ||
+                    error.code === 'auth/cancelled-popup-request'
+                ) {
+                    return;
+                }
                 console.error("Google Auth Error:", error);
-                showToast(`登入失敗或已取消：${error.message}`, 'error');
+                showToast(`登入失敗：${error.message}`, 'error');
             }
         };
 
